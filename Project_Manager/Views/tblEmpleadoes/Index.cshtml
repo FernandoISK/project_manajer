@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Project_Manager.Models.tblEmpleado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApellidoEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TelefonoEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GeneroEmpleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCuenta.CorreoCuenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblRol.Rol)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApellidoEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelefonoEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GeneroEmpleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCuenta.CorreoCuenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblRol.Rol)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDEmpleado }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDEmpleado }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDEmpleado })
+        </td>
+    </tr>
+}
+
+</table>
