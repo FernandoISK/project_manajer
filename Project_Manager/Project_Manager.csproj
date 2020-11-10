@@ -129,60 +129,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\tblEmpleadoesController.cs" />
-    <Compile Include="Controllers\tblProyectosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BDProyect.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProyect.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BDProyect.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BDProyect.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BDProyect.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblAdministrador.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblAsignacion.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblCliente.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblCuenta.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblDocumentacion.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblEmpleado.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblProblema.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblProyectos.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblRol.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblTarjeta.cs">
-      <DependentUpon>BDProyect.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +153,9 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\timeline.css" />
     <Content Include="Content\css\util.css" />
+    <Content Include="Content\Dialog\Dialog-ie.css" />
+    <Content Include="Content\Dialog\Dialog.css" />
+    <Content Include="Content\Dialog\Dialog.js" />
     <Content Include="Content\fonts\css\font-awesome.css" />
     <Content Include="Content\fonts\css\font-awesome.min.css" />
     <Content Include="Content\fonts\Flaticon.svg" />
@@ -280,6 +234,12 @@
     <Content Include="Content\vendor\countdowntime\countdowntime.js" />
     <Content Include="Content\vendor\css-hamburgers\hamburgers.css" />
     <Content Include="Content\vendor\css-hamburgers\hamburgers.min.css" />
+    <Content Include="Content\vendor\datatables\dataTables.bootstrap4.css" />
+    <Content Include="Content\vendor\datatables\dataTables.bootstrap4.js" />
+    <Content Include="Content\vendor\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\vendor\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\vendor\datatables\jquery.dataTables.js" />
+    <Content Include="Content\vendor\datatables\jquery.dataTables.min.js" />
     <Content Include="Content\vendor\daterangepicker\daterangepicker.css" />
     <Content Include="Content\vendor\daterangepicker\daterangepicker.js" />
     <Content Include="Content\vendor\daterangepicker\moment.js" />
@@ -1878,16 +1838,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Models\BDProyect.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BDProyect.Context.cs</LastGenOutput>
-      <DependentUpon>BDProyect.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\BDProyect.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BDProyect.edmx</DependentUpon>
-      <LastGenOutput>BDProyect.cs</LastGenOutput>
-    </Content>
+    <Content Include="Scripts\Employees.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1905,7 +1856,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1971,32 +1922,23 @@
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\BDProyect.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BDProyect.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BDProyect.edmx.diagram">
-      <DependentUpon>BDProyect.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Login\UserLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\tblEmpleadoes\Create.cshtml" />
-    <Content Include="Views\tblEmpleadoes\Delete.cshtml" />
-    <Content Include="Views\tblEmpleadoes\Details.cshtml" />
-    <Content Include="Views\tblEmpleadoes\Edit.cshtml" />
-    <Content Include="Views\tblEmpleadoes\Index.cshtml" />
-    <Content Include="Views\tblProyectos\Create.cshtml" />
-    <Content Include="Views\tblProyectos\Delete.cshtml" />
-    <Content Include="Views\tblProyectos\Details.cshtml" />
-    <Content Include="Views\tblProyectos\Edit.cshtml" />
-    <Content Include="Views\tblProyectos\Index.cshtml" />
+    <Content Include="Views\Empleado\Index.cshtml" />
+    <Content Include="Views\Empleado\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project_Manager.Services\Project_Manager.Services.csproj">
+      <Project>{c08f8ee2-0ec9-40a0-8a60-89ae8a947057}</Project>
+      <Name>Project_Manager.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

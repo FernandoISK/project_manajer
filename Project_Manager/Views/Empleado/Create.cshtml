@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    
+}
+
+<div class="card">
+    <div class="card-header">
+        Agregar conductor
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div class="group form-group">
+                <input type="hidden" class="form-control" asp-for="chofer.id_chofer">
+                <fieldset>
+                    <legend>Datos personales</legend>
+                    <div class="row col-lg-12">
+                        <div class="col-md-4">
+                            <label class="label">Nombre del Empleado</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label">Apellido Paterno</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label ">Apellido Materno</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-5">
+                            <label class="label">Telefono celular</label>
+                            <input type="text" class="form-control" required pattern="[+?0-9]+">
+                        </div>
+                        <div class="col-lg-4">
+                            <label class="label">Fecha de nacimiento</label>
+                            <input id="fecha" type="date" class="form-control" required>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="veh.modelo" class="label">Genero</label>
+                            <select asp-for="veh.modelo" class="form-control col-md-6" required>
+                                <option selected disabled>Sexo</option>
+                                <option value="F">Femenino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+                    </div>
+                    <legend>Datos De Cuenta</legend>
+
+
+                </fieldset>
+            </div>
+            <div class="group">
+                <input type="submit" class="btn btn-success btn-sm" value="Guardar" asp-page-handler="Agregar">
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -88,3 +88,5 @@ C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Man
 C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager\bin\EntityFramework.SqlServer.dll
 C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager\bin\EntityFramework.xml
 C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager\bin\EntityFramework.SqlServer.xml
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager\bin\Project_Manager.Services.dll
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager\bin\Project_Manager.Services.pdb

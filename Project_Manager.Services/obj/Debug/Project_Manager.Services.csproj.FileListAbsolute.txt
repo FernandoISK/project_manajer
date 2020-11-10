@@ -1,0 +1,6 @@
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\bin\Debug\Project_Manager.Services.dll
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\bin\Debug\Project_Manager.Services.pdb
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.csprojAssemblyReference.cache
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.csproj.CoreCompileInputs.cache
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.dll
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.pdb
