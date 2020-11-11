@@ -28,8 +28,7 @@ namespace Project_Manager.Services.DAO
 		cmd.Parameters["@IDAdmin"].Value = datos.IDAdmin;
 		cmd.Parameters["@NombreAdmin"].Value = datos.NombreAdmin;
 		cmd.Parameters["@ApellidoAdmin"].Value = datos.ApellidoAdmin;
-		cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
-		cmd.Parameters["@FKRol"].Value = datos.OTblRolBO.IDRol;
+		//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
 		cmd.CommandText = sql;
 
 
@@ -67,8 +66,7 @@ namespace Project_Manager.Services.DAO
 		cmd.Parameters["@IDAdmin"].Value = datos.IDAdmin;
 		cmd.Parameters["@NombreAdmin"].Value = datos.NombreAdmin;
 		cmd.Parameters["@ApellidoAdmin"].Value = datos.ApellidoAdmin;
-		cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
-		cmd.Parameters["@FKRol"].Value = datos.OTblRolBO.IDRol;
+		//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
 
 		cmd.CommandText = sql;
 

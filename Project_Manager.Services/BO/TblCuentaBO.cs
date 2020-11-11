@@ -1,25 +1,37 @@
 namespace Project_Manager.Services.BO
 {
-    public class TblCuentaBO
-{
-	string correocuenta;
-	string contracuenta;
-	int idcuenta;
+	public class TblCuentaBO
+	{
+		string correo;
+		string contra;
+		string usuario;
+		string rol;
+		int estatus;
 
-	public string CorreoCuenta
-	{
-		get { return correocuenta; }
-		set { correocuenta = value; }
-	}
-	public string ContraCuenta
-	{
-		get { return contracuenta; }
-		set { contracuenta = value; }
-	}
-	public int IDCuenta
-	{
-		get { return idcuenta; }
-		set { idcuenta = value; }
-	}
+		public string Correo
+		{
+			get { return correo; }
+			set { correo = value; }
+		}
+		public string Contra
+		{
+			get { return contra; }
+			set { contra = value; }
+		}
+		public string Usuario
+		{
+			get { return usuario; }
+			set { usuario = value; }
+		}
+		public int Estatus
+		{
+			get { return estatus; }
+			set { estatus = value; }
+		}
+		public string Rol
+		{
+			get { return rol; }
+			set { rol = value; }
+		}
 	}
 }

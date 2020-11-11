@@ -38,10 +38,10 @@ namespace Project_Manager.Services.Services
 		}
 
 
-			public DataTable Ver()
+			public DataTable login(string user, string contra)
 		{
 			DataTable datos = new DataTable();;
-			datos = metodo.ListarTabla();
+			datos = metodo.InisiarSesion(user, contra);
 			return datos;
 		}
 

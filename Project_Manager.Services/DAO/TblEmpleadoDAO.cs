@@ -18,25 +18,21 @@ namespace Project_Manager.Services.DAO
 			TblEmpleadoBO datos = (TblEmpleadoBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "Insert into TblEmpleado(NombreEmpleado ,ApellidoPEmpleado ,ApellidoMEmpleado, TelefonoEmpleado ,Nacimiento ,GeneroEmpleado ,FKRol ,FKCuenta, Estatus)" +
-			"Values(@NombreEmpleado ,@ApellidoPEmpleado, @ApellidoMEmpleado ,@TelefonoEmpleado ,@Nacimiento ,@GeneroEmpleado ,@FKRol ,@FKCuenta, @Estatus)";
+			string sql = "Insert into TblEmpleado(NombreEmpleado ,ApellidoPEmpleado ,ApellidoMEmpleado, TelefonoEmpleado ,CorreoEmpleado ,ContraEmpleado ,Nacimiento ,GeneroEmpleado ,FKRol ,FKUsuario)" +
+			"Values(@NombreEmpleado ,@ApellidoPEmpleado, @ApellidoMEmpleado ,@TelefonoEmpleado,@CorreoEmpleado,@ContraEmpleado ,@Nacimiento ,@GeneroEmpleado ,@FKRol ,@FKUsuario)";
 
-
-			cmd.Parameters.AddWithValue("@IDEmpleado", datos.IDEmpleado);
 			cmd.Parameters.AddWithValue("@NombreEmpleado", datos.NombreEmpleado);
 			cmd.Parameters.AddWithValue("@ApellidoPEmpleado", datos.ApellidoPEmpleado);
 			cmd.Parameters.AddWithValue("@TelefonoEmpleado", datos.TelefonoEmpleado);
+			cmd.Parameters.AddWithValue("@CorreoEmpleado", datos.CorreoEmpleado);
+			cmd.Parameters.AddWithValue("@ContraEmpleado", datos.ContraEmpleado);												 
 			cmd.Parameters.AddWithValue("@Nacimiento", datos.Nacimiento);
 			cmd.Parameters.AddWithValue("@GeneroEmpleado", datos.GeneroEmpleado);
-			cmd.Parameters.AddWithValue("@FKCuenta", datos.OTblCuentaBO.IDCuenta);
-			cmd.Parameters.AddWithValue("@FKRol", datos.OTblRolBO.IDRol);
+			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKUsuario);
+			cmd.Parameters.AddWithValue("@FKRol", datos.FKRol);
 			cmd.Parameters.AddWithValue("@ApellidoMEmpleado", datos.ApellidoMEmpleado);
-			cmd.Parameters.AddWithValue("@Estatus", datos.Estatus);
 			cmd.CommandText = sql;
-
-
 			int i = cmd.ExecuteNonQuery();
-			con2.CerrarConexion();
 			cmd.Parameters.Clear();
 
 			if (i <= 0)
@@ -51,18 +47,8 @@ namespace Project_Manager.Services.DAO
 		{
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "update TblEmpleado" +
-			" set " +
-			"NombreEmpleado = @NombreEmpleado," +
-			"ApellidoPEmpleado = @ApellidoPEmpleado," +
-			"ApellidoMEmpleado = @ApellidoMEmpleado," +
-			"TelefonoEmpleado = @TelefonoEmpleado," +
-			"Nacimiento = @Nacimiento," +
-			"GeneroEmpleado = @GeneroEmpleado," +
-			"FKRol = @FKRol," +
-			"FKCuenta = @FKCuenta" +
-			"Estatus = @Estatus" +
-			" where IDEmpleado = @IDEmpleado";
+			sql = "update TblEmpleado set NombreEmpleado = @NombreEmpleado,ApellidoPEmpleado = @ApellidoPEmpleado,ApellidoMEmpleado = @ApellidoMEmpleado,TelefonoEmpleado = @TelefonoEmpleado," +
+			"Nacimiento = @Nacimiento,GeneroEmpleado = @GeneroEmpleado,CorreoEmpleado = @CorreoEmpleado,ContraEmpleado = @ContraEmpleado,FKRol = @FKRol, FKCuenta = @FKCuenta where IDEmpleado = @IDEmpleado;";
 
 			cmd.Parameters.AddWithValue("@IDEmpleado", datos.IDEmpleado);
 			cmd.Parameters.AddWithValue("@NombreEmpleado", datos.NombreEmpleado);
@@ -70,10 +56,11 @@ namespace Project_Manager.Services.DAO
 			cmd.Parameters.AddWithValue("@TelefonoEmpleado", datos.TelefonoEmpleado);
 			cmd.Parameters.AddWithValue("@Nacimiento", datos.Nacimiento);
 			cmd.Parameters.AddWithValue("@GeneroEmpleado", datos.GeneroEmpleado);
-			cmd.Parameters.AddWithValue("@FKCuenta", datos.OTblCuentaBO.IDCuenta);
-			cmd.Parameters.AddWithValue("@FKRol", datos.OTblRolBO.IDRol);
+			cmd.Parameters.AddWithValue("@CorreoEmpleado", datos.CorreoEmpleado);
+			cmd.Parameters.AddWithValue("@ContraEmpleado", datos.ContraEmpleado);
+			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKUsuario);
+			cmd.Parameters.AddWithValue("@FKRol", datos.FKRol);
 			cmd.Parameters.AddWithValue("@ApellidoMEmpleado", datos.ApellidoMEmpleado);
-			cmd.Parameters.AddWithValue("@Estatus", datos.Estatus);
 
 			cmd.CommandText = sql;
 
@@ -140,6 +127,7 @@ namespace Project_Manager.Services.DAO
 			}
 			if (data.ApellidoMEmpleado != null)
 			{
+				cadenaWhere = cadenaWhere + " ApellidoMEmpleado = @ApellidoMEmpleado and";
 				cmd.Parameters.AddWithValue("@ApellidoMEmpleado", data.ApellidoMEmpleado);
 				edo = true;
 			}
@@ -155,14 +143,42 @@ namespace Project_Manager.Services.DAO
 				cmd.Parameters.AddWithValue("@Nacimiento", data.Nacimiento);
 				edo = true;
 			}
+			if (data.Estatus > 0)
+			{
+				cadenaWhere = cadenaWhere + " Estatus = @Estatus and";
+				cmd.Parameters.AddWithValue("@Estatus", data.Estatus);
+				edo = true;
+			}
 			if (data.GeneroEmpleado.ToString() != "\0")
 			{
 				cadenaWhere = cadenaWhere + " GeneroEmpleado = @GeneroEmpleado and";
-				cmd.Parameters.Add("@GeneroEmpleado", SqlDbType.Char);
-				cmd.Parameters["@GeneroEmpleado"].Value = data.GeneroEmpleado;
+				cmd.Parameters.AddWithValue("@GeneroEmpleado", data.GeneroEmpleado);
 				edo = true;
 			}
-
+			if (data.CorreoEmpleado != null)
+			{
+				cadenaWhere = cadenaWhere + " CorreoEmpleado = @CorreoEmpleado and";
+				cmd.Parameters.AddWithValue("@CorreoEmpleado", data.CorreoEmpleado);
+				edo = true;
+			}
+			if (data.ContraEmpleado != null)
+			{
+				cadenaWhere = cadenaWhere + " ContraEmpleado = @ContraEmpleado and";
+				cmd.Parameters.AddWithValue("@ContraEmpleado", data.ContraEmpleado);
+				edo = true;
+			}
+			if (data.FKUsuario != null)
+			{
+				cadenaWhere = cadenaWhere + " FKUsuario = @FKUsuario and";
+				cmd.Parameters.AddWithValue("@FKUsuario", data.FKUsuario);
+				edo = true;
+			}
+			if (data.FKRol != null)
+			{
+				cadenaWhere = cadenaWhere + " FKRol = @FKRol and";
+				cmd.Parameters.AddWithValue("@FKRol", data.FKRol);
+				edo = true;
+			}
 			if (edo == true)
 			{
 				cadenaWhere = " WHERE " + cadenaWhere.Remove(cadenaWhere.Length - 3, 3);
@@ -179,7 +195,7 @@ namespace Project_Manager.Services.DAO
 		public List<TblEmpleadoBO> ListarTabla()
 		{
 			List<TblEmpleadoBO> lista = new List<TblEmpleadoBO>();
-			sql = "Select * from TblEmpleado";
+			sql = "select * from tblEmpleado where Estatus = 0;";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -194,8 +210,12 @@ namespace Project_Manager.Services.DAO
 					obj.ApellidoMEmpleado = row["ApellidoMEmpleado"].ToString();
 					obj.TelefonoEmpleado = row["TelefonoEmpleado"].ToString();
 					obj.Nacimiento = row["Nacimiento"].ToString();
-					obj.GeneroEmpleado = row["GeneroEmpleado"].ToString();
 					obj.Estatus = int.Parse(row["Estatus"].ToString());
+					obj.GeneroEmpleado = row["GeneroEmpleado"].ToString();
+					obj.GeneroEmpleado = row["CorreoEmpleado"].ToString();
+					obj.GeneroEmpleado = row["ContraEmpleado"].ToString();
+					obj.Nacimiento = row["FKUsuario"].ToString();
+					obj.Nacimiento = row["FKRol"].ToString();
 					lista.Add(obj);
 				}				
 			}

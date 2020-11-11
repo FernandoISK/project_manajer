@@ -36,8 +36,7 @@ namespace Project_Manager.Services.DAO
 		cmd.Parameters["@GeneroCliente"].Value = datos.GeneroCliente;
 		cmd.Parameters["@EmpresaCliente"].Value = datos.EmpresaCliente;
 		cmd.Parameters["@RepresentanteCliente"].Value = datos.RepresentanteCliente;
-		cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
-		cmd.Parameters["@FKRol"].Value = datos.OTblRolBO.IDRol;
+		//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
 		cmd.CommandText = sql;
 
 
@@ -87,9 +86,7 @@ namespace Project_Manager.Services.DAO
 		cmd.Parameters["@GeneroCliente"].Value = datos.GeneroCliente;
 		cmd.Parameters["@EmpresaCliente"].Value = datos.EmpresaCliente;
 		cmd.Parameters["@RepresentanteCliente"].Value = datos.RepresentanteCliente;
-		cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
-		cmd.Parameters["@FKRol"].Value = datos.OTblRolBO.IDRol;
-
+		//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
 		cmd.CommandText = sql;
 
 		int i = cmd.ExecuteNonQuery();
