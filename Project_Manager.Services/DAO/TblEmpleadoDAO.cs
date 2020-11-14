@@ -18,7 +18,7 @@ namespace Project_Manager.Services.DAO
 			TblEmpleadoBO datos = (TblEmpleadoBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			string sql = "Insert into TblEmpleado(NombreEmpleado ,ApellidoPEmpleado ,ApellidoMEmpleado, TelefonoEmpleado ,CorreoEmpleado ,ContraEmpleado ,Nacimiento ,GeneroEmpleado ,FKRol ,FKUsuario)" +
+			sql = "Insert into TblEmpleado(NombreEmpleado ,ApellidoPEmpleado ,ApellidoMEmpleado, TelefonoEmpleado ,CorreoEmpleado ,ContraEmpleado ,Nacimiento ,GeneroEmpleado ,FKRol ,FKUsuario)" +
 			"Values(@NombreEmpleado ,@ApellidoPEmpleado, @ApellidoMEmpleado ,@TelefonoEmpleado,@CorreoEmpleado,@ContraEmpleado ,@Nacimiento ,@GeneroEmpleado ,@FKRol ,@FKUsuario)";
 
 			cmd.Parameters.AddWithValue("@NombreEmpleado", datos.NombreEmpleado);
@@ -212,8 +212,8 @@ namespace Project_Manager.Services.DAO
 					obj.Nacimiento = row["Nacimiento"].ToString();
 					obj.Estatus = int.Parse(row["Estatus"].ToString());
 					obj.GeneroEmpleado = row["GeneroEmpleado"].ToString();
-					obj.GeneroEmpleado = row["CorreoEmpleado"].ToString();
-					obj.GeneroEmpleado = row["ContraEmpleado"].ToString();
+					obj.CorreoEmpleado = row["CorreoEmpleado"].ToString();
+					obj.ContraEmpleado = row["ContraEmpleado"].ToString();
 					obj.Nacimiento = row["FKUsuario"].ToString();
 					obj.Nacimiento = row["FKRol"].ToString();
 					lista.Add(obj);

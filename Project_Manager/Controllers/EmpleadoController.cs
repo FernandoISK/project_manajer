@@ -15,13 +15,11 @@ namespace Project_Manager.Controllers
         // GET: Empleado
         public ActionResult Index()
         {
-
             ViewBag.EmpleadoList = Employees.GetAll();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
             return View();
         }
         public ActionResult Create()
         {
-
             return View();
         }
         public int New()
@@ -72,7 +70,7 @@ namespace Project_Manager.Controllers
         //get = 
         public int UpdateStatus()
         {
-            int estatus = int.Parse(Request.Form.Get("estatus"));
+            int estatus = 1;
             int id = int.Parse(Request.Form.Get("id"));
             try
             {

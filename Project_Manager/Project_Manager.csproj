@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -187,6 +188,9 @@
     <Content Include="Content\images\s4.jpg" />
     <Content Include="Content\images\search_icon.png" />
     <Content Include="Content\images\slide_img.jpg" />
+    <Content Include="Content\jquery\dist\jquery.js" />
+    <Content Include="Content\jquery\dist\jquery.min.js" />
+    <Content Include="Content\jquery\LICENSE.txt" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\contact-form-script.js" />
     <Content Include="Content\js\custom.js" />
@@ -1922,6 +1926,7 @@
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\jquery\dist\jquery.min.map" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
@@ -1930,6 +1935,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Empleado\Index.cshtml" />
     <Content Include="Views\Empleado\Create.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Clientes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -28,12 +28,11 @@
                                 <thead>
 
                                     <tr>
-                                        <th scope="col" style="display:none">Id</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Apellidos</th>
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Sexo</th>
-                                        <th></th>
+                                        <th>Accesorios</th>
                                     </tr>
 
                                 </thead>
@@ -42,21 +41,22 @@
 
                                     @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in Empleados)
                                     {
-                                        <tr>
-                                            <td>@item.NombreEmpleado</td>
-                                            <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
-                                            <td>@item.TelefonoEmpleado</td>
-                                            <td>@item.GeneroEmpleado</td>
-
-                                            @if (item.Estatus == 1)
-                                            {
-                                                <td>
-
-                                                    <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','1')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                                                </td>
-                                            }
-
-                                        </tr>
+                                    <tr>
+                                        <td>@item.NombreEmpleado</td>
+                                        <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
+                                        <td align="center">@item.TelefonoEmpleado</td>
+                                        @if (item.GeneroEmpleado == "M")
+                                        {
+                                            <td align="center">Masculino</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Femenino</td>
+                                        }
+                                        <td align="center">
+                                            <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
 
                                     }
 
@@ -68,7 +68,8 @@
             }
             else
             {
-                <tr><td>Sin resultados</td></tr>
+        <h2> Sin resultados</h2>
+               
             }
 
         </div>

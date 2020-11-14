@@ -34,7 +34,7 @@ namespace Project_Manager.Services.Services
 
 		public DataSet devuelveEmp(object obj)
 		{
-			DataSet ds = new DataSet(); ;
+			DataSet ds = new DataSet(); 
 			ds = metodo.devuelveEmpleado(obj);
 			return ds;
 		}

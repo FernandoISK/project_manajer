@@ -110,7 +110,7 @@
                 Dialog.show("Estás seguro que quiere Eliminar este empleaado?", Dialog.type.question);
             }
             else {
-                Dialog.show("Reactivar este producto?", Dialog.type.question);
+                Dialog.show("Reactivar este Empleado?", Dialog.type.question);
             }
             $(".sem-dialog").on("done", function () {
                 $.ajax({

@@ -73,7 +73,6 @@ namespace Project_Manager.Services.BO
 			get { return fkRol; }
 			set { fkRol = value; }
 		}
-
 		public int Estatus
 		{
 			get { return estatus; }
