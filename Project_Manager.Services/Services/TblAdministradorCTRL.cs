@@ -6,7 +6,8 @@ namespace Project_Manager.Services.Services
     public class TblAdministradorCTRL
 	{
 		TblAdministradorDAO metodo = new TblAdministradorDAO();
-			public int Alta(object obj)
+
+		public int Alta(object obj)
 		{
 			int resultado = 0;
 			resultado = metodo.Crear(obj);
@@ -14,7 +15,7 @@ namespace Project_Manager.Services.Services
 		}
 
 
-			public int Baja(object obj)
+		public int Baja(object obj)
 		{
 			int resultado = 0;
 			resultado = metodo.Eliminar(obj);
@@ -22,7 +23,7 @@ namespace Project_Manager.Services.Services
 		}
 
 
-			public int Cambio(object obj)
+		public int Cambio(object obj)
 		{
 			int resultado = 0;
 			resultado = metodo.Modificar(obj);
@@ -30,17 +31,17 @@ namespace Project_Manager.Services.Services
 		}
 
 
-			public DataSet devuelveAlu(object obj)
+		public DataSet devuelveAlu(object obj)
 		{
-			DataSet ds = new DataSet();;
+			DataSet ds = new DataSet(); ;
 			ds = metodo.devuelveAlumno(obj);
 			return ds;
 		}
 
 
-			public DataTable Ver()
+		public DataTable Ver()
 		{
-			DataTable datos = new DataTable();;
+			DataTable datos = new DataTable(); ;
 			datos = metodo.ListarTabla();
 			return datos;
 		}
