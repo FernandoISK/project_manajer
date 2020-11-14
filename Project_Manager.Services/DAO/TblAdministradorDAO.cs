@@ -1,4 +1,5 @@
 using Project_Manager.Services.BO;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -40,6 +41,53 @@ namespace Project_Manager.Services.DAO
 			return 1;
 		}
 
+		public List<TblAdministradorBO> ListarTabla()
+		{
+			List<TblAdministradorBO> lista = new List<TblAdministradorBO>();
+			sql = "select * from TblAdministrador where Estatus = 0;";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblAdministradorBO obj = new TblAdministradorBO();
+					obj.IDAdmin = int.Parse(row["IDAdmin"].ToString());
+					obj.NombreAdmin = row["NombreAdmin"].ToString();
+					obj.ApellidoPAdmin = row["ApellidoPAdmin"].ToString();
+					obj.ApellidoMAdmin = row["ApellidoMAdmin"].ToString();
+					obj.Estatus = int.Parse(row["Estatus"].ToString());
+					obj.CorreoAdmin = row["CorreoAdmin"].ToString();
+					obj.ContraAdmin = row["ContraAdmin"].ToString();
+					obj.FKUsuario = row["FKUsuario"].ToString();
+					obj.FKRol = row["FKRol"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+
+		public int Eliminar(int id, int status)
+		{
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "UPDATE TblAdministrador SET Estatus = @Estatus WHERE IDAdmin = @IDAdmin;";
+			cmd.Parameters.AddWithValue("@Estatus", status);
+			cmd.Parameters.AddWithValue("@IDAdmin", id);
+			cmd.CommandText = sql;
+
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+
+
 
 		public int Modificar(object obj)
 		{
@@ -77,25 +125,6 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-		public int Eliminar(object obj)
-		{
-			TblAdministradorBO datos = (TblAdministradorBO)obj;
-			cmd.Connection = con2.establecerconexion();
-			con2.AbrirConexion();
-			sql = "DELETE FROM TblAdministrador where IDAdmin = @IDAdmin";
-			cmd.Parameters.Add("@IDAdmin", SqlDbType.Int);
-			cmd.Parameters["@IDAdmin"].Value = datos.IDAdmin;
-			cmd.CommandText = sql;
-
-			int i = cmd.ExecuteNonQuery();
-			cmd.Parameters.Clear();
-
-			if (i <= 0)
-			{
-				return 0;
-			}
-			return 1;
-		}
 		public DataSet devuelveAlumno(object obj)
 		{
 			string cadenaWhere = "";
@@ -119,13 +148,13 @@ namespace Project_Manager.Services.DAO
 			con2.CerrarConexion();
 			return ds;
 		}
-		public DataTable ListarTabla()
-		{
-			sql = "Select * from TblAdministrador";
-			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
-			DataTable tabla = new DataTable();
-			da.Fill(tabla);
-			return tabla;
-		}
+		//public DataTable ListarTabla()
+		//{
+		//	sql = "Select * from TblAdministrador";
+		//	SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+		//	DataTable tabla = new DataTable();
+		//	da.Fill(tabla);
+		//	return tabla;
+		//}
 	}
 }

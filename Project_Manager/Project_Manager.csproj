@@ -1941,6 +1941,7 @@
     <Content Include="Views\Clientes\Index.cshtml" />
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Administrador\Create.cshtml" />
+    <Content Include="Views\Administrador\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

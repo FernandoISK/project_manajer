@@ -13,11 +13,13 @@ namespace Project_Manager.Controllers
         TblAdministradorCTRL Administrador = new TblAdministradorCTRL();
         TblCuentaCTRL Login = new TblCuentaCTRL();
 
-        // GET: Administrador
-        public ActionResult Ver()
+        public ActionResult Index()
         {
+            ViewBag.AdministradorList = Administrador.GetAll_Administrador();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
             return View();
         }
+
+        // GET: Administrador
 
         public ActionResult Create()
         {
@@ -59,6 +61,20 @@ namespace Project_Manager.Controllers
                 res = Login.Alta(login);
                 res = 0;
                 res = Administrador.Alta(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int UpdateStatus()
+        {
+            int estatus = 1;
+            int id = int.Parse(Request.Form.Get("id"));
+            try
+            {
+                int res = Administrador.Baja(id, estatus);
                 return res;
             }
             catch (Exception ex)

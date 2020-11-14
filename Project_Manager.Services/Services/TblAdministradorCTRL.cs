@@ -1,4 +1,6 @@
+using Project_Manager.Services.BO;
 using Project_Manager.Services.DAO;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Project_Manager.Services.Services
@@ -13,12 +15,17 @@ namespace Project_Manager.Services.Services
 			resultado = metodo.Crear(obj);
 			return resultado;
 		}
+		public List<TblAdministradorBO> GetAll_Administrador()
+        {
+			List<TblAdministradorBO> datos = new List<TblAdministradorBO>(); 
+			datos = metodo.ListarTabla(); 
+			return datos;
+		}
 
-
-		public int Baja(object obj)
+		public int Baja(int id, int status)
 		{
 			int resultado = 0;
-			resultado = metodo.Eliminar(obj);
+			resultado = metodo.Eliminar(id, status);
 			return resultado;
 		}
 
@@ -39,12 +46,12 @@ namespace Project_Manager.Services.Services
 		}
 
 
-		public DataTable Ver()
-		{
-			DataTable datos = new DataTable(); ;
-			datos = metodo.ListarTabla();
-			return datos;
-		}
+		//public DataTable Ver()
+		//{
+		//	DataTable datos = new DataTable(); ;
+		//	datos = metodo.ListarTabla();
+		//	return datos;
+		//}
 
 
 	}
