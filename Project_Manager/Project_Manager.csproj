@@ -1842,6 +1842,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\Administrador.js" />
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Web.config" />
