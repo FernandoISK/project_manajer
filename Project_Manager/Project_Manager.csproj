@@ -1843,6 +1843,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\Employees.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
