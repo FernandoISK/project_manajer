@@ -46,6 +46,6 @@ namespace Project_Manager.Services.Services
 		}
 
 
-	} }
+	}
 }
 
