@@ -57,10 +57,24 @@
                 Dialog.show("La contraseña no coincide", Dialog.type.error);
                 return;
             }
+
+            var objEmpleado = {
+                NombreEmpleado: E_NAME,
+                ApellidoPEmpleado: E_PATERNALSURNAME,
+                ApellidoMEmpleado: E_MATERNALSURNAME,
+                TelefonoEmpleado: E_CELLPHONE,
+                Nacimiento: E_BIRTH,
+                GeneroEmpleado: E_GENDER,
+                CorreoEmpleado: E_EMAIL,
+                ContraEmpleado: E_PASSWORD
+            };
+
                 $.ajax({
                     url: Root + "Empleado/New",
                     type: "POST",
-                    data: { nombre: E_NAME, apellidop: E_PATERNALSURNAME, apellidom: E_MATERNALSURNAME, telefono: E_CELLPHONE, nacimineto: E_BIRTH, genero: E_GENDER, correo: E_EMAIL, contraseña: E_PASSWORD, usuario: E_USERNAME },
+                    data: {
+                        dataEmpleado: JSON.stringify(objEmpleado)
+                    },
                     beforeSend: function () {
                         Dialog.show("Guardando datos", Dialog.type.progress);
                     },

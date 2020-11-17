@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project_Manager.Services.BO;
 using Project_Manager.Services.Services;
+using Newtonsoft.Json;
 
 namespace Project_Manager.Controllers
 {
@@ -24,31 +25,13 @@ namespace Project_Manager.Controllers
         }
         public int New()
         {
-            string nombre = Request.Form.Get("nombre");
-            string apellidop = Request.Form.Get("apellidop");
-            string apellidom = Request.Form.Get("apellidom");
-            string telefono = Request.Form.Get("telefono");
-            string nacimineto = Convert.ToString(Request.Form.Get("nacimineto"));
-            string genero = Request.Form.Get("genero");
-            string correo = Request.Form.Get("correo");
-            string contraseña = Request.Form.Get("contraseña");
-            string usuario = Request.Form.Get("usuario");
-
-            TblEmpleadoBO data = new TblEmpleadoBO();
+            string data = Request.Form.Get("dataEmpleado");
+            TblEmpleadoBO empleado = JsonConvert.DeserializeObject<TblEmpleadoBO>(data);
             TblCuentaBO login = new TblCuentaBO();
-            data.NombreEmpleado = nombre;
-            data.ApellidoPEmpleado = apellidop;
-            data.ApellidoMEmpleado = apellidom;
-            data.TelefonoEmpleado = telefono;
-            data.Nacimiento = nacimineto;
-            data.GeneroEmpleado = genero;
-            data.CorreoEmpleado = correo;
-            data.ContraEmpleado = contraseña;
-            data.FKUsuario = usuario;
-            data.FKRol = "Empleado";
-            login.Correo = correo;
-            login.Contra = contraseña;
-            login.Usuario = usuario;
+            empleado.FKRol = "Empleado";
+            login.Correo = empleado.CorreoEmpleado;
+            login.Contra = empleado.ContraEmpleado;
+            login.Usuario = empleado.FKUsuario;
             login.Rol = "Empleado";
             login.Estatus = 0;
 
