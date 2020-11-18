@@ -1,4 +1,6 @@
+using Project_Manager.Services.BO;
 using Project_Manager.Services.DAO;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Project_Manager.Services.Services
@@ -11,6 +13,25 @@ namespace Project_Manager.Services.Services
 			int resultado = 0;
 			resultado = metodo.Crear(obj);
 			return resultado;
+		}
+
+		public List<TblCuentaBO> GetAll_Cuenta()
+		{
+			List<TblCuentaBO> datos = new List<TblCuentaBO>();
+			datos = metodo.ListarTabla();
+			return datos;
+		}
+
+		public int GetAll_Cuenta(object obj)
+		{
+			int datos = 0;
+			datos = metodo.ListarTablaL(obj);
+
+			if (datos == 1)
+				return 1;
+			else
+				return 0;
+
 		}
 
 
@@ -41,7 +62,7 @@ namespace Project_Manager.Services.Services
 		public DataTable login(string user, string contra)
 		{
 			DataTable datos = new DataTable(); ;
-			datos = metodo.InisiarSesion(user, contra);
+			//datos = metodo.InisiarSesion(user, contra);
 			return datos;
 		}
 

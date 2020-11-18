@@ -16,7 +16,7 @@
             }
             $.ajax({
                 url: Root + "Login/Validar",
-                type: "GET",
+                type: "POST",
                 data: { usuario: L_USER, contraseña: L_PASS },
                 beforeSend: function () {
                     Dialog.show("Validando Datos", Dialog.type.progress);
@@ -25,7 +25,7 @@
                     if (response > 0) {
                         Dialog.show("Inicio De Sesion Correcto", Dialog.type.success);
                         $(".sem-dialog").on("done", function () {
-                            document.location.href = "Admin/Index";
+                            document.location.href = '../Admin/Index';
                         });
                     }
                     else {

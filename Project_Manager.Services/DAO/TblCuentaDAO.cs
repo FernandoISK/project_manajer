@@ -1,4 +1,5 @@
 using Project_Manager.Services.BO;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -23,8 +24,6 @@ namespace Project_Manager.Services.DAO
 			cmd.Parameters.AddWithValue("@Correo", datos.Correo);
 			cmd.Parameters.AddWithValue("@Estatus", datos.Estatus);
 			cmd.Parameters.AddWithValue("@Rol", datos.Rol);
-			cmd.CommandText = sql;
-
 
 			int i = cmd.ExecuteNonQuery();
 			cmd.Parameters.Clear();
@@ -35,7 +34,6 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-
 
 		public int Modificar(object obj)
 		{
@@ -69,7 +67,6 @@ namespace Project_Manager.Services.DAO
 			return 1;
 		}
 
-
 		public int Eliminar(object obj)
 		{
 			TblCuentaBO datos = (TblCuentaBO)obj;
@@ -88,7 +85,6 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-
 
 		public DataSet devuelveAlumno(object obj)
 		{
@@ -135,31 +131,44 @@ namespace Project_Manager.Services.DAO
 			return ds;
 		}
 
-
-		public DataTable InisiarSesion(string usuario, string contraseña)
+		public List<TblCuentaBO> ListarTabla()
 		{
-			SqlCommand cmd = new SqlCommand();
+			List<TblCuentaBO> lista = new List<TblCuentaBO>();
+			sql = "select * from tblCuenta where Estatus = 0;";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
-			sql = "Select * from TblCuenta where Usuario = @Usuario and Contra = @Contra and Estatus = 0";
-			cmd.Parameters.AddWithValue("@Usuario", usuario);
-			cmd.Parameters.AddWithValue("@Contra", contraseña);
-			cmd.CommandText = sql;
-			da.SelectCommand = cmd;
-
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblCuentaBO obj = new TblCuentaBO();
+					obj.Usuario = row["Usuario"].ToString();
+					obj.Contra = row["Contra"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
 
-			//int i = cmd.ExecuteNonQuery();
-			con2.CerrarConexion();
-			cmd.Parameters.Clear();
+		public int ListarTablaL(object obj)
+		{
+			TblCuentaBO datos = (TblCuentaBO)obj;
+			List<TblCuentaBO> lista = new List<TblCuentaBO>();
 
-			return tabla;
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = ("SELECT * FROM TblCuenta WHERE Usuario='"+datos.Usuario+"' AND Contra='"+datos.Contra+"' AND ESTATUS=0");
+			cmd.CommandText = sql;
+			cmd.ExecuteNonQuery();
 
-			//if (i <= 0)
-			//{
-			//	return 0;
-			//}
-			//return 1;
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			SqlDataReader rd = cmd.ExecuteReader();
+
+			if (rd.Read())
+				return 1;
+			else
+				return 0;
 		}
 
 	}
