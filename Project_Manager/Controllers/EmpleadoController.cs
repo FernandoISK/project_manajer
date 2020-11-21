@@ -25,12 +25,13 @@ namespace Project_Manager.Controllers
         }
         public int New()
         {
+            string correo = Request.Form.Get("CorreoEmpleado");
+            string contraseña = Request.Form.Get("ContraEmpleado");
             string data = Request.Form.Get("dataEmpleado");
             TblEmpleadoBO empleado = JsonConvert.DeserializeObject<TblEmpleadoBO>(data);
             TblCuentaBO login = new TblCuentaBO();
-            empleado.FKRol = "Empleado";
-            login.Correo = empleado.CorreoEmpleado;
-            login.Contra = empleado.ContraEmpleado;
+            login.Correo = correo;
+            login.Contra = contraseña;
             login.Usuario = empleado.FKUsuario;
             login.Rol = "Empleado";
             login.Estatus = 0;
@@ -41,7 +42,7 @@ namespace Project_Manager.Controllers
                 int res = 0;
                 res = Login.Alta(login);
                 res = 0;
-                res = Employees.Alta(data);
+                res = Employees.Alta(empleado);
                 return res;
             }
             catch (Exception ex)
@@ -49,8 +50,36 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        public int Update()
+        {
+            string nombre = Request.Form.Get("nombre");
+            string telefono = Request.Form.Get("telefono");
+            string correo = Request.Form.Get("correo");
+            int id = int.Parse(Request.Form.Get("id"));
+            string usuario = Request.Form.Get("usuario");
 
-        //get = 
+            TblEmpleadoBO data = new TblEmpleadoBO();
+            TblCuentaBO login = new TblCuentaBO();
+
+            data.NombreEmpleado = nombre;
+            data.TelefonoEmpleado = telefono;
+            data.FKUsuario = usuario;
+            data.IDEmpleado = id;
+            login.Usuario = usuario;
+            login.Correo = correo;
+            try
+            {
+                int res = 0;
+                res = Login.Cambio(login);
+                res = 0;
+                res = Employees.Cambio(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         public int UpdateStatus()
         {
             int estatus = 1;

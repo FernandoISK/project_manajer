@@ -10,15 +10,13 @@ namespace Project_Manager.Services.BO
 		string telefonoempleado;
 		string nacimiento;
 		string generoempleado;
-		string correoempleado;
-		string contraempleado;
 		string fkUsuario;
 		int idempleado;
 		int estatus;
-		string fkRol;
+        public string correo { get; set; }
 
 
-		public string NombreEmpleado
+        public string NombreEmpleado
 		{
 			get { return nombreempleado; }
 			set { nombreempleado = value; }
@@ -48,16 +46,6 @@ namespace Project_Manager.Services.BO
 			get { return generoempleado; }
 			set { generoempleado = value; }
 		}
-		public string CorreoEmpleado
-		{
-			get { return correoempleado; }
-			set { correoempleado = value; }
-		}
-		public string ContraEmpleado
-		{
-			get { return contraempleado; }
-			set { contraempleado = value; }
-		}
 		public string FKUsuario
 		{
 			get { return fkUsuario; }
@@ -67,11 +55,6 @@ namespace Project_Manager.Services.BO
 		{
 			get { return idempleado; }
 			set { idempleado = value; }
-		}
-		public string FKRol
-		{
-			get { return fkRol; }
-			set { fkRol = value; }
 		}
 		public int Estatus
 		{

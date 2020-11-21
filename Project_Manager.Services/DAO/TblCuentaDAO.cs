@@ -38,33 +38,22 @@ namespace Project_Manager.Services.DAO
 		public int Modificar(object obj)
 		{
 
-			//TblCuentaBO datos = (TblCuentaBO)obj;
-			//cmd.Connection = con2.establecerconexion();
-			//con2.AbrirConexion();
-			//sql = "update TblCuenta" +
-			//" set " +
-			//"CorreoCuenta = @CorreoCuenta," +
-			//"ContraCuenta = @ContraCuenta" +
-			//" where IDCuenta = @IDCuenta";
+            TblCuentaBO datos = (TblCuentaBO)obj;
+            cmd.Connection = con2.establecerconexion();
+            con2.AbrirConexion();
+            sql = "update TblCuenta set Correo = @Correo where Usuario = @Usuario";
+			cmd.Parameters.AddWithValue("@Usuario", datos.Usuario);
+			cmd.Parameters.AddWithValue("@Correo", datos.Correo);
+			cmd.CommandText = sql;
 
-			//cmd.Parameters.Add("@IDCuenta", SqlDbType.Int);
-			//cmd.Parameters.Add("@CorreoCuenta", SqlDbType.VarChar);
-			//cmd.Parameters.Add("@ContraCuenta", SqlDbType.VarChar);
+            int i = cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
 
-			//cmd.Parameters["@IDCuenta"].Value = datos.IDCuenta;
-			//cmd.Parameters["@CorreoCuenta"].Value = datos.CorreoCuenta;
-			//cmd.Parameters["@ContraCuenta"].Value = datos.ContraCuenta;
-
-			//cmd.CommandText = sql;
-
-			//int i = cmd.ExecuteNonQuery();
-			//cmd.Parameters.Clear();
-
-			//if (i <= 0)
-			//{
-			//	return 0;
-			//}
-			return 1;
+            if (i <= 0)
+            {
+                return 0;
+            }
+            return 1;
 		}
 
 		public int Eliminar(object obj)
