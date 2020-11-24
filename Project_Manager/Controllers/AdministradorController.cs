@@ -82,6 +82,38 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        public int Update()
+        {
+            int id = int.Parse(Request.Form.Get("id"));
+            string nombre = Request.Form.Get("nombre");
+            string correo = Request.Form.Get("correo");
+            string usuario = Request.Form.Get("usuario");
+
+            TblAdministradorBO data = new TblAdministradorBO();
+            TblCuentaBO login = new TblCuentaBO();
+
+            data.IDAdmin = id;
+            data.NombreAdmin = nombre;
+            data.CorreoAdmin = correo;
+            data.FKUsuario = usuario;
+
+            login.Usuario = usuario;
+            login.Correo = correo;
+            try
+            {
+                int res = 0;
+                res = Login.Cambio(login);
+                res = 0;
+                res = Administrador.Cambio(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
+        }
+
         #endregion
     }
 }
