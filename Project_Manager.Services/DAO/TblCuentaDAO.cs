@@ -24,7 +24,7 @@ namespace Project_Manager.Services.DAO
 			cmd.Parameters.AddWithValue("@Correo", datos.Correo);
 			cmd.Parameters.AddWithValue("@Estatus", datos.Estatus);
 			cmd.Parameters.AddWithValue("@Rol", datos.Rol);
-
+			cmd.CommandText = sql;
 			int i = cmd.ExecuteNonQuery();
 			cmd.Parameters.Clear();
 
