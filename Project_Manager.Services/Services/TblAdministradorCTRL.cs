@@ -30,7 +30,7 @@ namespace Project_Manager.Services.Services
 		}
 
 
-		public int Cambio(object obj)
+		public int Cambio(TblAdministradorBO obj)
 		{
 			int resultado = 0;
 			resultado = metodo.Modificar(obj);

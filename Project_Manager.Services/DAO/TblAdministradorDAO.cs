@@ -89,34 +89,20 @@ namespace Project_Manager.Services.DAO
 
 
 
-		public int Modificar(object obj)
+		public int Modificar(TblAdministradorBO datos)
 		{
-
-			TblAdministradorBO datos = (TblAdministradorBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "update TblAdministrador" +
-			" set " +
-			"NombreAdmin = @NombreAdmin," +
-			"ApellidoAdmin = @ApellidoAdmin," +
-			"FKRol = @FKRol," +
-			"FKCuenta = @FKCuenta" +
-			" where IDAdmin = @IDAdmin";
-
-			cmd.Parameters.Add("@IDAdmin", SqlDbType.Int);
-			cmd.Parameters.Add("@NombreAdmin", SqlDbType.VarChar);
-			cmd.Parameters.Add("@ApellidoAdmin", SqlDbType.VarChar);
-			cmd.Parameters.Add("@FKRol", SqlDbType.Int);
-			cmd.Parameters.Add("@FKCuenta", SqlDbType.Int);
-
-			cmd.Parameters["@IDAdmin"].Value = datos.IDAdmin;
-			cmd.Parameters["@NombreAdmin"].Value = datos.NombreAdmin;
-			cmd.Parameters["@ApellidoAdmin"].Value = datos.ApellidoMAdmin;
-			//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
+			sql = "UPDATE TblAdministrador SET NombreAdmin=@NombreAdmin, CorreoAdmin=@CorreoAdmin, FKUsuario=@FKUsuario WHERE IDAdmin=@IDAdmin";
+			cmd.Parameters.AddWithValue("@IDAdmin", datos.IDAdmin);
+			cmd.Parameters.AddWithValue("@NombreAdmin", datos.NombreAdmin);
+			cmd.Parameters.AddWithValue("@CorreoAdmin", datos.CorreoAdmin);
+			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKUsuario);
 
 			cmd.CommandText = sql;
 
 			int i = cmd.ExecuteNonQuery();
+			con2.CerrarConexion();
 			cmd.Parameters.Clear();
 
 			if (i <= 0)
@@ -125,6 +111,7 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
+
 		public DataSet devuelveAlumno(object obj)
 		{
 			string cadenaWhere = "";
@@ -148,13 +135,5 @@ namespace Project_Manager.Services.DAO
 			con2.CerrarConexion();
 			return ds;
 		}
-		//public DataTable ListarTabla()
-		//{
-		//	sql = "Select * from TblAdministrador";
-		//	SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
-		//	DataTable tabla = new DataTable();
-		//	da.Fill(tabla);
-		//	return tabla;
-		//}
 	}
 }
