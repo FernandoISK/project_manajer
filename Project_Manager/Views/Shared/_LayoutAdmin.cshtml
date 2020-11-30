@@ -36,7 +36,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="@Url.Content("~/Admin/Index")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Administración</span>
+                    @Session["Rol"]
                 </a>
             </li>
 
@@ -85,53 +85,27 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Administración
-            </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-wrench"></i>
-                    <span>Soporte</span>
-                </a>
-            </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-server"></i>
-                    <span>Proyectos</span>
-                </a>
-            </li>
+            @{
+                if (Session["Rol"].ToString() == "Cliente")
+                {
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Clientes</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-plane"></i>
-                    <span>Vacaciones</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-book"></i>
-                    <span>Repostes</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-users"></i>
-                    <span>Equipos</span>
-                </a>
-            </li>
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Cliente
+                    </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-dolly-flatbed"></i>
+                            <span>Proyectos</span>
+                        </a>
+                    </li>
+
+
+                }
+            }
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -325,7 +299,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar Sesion
                                 </a>
                             </div>
                         </li>
@@ -364,15 +338,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Cerrar Sesion?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Confirme Si Desea Terminar La Sesion</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="@Url.Content("~/Login/Cerrar")">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                    <a class="btn btn-primary" href="@Url.Content("~/Login/Cerrar")">Si</a>
                 </div>
             </div>
         </div>
