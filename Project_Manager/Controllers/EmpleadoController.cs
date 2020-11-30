@@ -16,13 +16,35 @@ namespace Project_Manager.Controllers
         // GET: Empleado
         public ActionResult Index()
         {
-            ViewBag.EmpleadoList = Employees.GetAll();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    ViewBag.EmpleadoList = Employees.GetAll(); //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
         public ActionResult Create()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    return View();
+                }
+                return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
+
+        
+        #region Metodos
         public int New()
         {
             string correo = Request.Form.Get("CorreoEmpleado");
@@ -94,5 +116,6 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        #endregion
     }
 }

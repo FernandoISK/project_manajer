@@ -41,23 +41,23 @@
 
                                     @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in Empleados)
                                     {
-                                    <tr>
-                                        <td>@item.NombreEmpleado</td>
-                                        <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
-                                        <td align="center">@item.TelefonoEmpleado</td>
-                                        @if (item.GeneroEmpleado == "M")
-                                        {
-                                            <td align="center">Masculino</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Femenino</td>
-                                        }
-                                    <td align="center">
-                                        <button type="button" onclick="Employees.evts.getEmployeesInfo('@item.IDEmpleado', '@item.NombreEmpleado','@item.TelefonoEmpleado', '@item.correo', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i>Editar</button>
-                                        <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                    </tr>
+                                        <tr>
+                                            <td>@item.NombreEmpleado</td>
+                                            <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
+                                            <td align="center">@item.TelefonoEmpleado</td>
+                                            @if (item.GeneroEmpleado == "M")
+                                            {
+                                                <td align="center">Masculino</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Femenino</td>
+                                            }
+                                            <td align="center">
+                                                <button type="button" onclick="Employees.evts.getEmployeesInfo('@item.IDEmpleado', '@item.NombreEmpleado','@item.TelefonoEmpleado', '@item.correo', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
+                                                <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
 
                                     }
 
@@ -69,8 +69,8 @@
             }
             else
             {
-        <h2> Sin resultados</h2>
-               
+                <h2> Sin resultados</h2>
+
             }
 
         </div>
@@ -91,6 +91,7 @@
     <!-- End of Footer -->
 
 </div>
+
 
 <div class="modal fade" tabindex="-1" role="dialog" id="mdlDetail">
     <div class="modal-dialog modal-dialog-centered modal-md" role="document">
@@ -116,14 +117,14 @@
                         </div>
                     </div>
                     <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label>Telefono</label>
-                                <input type="text" autocomplete="off" class="form-control" name="txtCelular" id="txtCelular" />
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Usuario</label>
-                                <input type="text" autocomplete="off" class="form-control" name="txtUsuario" id="txtUsuario" />
-                            </div>
+                        <div class="form-group col-md-12">
+                            <label>Telefono</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtCelular" id="txtCelular" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Usuario</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtUsuario" id="txtUsuario" />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">

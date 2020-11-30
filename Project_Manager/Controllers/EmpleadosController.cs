@@ -6,22 +6,19 @@ using System.Web.Mvc;
 
 namespace Project_Manager.Controllers
 {
-    public class AdminController : Controller
+    public class EmpleadosController : Controller
     {
-        // GET: Admin
+        // GET: Empleados
         public ActionResult Index()
         {
             if (Session["Rol"] != null)
             {
-                if ((Session["Rol"]).ToString() == "Administrador")
+                if ((Session["Rol"]).ToString() == "Empleado")
                 {
                     return View();
                 }
-                else if ((Session["Rol"]).ToString() == "Empleado")
-                {
-                    return RedirectToAction("../Empleados/Index");
-                }
-                return null;
+                else
+                    return RedirectToAction("../Login/UserLogin");
             }
             else
                 return RedirectToAction("../Login/UserLogin");

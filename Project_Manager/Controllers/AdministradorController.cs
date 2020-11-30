@@ -15,15 +15,35 @@ namespace Project_Manager.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.AdministradorList = Administrador.GetAll_Administrador();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    ViewBag.AdministradorList = Administrador.GetAll_Administrador();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
 
         // GET: Administrador
 
         public ActionResult Create()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
 
         #region Metodos
@@ -68,6 +88,7 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        // Eliminar o mas bien desactivar... algo asi xD
         public int UpdateStatus()
         {
             int estatus = 1;
@@ -113,7 +134,6 @@ namespace Project_Manager.Controllers
             }
 
         }
-
         #endregion
     }
 }

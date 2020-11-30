@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aleatorios.cs" />
+    <Compile Include="BO\DataSessionBO.cs" />
     <Compile Include="BO\TblAdministradorBO.cs" />
     <Compile Include="BO\TblAsignacionBO.cs" />
     <Compile Include="BO\TblClienteBO.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="BO\TblProyectosBO.cs" />
     <Compile Include="BO\TblTarjetaBO.cs" />
     <Compile Include="DAO\Conexion.cs" />
+    <Compile Include="DAO\DataSessionDAO.cs" />
     <Compile Include="DAO\TblAdministradorDAO.cs" />
     <Compile Include="DAO\TblAsignacionDAO.cs" />
     <Compile Include="DAO\TblClienteDAO.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="DAO\TblProyectosDAO.cs" />
     <Compile Include="DAO\TblTarjetaDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DataSessionCTRL.cs" />
     <Compile Include="Services\TblAdministradorCTRL.cs" />
     <Compile Include="Services\TblAsignacionCTRL.cs" />
     <Compile Include="Services\TblClienteCTRL.cs" />
