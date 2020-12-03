@@ -46,8 +46,12 @@ namespace Project_Manager.Services.Services
 			datos = metodo.ListarTabla(); //Llena la lista con la consulta, hubicada en Project_Manager.Services.DAO.TblEmpleadoDAO
 			return datos;
 		}
-
-
+		public List<TblClienteBO> TraerClienteiD()  //Trae todos los empleados con estatus 0 
+		{
+			List<TblClienteBO> datos = new List<TblClienteBO>();
+			datos = metodo.TraerIDCliente();
+			return datos;
+		}
 	}
 }
 

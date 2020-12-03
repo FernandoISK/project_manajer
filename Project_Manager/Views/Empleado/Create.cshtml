@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var Empleados = (Project_Manager.Services.BO.TblEmpleadoBO) ViewBag.EmpleadoList;
+    var Proyectos = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.ProyectoList;
 }
 
 <div class="card">
@@ -33,7 +33,7 @@
                     <div class="row col-lg-12">
                         <div class="col-lg-5">
                             <label class="label">Telefono celular*</label>
-                            <input type="text" class="form-control input-number"id="txtCelular">
+                            <input type="text" class="form-control input-number" id="txtCelular">
                         </div>
                         <div class="col-lg-4">
                             <label class="label">Fecha de nacimiento*</label>
@@ -47,6 +47,28 @@
                                 <option value="M">Masculino</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        @if (Proyectos.Count != 0)
+                        {
+                            <div class="col-md-6">
+                                <label for="cmbEstacionesBio">Empresa dueña*</label>
+                                <select class="form-control" id="cmbEstacionesBio" name="cmbEstacionesBio" onchange="det.estacionesChange(this)">
+                                    <option value="0">-Seleccionar una estación</option>
+                                    @foreach (var est in Proyectos)
+                                    {
+                                        <option value="@est.Folio">@string.Format("{0}", est.NombreProyecto) </option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div></div>
+                            <div class="col-md-6">
+                                <h2>No se encontro ninguna Empresa</h2>
+                            </div>
+                        }
                     </div>
                     <legend>Datos De Cuenta</legend>
                     <div class="row col-lg-12">

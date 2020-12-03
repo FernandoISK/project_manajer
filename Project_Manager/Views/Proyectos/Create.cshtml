@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Cliente = (List<Project_Manager.Services.BO.TblClienteBO>)ViewBag.ClienteList;
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Agregar Proyecto</h2>
+        <p class="mb-4">Todos los campos señalados con un "*" son oblogatorios</p>
+    </div>
+    <div class="card-body">
+        <form method="post" id="frmCreate">
+            <div class="group form-group">
+                <fieldset>
+                    <div class="row col-lg-12">
+                        <div class="col-md-6">
+                            <label class="label">Nombre del Proyecto*</label>
+                            <input type="text" class="form-control" id="txtNombre">
+                        </div>
+                        @if (Cliente.Count != 0)
+                        {
+                            <div class="col-md-6">
+                                <label for="cmbEstacionesBio">Empresa dueña*</label>
+                                <select class="form-control" id="cmbEmpresa" name="cmbEmpresa">
+                                    <option value="0">-Seleccionar una estación</option>
+                                    @foreach (var est in Cliente)
+                                    {
+                                        <option value="@est.IDCliente">@string.Format("{0}", est.NombreEmpresa) </option>
+                                    }
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <p>No se encontro ninguna Empresa</p>
+                            </div>
+                        }
+
+                    </div>
+                    <br/>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-5">
+                            <label class="label">Fecha de entrega*</label>
+                            <input type="date" class="form-control" id="txtCelular">
+                        </div>
+                        <div class="col-lg-7">
+                            <label asp-for="veh.modelo" class="label">Prioridad*</label>
+                            <select asp-for="veh.modelo" class="form-control col-md-12" id="txtGenero">
+                                <option selected disabled>--Seleccione--</option>
+                                <option value="alta">Alta preoridad</option>
+                                <option value="media">Media preoridad</option>
+                                <option value="baja">Baja preoridad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <label asp-for="veh.modelo" class="label">Descripción*</label>
+                    </div>
+                    <div class="row col-lg-12">
+                        <textarea maxlength="1000" id="mensaje" rows="4" cols="70"></textarea>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div id="contador">0/1000</div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="group">
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const mensaje = document.getElementById('mensaje');
+    const contador = document.getElementById('contador');
+
+    mensaje.addEventListener('input', function (e) {
+        const target = e.target;
+        const longitudMax = target.getAttribute('maxlength');
+        const longitudAct = target.value.length;
+        contador.innerHTML = `${longitudAct}/${longitudMax}`;
+    });
+</script>
+<script src="~/Scripts/Employees.js"></script>
+<script>
+    $(function () {
+        Employees.init();
+    });
+</script>
+
