@@ -13,6 +13,7 @@ namespace Project_Manager.Controllers
     {
         TblEmpleadoCTRL Employees = new TblEmpleadoCTRL();
         TblCuentaCTRL Login = new TblCuentaCTRL();
+        TblProyectosCTRL Proyecto = new TblProyectosCTRL();
         // GET: Empleado
         public ActionResult Index()
         {
@@ -35,6 +36,7 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Administrador")
                 {
+                    ViewBag.ProyectoList = Proyecto.GetIDProyecto();
                     return View();
                 }
                 return RedirectToAction("../Login/UserLogin");

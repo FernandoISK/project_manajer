@@ -14,9 +14,10 @@ namespace Project_Manager.Services.BO
 		int idempleado;
 		int estatus;
         public string correo { get; set; }
+		public int Conproyecto { get; set; }
+		public int FKProyecto { get; set; }
 
-
-        public string NombreEmpleado
+		public string NombreEmpleado
 		{
 			get { return nombreempleado; }
 			set { nombreempleado = value; }
