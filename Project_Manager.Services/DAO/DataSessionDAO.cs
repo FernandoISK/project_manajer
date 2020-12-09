@@ -40,7 +40,7 @@ namespace Project_Manager.Services.DAO
                 switch (Rol)
                 {
                     case "Administrador":
-                        sql = ("SELECT * FROM TblAdministrador WHERE FKUsuario='" + datos.Usuario + "' AND ContraAdmin='" + datos.Contra + "' AND Estatus=0");
+                        sql = ("SELECT IDAdmin, NombreAdmin, ApellidoPAdmin, ApellidoMAdmin, FKUsuario, Contra, Rol FROM TblAdministrador, tblCuenta WHERE FKUsuario='" + datos.Usuario + "' AND Contra='" + datos.Contra + "' AND Rol='Administrador'");
                         SqlDataAdapter daSA = new SqlDataAdapter(sql, con2.establecerconexion());
                         DataTable tablaSA = new DataTable();
                         daSA.Fill(tablaSA);
@@ -53,16 +53,16 @@ namespace Project_Manager.Services.DAO
                                 bo.Nombre = rowsa["NombreAdmin"].ToString();
                                 bo.Apellido1 = rowsa["ApellidoPAdmin"].ToString();
                                 bo.Apellido2 = rowsa["ApellidoMAdmin"].ToString();
-                                bo.Correo = rowsa["CorreoAdmin"].ToString();
-                                bo.Contraseña = rowsa["ContraAdmin"].ToString();
+                                bo.Contraseña = rowsa["Contra"].ToString();
                                 bo.Usuario = rowsa["FKUsuario"].ToString();
-                                bo.Rol = rowsa["FKRol"].ToString();
+                                bo.Rol = rowsa["Rol"].ToString();
                                 lista.Add(bo);
                             }
                         }
                         break;
                     case "Empleado":
-                        sql = ("SELECT * FROM tblEmpleado WHERE FKUsuario='" + datos.Usuario + "' AND ContraEmpleado='" + datos.Contra + "' AND Estatus=0");
+                        sql = ("SELECT IDEmpleado, NombreEmpleado, ApellidoPEmpleado, ApellidoMEmpleado, FKUsuario, Contra, Rol FROM tblEmpleado, tblCuenta WHERE FKUsuario = '" + datos.Usuario + "' AND Contra = '" + datos.Contra + "' AND Rol = 'Empleado'");
+
                         SqlDataAdapter daSE = new SqlDataAdapter(sql, con2.establecerconexion());
                         DataTable tablaSE = new DataTable();
                         daSE.Fill(tablaSE);
@@ -75,10 +75,9 @@ namespace Project_Manager.Services.DAO
                                 bo.Nombre = rowse["NombreEmpleado"].ToString();
                                 bo.Apellido1 = rowse["ApellidoPEmpleado"].ToString();
                                 bo.Apellido2 = rowse["ApellidoMEmpleado"].ToString();
-                                bo.Correo = rowse["CorreoEmpleado"].ToString();
-                                bo.Contraseña = rowse["ContraEmpleado"].ToString();
+                                bo.Contraseña = rowse["Contra"].ToString();
                                 bo.Usuario = rowse["FKUsuario"].ToString();
-                                bo.Rol = rowse["FKRol"].ToString();
+                                bo.Rol = rowse["Rol"].ToString();
                                 lista.Add(bo);
                             }
                         }

@@ -16,7 +16,6 @@ namespace Project_Manager.Services.BO
 
         public string Apellido2 { get; set; }
 
-        public string Correo { get; set; }
 
         public string Usuario { get; set; }
 
@@ -24,9 +23,5 @@ namespace Project_Manager.Services.BO
 
         public string Rol { get; set; }
 
-        public static implicit operator List<object>(DataSessionBO v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

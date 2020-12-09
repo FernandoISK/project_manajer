@@ -26,7 +26,6 @@ namespace Project_Manager.Controllers
             Session["Nombre"] = null;
             Session["Apellido1"] = null;
             Session["Apellido2"] = null;
-            Session["Correo"] = null;
             Session["Usuario"] = null;
             Session["Contraseña"] = null;
             Session["Rol"] = null;
@@ -58,7 +57,6 @@ namespace Project_Manager.Controllers
                     Session["Nombre"] = dso.Nombre;
                     Session["Apellido1"] = dso.Apellido1;
                     Session["Apellido2"] = dso.Apellido2;
-                    Session["Correo"] = dso.Correo;
                     Session["Usuario"] = dso.Usuario;
                     Session["Contraseña"] = dso.Contraseña;
                     Session["Rol"] = dso.Rol;
