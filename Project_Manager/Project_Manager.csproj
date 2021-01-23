@@ -133,7 +133,7 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
-    <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\PantallaHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
@@ -1948,7 +1948,7 @@
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
     <Content Include="Views\Administrador\Create.cshtml" />
-    <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\PantallaHome\Index.cshtml" />
     <Content Include="Views\Proyectos\Create.cshtml" />
     <Content Include="Views\Proyectos\Index.cshtml" />
   </ItemGroup>

@@ -13,6 +13,7 @@ namespace Project_Manager.Services.BO
 		public int Estatus { get; set;}
         public int Folio { get; set; }
 		public int FKCliente { get; set; }
+        public int Limite { get; set; }
 
-	}
+    }
 }

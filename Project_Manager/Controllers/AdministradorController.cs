@@ -72,7 +72,6 @@ namespace Project_Manager.Controllers
             login.Contra = contraseña;
             login.Usuario = usuario;
             login.Rol = "Administrador";
-            login.Estatus = 0;
 
 
             try

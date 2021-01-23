@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Project_Manager.Controllers
 {
-    public class EmpleadosController : Controller
+    public class PantallaHomeController : Controller
     {
         // GET: Empleados
         public ActionResult Index()

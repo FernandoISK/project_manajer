@@ -8,19 +8,20 @@
 
             var C_NAME = $("#txtNombre").val();
             var C_CELLPHONE = $("#txtCelular").val();
-            var C_USERNAME = $("#txtUsuario").val();
             var C_EMAIL = $("#txtCorreo").val();
             var C_PATERNALSURNAME = $("#txtApellidoP").val();
             var C_MATERNALSURNAME = $("#txtApellidoM").val();
+            var C_USERNAME = $("#txtUsuario").val();
+
 
             if (Client.Objects.IDClinete == 0) {
-                
+
                 var C_NAMEEM = $("#txtNombreEmpresa").val();
                 var C_PREPASSWORD = $("#txtPreContraseña").val();
                 var C_PASSWORD = $("#txtContraseña").val();
 
                 if (C_NAME.trim() == "") {
-                    Dialog.show("El campo 'Nombre' es obligatorio", Dialog.type.error);
+                    Dialog.show("El campo 'Nombre del empleado' es obligatorio", Dialog.type.error);
                     return;
                 }
                 if (C_PATERNALSURNAME.trim() == "") {

@@ -40,8 +40,8 @@ namespace Project_Manager.Controllers
             try
             {
                 int res = 0;
-                //res = Login.Alta(login);
-                //res = 0;
+                res = Login.Alta(login);
+                res = 0;
                 res = Client.Alta(cliente);
                 return res;
             }

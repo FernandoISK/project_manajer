@@ -8,8 +8,11 @@ namespace Project_Manager.Services.BO
 		public string ApellidoPRepresentante { get; set;}
 		public string TelefonoRepresentante { get; set;}
 		public string FKUsuario { get; set;}
-		public string correo { get; set; }
 		public int IDCliente { get; set;}
 		public int Estatus { get; set; }
+		//====================================TABLAS TEMPORALES DE CONSULTA==================================== =====
+
+		public string correo { get; set; }
+
 	}
 }

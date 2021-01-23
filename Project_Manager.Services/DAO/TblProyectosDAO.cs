@@ -27,7 +27,7 @@ namespace Project_Manager.Services.DAO
 			cmd.Parameters.AddWithValue("@FechaLimite", datos.FechaLimite);
 			cmd.Parameters.AddWithValue("@FechaEntrega", datos.FechaEntrega);
 			cmd.Parameters.AddWithValue("@FechaInicio", datos.FechaInicio);
-			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKLider);
+			//cmd.Parameters.AddWithValue("@FKUsuario", datos.FKLider);
 			cmd.CommandText = sql;
 
 
