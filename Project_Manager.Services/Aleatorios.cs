@@ -12,12 +12,13 @@ namespace Project_Manager.Services
         public string NumFolio()
         {
             Random rdm = new Random();
-            string aculador = "";
-            for(int i = 0; i > 10; i++)
+            string acomulador = "";
+            for(int i = 0; i < 10; i++)
             {
                 int numero = rdm.Next(10);
-                aculador = aculador + Convert.ToString(numero);
+                acomulador = acomulador + Convert.ToString(numero);
             }
+            Folio = acomulador;
             return Folio;
         }
     }

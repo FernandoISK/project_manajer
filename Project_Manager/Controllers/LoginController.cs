@@ -81,7 +81,7 @@ namespace Project_Manager.Controllers
             }
             else if ((Session["Rol"]).ToString() == "Empleado")
             {
-                return RedirectToAction("../Empleados/Index");
+                return RedirectToAction("../RolEpleado/Index");
             }
             return null;
         }

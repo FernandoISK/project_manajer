@@ -11,9 +11,13 @@ namespace Project_Manager.Services.BO
 		public string FechaInicio { get; set;}
 		public string FechaEntrega { get; set;}
 		public int Estatus { get; set;}
-        public int Folio { get; set; }
+        public string Folio { get; set; }
 		public int FKCliente { get; set; }
         public int Limite { get; set; }
+        public int Actual { get; set; }
+
+        //======================= COLUMNAS TEMPORALES ==============================
+        public string NombreEmpresa { get; set; }
 
     }
 }

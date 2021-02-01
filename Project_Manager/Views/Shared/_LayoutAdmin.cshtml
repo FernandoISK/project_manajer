@@ -12,6 +12,7 @@
     <link href="~/Content/Dialog/Dialog-ie.css" rel="stylesheet" />
     <link href="~/Content/Dialog/Dialog.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="~/Content/css/MyStyle.css" rel="stylesheet" />
 </head>
 <body id="page-top">
 
@@ -49,73 +50,66 @@
             </div>
 
             <!-- CATALOGO CATALOGO CATALOGO CATALOGO CATALOGO -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Catalogos</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Buscar por :</h6>
-                        <a class="collapse-item" href="@Url.Content("~/Clientes/Index")">Clientes</a>
-                        <a class="collapse-item" href="@Url.Content("~/Empleado/Index")">Empleados</a>
-                        <a class="collapse-item" href="@Url.Content("~/Administrador/Index")">Administradores</a>
-                        <a class="collapse-item" href="@Url.Content("~/tblEmpleadoes/Index")">Proyectos</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- AGREGAR AGREGAR AGREGAR AGREGAR AGREGAR  -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Registrar</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Agregar nuevo: </h6>
-                        <a class="collapse-item" href="@Url.Content("~/Clientes/Create")">Clientes</a>
-                        <a class="collapse-item" href="@Url.Content("~/Empleado/Create")">Empleados</a>
-                        <a class="collapse-item" href="@Url.Content("~/Administrador/Create")">Administradores</a>
-                        <a class="collapse-item" href="@Url.Content("~/tblProyectos/Create")">Proyectos</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-
-
             @{
-                if (Session["Rol"].ToString() == "Cliente")
+                if (Session["Rol"].ToString() == "Administrador")
                 {
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Cliente
-                    </div>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-dolly-flatbed"></i>
-                            <span>Proyectos</span>
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Catalogos</span>
                         </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Buscar por :</h6>
+                                <a class="collapse-item" href="@Url.Content("~/Clientes/Index")">Clientes</a>
+                                <a class="collapse-item" href="@Url.Content("~/Empleado/Index")">Empleados</a>
+                                <a class="collapse-item" href="@Url.Content("~/Administrador/Index")">Administradores</a>
+                                <a class="collapse-item" href="@Url.Content("~/Proyectos/Index")">Proyectos</a>
+                            </div>
+                        </div>
                     </li>
 
-
+                    <!-- AGREGAR AGREGAR AGREGAR AGREGAR AGREGAR  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Registrar</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Agregar nuevo: </h6>
+                                <a class="collapse-item" href="@Url.Content("~/Clientes/Create")">Clientes</a>
+                                <a class="collapse-item" href="@Url.Content("~/Empleado/Create")">Empleados</a>
+                                <a class="collapse-item" href="@Url.Content("~/Administrador/Create")">Administradores</a>
+                                <a class="collapse-item" href="@Url.Content("~/Proyectos/Create")">Proyectos</a>
+                            </div>
+                        </div>
+                    </li>
+                    }
                 }
-            }
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                            <!-- Heading -->
+                            <div class="sidebar-heading">
+                                Cliente
+                            </div>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-dolly-flatbed"></i>
+                                    <span>Mis Proyectos</span>
+                                </a>
+                            </li>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
 
-        </ul>
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                </ul>
         <!-- End of Sidebar -->
         @*-----------------------------------------------------------------------------------------------------------------------*@
         <!-- Content Wrapper -->

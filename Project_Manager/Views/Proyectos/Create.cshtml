@@ -17,7 +17,7 @@
                     <div class="row col-lg-12">
                         <div class="col-md-6">
                             <label class="label">Nombre del Proyecto*</label>
-                            <input type="text" class="form-control" id="txtNombre">
+                            <input type="text" class="form-control" id="txtNombrePro">
                         </div>
                         @if (Cliente.Count != 0)
                         {
@@ -44,27 +44,53 @@
                     <div class="row col-lg-12">
                         <div class="col-lg-5">
                             <label class="label">Fecha de entrega*</label>
-                            <input type="date" class="form-control" id="txtCelular">
+                            <input type="date" class="form-control" id="txtFechaEntrega">
                         </div>
                         <div class="col-lg-7">
                             <label asp-for="veh.modelo" class="label">Prioridad*</label>
-                            <select asp-for="veh.modelo" class="form-control col-md-12" id="txtGenero">
+                            <select asp-for="veh.modelo" class="form-control col-md-12" id="cmdPrioridad">
                                 <option selected disabled>--Seleccione--</option>
-                                <option value="alta">Alta preoridad</option>
-                                <option value="media">Media preoridad</option>
-                                <option value="baja">Baja preoridad</option>
+                                <option value="Alta">Alta preoridad</option>
+                                <option value="Media">Media preoridad</option>
+                                <option value="Baja">Baja preoridad</option>
                             </select>
                         </div>
                     </div>
-                    <div class="row col-lg-12">
-                        <label asp-for="veh.modelo" class="label">Descripción*</label>
-                    </div>
-                    <div class="row col-lg-12">
-                        <textarea maxlength="1000" id="mensaje" rows="4" cols="70"></textarea>
-                    </div>
-                    <div class="row col-lg-12">
-                        <div id="contador">0/1000</div>
-                    </div>
+                    <di class="row col-lg-12">
+                        <div class="col-lg-9">
+                            <div class="row col-lg-12">
+                                <label asp-for="veh.modelo" class="label">Descripción*</label>
+                            </div>
+                            <div class="row col-lg-12">
+                                <textarea maxlength="250" id="mensaje" rows="4" cols="70"></textarea>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div id="contador">0/250</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label asp-for="veh.modelo" class="label">Maximo de empleados*</label>
+                            <select asp-for="veh.modelo" class="form-control col-md-12" id="cmdmaxEm">
+                                <option selected disabled>--Seleccione--</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </di>
+                    
                 </fieldset>
             </div>
             <div class="group">
@@ -85,10 +111,10 @@
         contador.innerHTML = `${longitudAct}/${longitudMax}`;
     });
 </script>
-<script src="~/Scripts/Employees.js"></script>
+<script src="~/Scripts/ProjectAll.js"></script>
 <script>
     $(function () {
-        Employees.init();
+        Project.init();
     });
 </script>
 

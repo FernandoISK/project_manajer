@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Select";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var Proyecto = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.ProyectoList;
+
 }
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -31,7 +32,8 @@
                                     <tr>
                                         <th scope="col">Folio</th>
                                         <th scope="col">Nobre del proyecto</th>
-                                        <th>Accesorios</th>
+                                        <th>Fecha de entrega</th>
+                                        <th>Seleccionar</th>
                                     </tr>
 
                                 </thead>
@@ -43,17 +45,9 @@
                                         <tr>
                                             <td>@item.Folio</td>
                                             <td>@item.NombreProyecto</td>
+                                            <td>@item.FechaLimite</td>
                                             <td align="center">
-                                                <a href="@Url.Content(string.Format("~/Proyectos/Details?i={0}", item.Folio))" class="btn btn-warning">Detalles</a>
-                                                @if (item.Estatus != 4)
-                                                {
-                                                    <button type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-danger">Deshabilitar</button>
-
-                                                }
-                                                else
-                                                {
-                                                    <button type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-success">Habilitar </button>
-                                                }
+                                                    <button type="button" class="btn btn-warning">Tomar proyecto</button>
                                             </td>
                                         </tr>
 
@@ -86,9 +80,3 @@
     </footer>
 </div>
 
-<script src="~/Scripts/ProjectAll.js"></script>
-<script>
-    $(function () {
-        Project.init();
-    });
-</script>

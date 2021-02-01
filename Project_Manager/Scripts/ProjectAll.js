@@ -6,82 +6,60 @@
         $("#frmCreate").on("submit", function (e) {
             e.preventDefault()
 
-            var E_NAME = $("#txtNombre").val();
-            var E_CELLPHONE = $("#txtCelular").val();
-            var E_USERNAME = $("#txtUsuario").val();
-            var E_EMAIL = $("#txtCorreo").val();
+            var P_PROJECTNAME = $("#txtNombrePro").val();
+            var P_COMPANYNAME = $("#cmbEmpresa").val();
+            var P_DATEOFDELIVERY = $("#txtFechaEntrega").val();
+            var P_PRIORITY = $("#cmdPrioridad").val();
+            var P_DESCRIPTION = $("#mensaje").val();
+            var P_MAXIMUMEMPLOYEES = $("#cmdmaxEm").val();
 
-            if (Employees.Objects.IDEmpleado == 0) {
-                var E_PATERNALSURNAME = $("#txtApellidoP").val();
-                var E_MATERNALSURNAME = $("#txtApellidoM").val();
-                var E_BIRTH = $("#txtfecha").val();
-                var E_GENDER = $("#txtGenero").val();
-                var E_PREPASSWORD = $("#txtPreContraseña").val();
-                var E_PASSWORD = $("#txtContraseña").val();
+            if (Project.Objects.IDProyecto == 0) {
+                
 
-                if (E_NAME.trim() == "") {
-                    Dialog.show("El campo 'Nombre' es obligatorio", Dialog.type.error);
+                if (P_PROJECTNAME.trim() == "") {
+                    Dialog.show("El campo 'nombre del proyecto' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_PATERNALSURNAME.trim() == "") {
-                    Dialog.show("El campo 'Apellido paterno' es obligatorio", Dialog.type.error);
+                if (P_COMPANYNAME.trim() == "") {
+                    Dialog.show("El campo 'Nombre de la empresa' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_MATERNALSURNAME.trim() == "") {
-                    Dialog.show("El campo 'Apellido materno es obligatorio' es obligatorio", Dialog.type.error);
+                if (P_DATEOFDELIVERY.trim() == "") {
+                    Dialog.show("El campo 'Fecha de entrega' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_CELLPHONE.trim() == "") {
-                    Dialog.show("El campo 'Telefono' es obligatorio", Dialog.type.error);
+                if (P_PRIORITY.trim() == "") {
+                    Dialog.show("El campo 'Prioridad' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_BIRTH.trim() == "") {
-                    Dialog.show("El campo 'Fecha de nacimiento' es obligatorio", Dialog.type.error);
+                if (P_DESCRIPTION.trim() == "") {
+                    Dialog.show("El campo 'Descripcion del proyecto' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_GENDER.trim() == "") {
-                    Dialog.show("El campo 'Genero' es obligatorio", Dialog.type.error);
+                if (P_MAXIMUMEMPLOYEES.trim() == "") {
+                    Dialog.show("El campo 'Maximo de empleados' es obligatorio", Dialog.type.error);
                     return;
                 }
-                if (E_EMAIL.trim() == "") {
-                    Dialog.show("El campo 'Correo electronico' es obligatorio", Dialog.type.error);
-                    return;
-                }
-                if (E_USERNAME.trim() == "") {
-                    Dialog.show("El campo 'Usuario' es obligatorio", Dialog.type.error);
-                    return;
-                }
-                if (E_PREPASSWORD.trim() == "") {
-                    Dialog.show("El campo 'Contraseña' es obligatorio", Dialog.type.error);
-                    return;
-                }
-                if (E_PREPASSWORD.trim() != E_PASSWORD.trim()) {
-                    Dialog.show("La contraseña no coincide", Dialog.type.error);
-                    return;
-                }
-                var objEmpleado = {
-                    NombreEmpleado: E_NAME,
-                    ApellidoPEmpleado: E_PATERNALSURNAME,
-                    ApellidoMEmpleado: E_MATERNALSURNAME,
-                    TelefonoEmpleado: E_CELLPHONE,
-                    Nacimiento: E_BIRTH,
-                    GeneroEmpleado: E_GENDER,
-                    FKUsuario: E_USERNAME
+                var objProyecto = {
+                    NombreProyecto: P_PROJECTNAME,
+                    FKCliente: P_COMPANYNAME,
+                    FechaLimite: P_DATEOFDELIVERY,
+                    Prioridad: P_PRIORITY,
+                    Descripcion: P_DESCRIPTION,
+                    Limite: P_MAXIMUMEMPLOYEES
                 };
                 $.ajax({
-                    url: Root + "Empleado/New",
+                    url: Root + "Proyectos/New",
                     type: "POST",
                     data: {
-                        dataEmpleado: JSON.stringify(objEmpleado),
-                        CorreoEmpleado: E_EMAIL,
-                        ContraEmpleado: E_PASSWORD
+                        dataproyecto: JSON.stringify(objProyecto),
                     },
                     beforeSend: function () {
                         Dialog.show("Guardando datos", Dialog.type.progress);
                     },
                     success: function (response) {
                         if (response > 0) {
-                            Dialog.show("Nuevo empleado creado correctamente", Dialog.type.success);
+                            Dialog.show("Se agrego un nuevo proyecto", Dialog.type.success);
                             $(".sem-dialog").on("done", function () {
                                 location.reload(true);
                                 //location.href = '/HumanResources/Persons';
@@ -95,15 +73,15 @@
             }
             else {
                 $.ajax({
-                    url: Root + "Empleado/Update",
+                    url: Root + "Proyectos/Update",
                     type: "POST",
-                    data: { nombre: E_NAME, telefono: E_CELLPHONE, correo: E_EMAIL, usuario: E_USERNAME, id: Employees.Objects.IDEmpleado },
+                    data: { nombre: P_PROJECTNAME, descripcion: P_DESCRIPTION, prioridad: P_PRIORITY, limite: P_MAXIMUMEMPLOYEES, folio: Project.Objects.IDProyecto },
                     beforeSend: function () {
                         Dialog.show("Actualizando datos", Dialog.type.progress);
                     },
                     success: function (response) {
                         if (response > 0) {
-                            Dialog.show("Empleado actualizado correctamente", Dialog.type.success);
+                            Dialog.show("Proyecto actualizado correctamente", Dialog.type.success);
                             $(".sem-dialog").on("done", function () {
                                 location.reload(true);
                                 //location.href = '/HumanResources/Persons';
@@ -116,8 +94,41 @@
                 });
             }
         });
-        $(".input-number").on("input", function () {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
+        //$(".input-number").on("input", function () {
+        //    this.value = this.value.replace(/[^0-9]/g, '');
+        //});
     },
+    evts: {
+        getProyeInfo: function (id) {
+            Project.Objects.IDProyecto = id;
+            $("#mdlDetail").modal("show");
+            Dialog.hide();
+        },
+        updateStatus: function (id, status) {
+            if (status != "4") {
+                Dialog.show("¿Estás seguro que quiere Deshabilitar este proyecto?", Dialog.type.question);
+            }
+            else {
+                Dialog.show("¿Estás seguro que quiere habilitar este proyecto?", Dialog.type.question);
+            }
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/UpdateStatus",
+                    type: "POST",
+                    data: { id: id, estatus: status },
+                    beforeSend: function () {
+                        Dialog.show("Desactivando proyecto", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            location.reload(true);
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al eliminar, inténtelo de nuevo", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        }
+    }
 }

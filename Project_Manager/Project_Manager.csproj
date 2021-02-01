@@ -133,10 +133,10 @@
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
-    <Compile Include="Controllers\PantallaHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
+    <Compile Include="Controllers\RolEmpleadoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -151,6 +151,7 @@
     <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\MyStyle.css" />
     <Content Include="Content\css\pogo-slider.min.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\responsiveslides.css" />
@@ -1948,9 +1949,11 @@
     <Content Include="Views\Clientes\Create.cshtml" />
     <Content Include="Views\Administrador\Index.cshtml" />
     <Content Include="Views\Administrador\Create.cshtml" />
-    <Content Include="Views\PantallaHome\Index.cshtml" />
     <Content Include="Views\Proyectos\Create.cshtml" />
     <Content Include="Views\Proyectos\Index.cshtml" />
+    <Content Include="Views\Proyectos\Details.cshtml" />
+    <Content Include="Views\RolEmpleado\Index.cshtml" />
+    <Content Include="Views\RolEmpleado\Select.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
