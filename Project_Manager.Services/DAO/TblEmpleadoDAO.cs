@@ -82,84 +82,6 @@ namespace Project_Manager.Services.DAO
         }
 
 
-        public DataSet devuelveEmpleado(object obj)
-		{
-			string cadenaWhere = "";
-			bool edo = false;
-			TblEmpleadoBO data = (TblEmpleadoBO)obj;
-			SqlCommand cmd = new SqlCommand();
-			DataSet ds = new DataSet();
-			SqlDataAdapter da = new SqlDataAdapter();
-			cmd.Connection = con2.establecerconexion();
-			con2.AbrirConexion();
-
-			if (data.IDEmpleado > 0)
-			{
-				cadenaWhere = cadenaWhere + " IDEmpleado = @IDEmpleado and";
-				cmd.Parameters.AddWithValue("@IDEmpleado", data.IDEmpleado);
-				edo = true;
-			}
-			if (data.NombreEmpleado != null)
-			{
-				cadenaWhere = cadenaWhere + " NombreEmpleado = @NombreEmpleado and";
-				cmd.Parameters.AddWithValue("@NombreEmpleado", data.NombreEmpleado);
-				edo = true;
-			}
-			if (data.ApellidoPEmpleado != null)
-			{
-				cadenaWhere = cadenaWhere + " ApellidoPEmpleado = @ApellidoPEmpleado and";
-				cmd.Parameters.AddWithValue("@ApellidoPEmpleado", data.ApellidoPEmpleado);
-				edo = true;
-			}
-			if (data.ApellidoMEmpleado != null)
-			{
-				cadenaWhere = cadenaWhere + " ApellidoMEmpleado = @ApellidoMEmpleado and";
-				cmd.Parameters.AddWithValue("@ApellidoMEmpleado", data.ApellidoMEmpleado);
-				edo = true;
-			}
-			if (data.TelefonoEmpleado != null)
-			{
-				cadenaWhere = cadenaWhere + " TelefonoEmpleado = @TelefonoEmpleado and";
-				cmd.Parameters.AddWithValue("@TelefonoEmpleado", data.TelefonoEmpleado);
-				edo = true;
-			}
-			if (data.Nacimiento != null)
-			{
-				cadenaWhere = cadenaWhere + " Nacimiento = @Nacimiento and";
-				cmd.Parameters.AddWithValue("@Nacimiento", data.Nacimiento);
-				edo = true;
-			}
-			if (data.Estatus > 0)
-			{
-				cadenaWhere = cadenaWhere + " Estatus = @Estatus and";
-				cmd.Parameters.AddWithValue("@Estatus", data.Estatus);
-				edo = true;
-			}
-			if (data.GeneroEmpleado.ToString() != "\0")
-			{
-				cadenaWhere = cadenaWhere + " GeneroEmpleado = @GeneroEmpleado and";
-				cmd.Parameters.AddWithValue("@GeneroEmpleado", data.GeneroEmpleado);
-				edo = true;
-			}
-			if (data.FKUsuario != null)
-			{
-				cadenaWhere = cadenaWhere + " FKUsuario = @FKUsuario and";
-				cmd.Parameters.AddWithValue("@FKUsuario", data.FKUsuario);
-				edo = true;
-			}
-
-			if (edo == true)
-			{
-				cadenaWhere = " WHERE " + cadenaWhere.Remove(cadenaWhere.Length - 3, 3);
-			}
-			sql = "SELECT * FROM TblEmpleado" + cadenaWhere;
-			cmd.CommandText = sql;
-			da.SelectCommand = cmd;
-			da.Fill(ds);
-			con2.CerrarConexion();
-			return ds;
-		}
-
 
 		public List<TblEmpleadoBO> ListarTabla()
 		{
@@ -187,6 +109,47 @@ namespace Project_Manager.Services.DAO
 				}				
 			}
 			return lista;
+		}
+
+		public List<TblEmpleadoBO> GetAsignacionEmpleado()
+		{
+			List<TblEmpleadoBO> lista = new List<TblEmpleadoBO>();
+			sql = "Select NombreEmpleado, ApellidoPEmpleado, ApellidoMEmpleado, TelefonoEmpleado, IDEmpleado FROM tblEmpleado where Estatus = 0;";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblEmpleadoBO obj = new TblEmpleadoBO();
+					obj.NombreEmpleado = row["NombreEmpleado"].ToString();
+					obj.ApellidoPEmpleado = row["ApellidoPEmpleado"].ToString();
+					obj.ApellidoMEmpleado = row["ApellidoMEmpleado"].ToString();
+					obj.TelefonoEmpleado = row["TelefonoEmpleado"].ToString();
+					obj.IDEmpleado = int.Parse(row["IDEmpleado"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+		public TblEmpleadoBO TraerUnEmpleado(int id)
+		{
+			TblEmpleadoBO dato = new TblEmpleadoBO();
+			sql = "SELECT b.FKUsuario,b.NombreEmpleado, a.Correo FROM tblCuenta a INNER JOIN tblEmpleado b ON a.Usuario = b.FKUsuario WHERE b.IDEmpleado = " +id+ ";";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					dato.FKUsuario = row["FKUsuario"].ToString();
+					dato.NombreEmpleado = row["NombreEmpleado"].ToString();
+					dato.correo = row["Correo"].ToString();
+				}
+			}
+			return dato;
 		}
 
 	}

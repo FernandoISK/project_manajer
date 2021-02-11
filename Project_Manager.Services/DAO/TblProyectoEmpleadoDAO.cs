@@ -31,5 +31,26 @@ namespace Project_Manager.Services.DAO
 			}
 			return lista;
 		}
+		public int Crear(object obj)
+		{
+
+			TblProyectoEmpleadoBO datos = (TblProyectoEmpleadoBO)obj;
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "EXEC PA_AsignarEmpleado @FKProyecto,@FKEmpleado,@FechaIngreso";
+			cmd.Parameters.AddWithValue("@FKProyecto", datos.FKProyecto);
+			cmd.Parameters.AddWithValue("@FKEmpleado", datos.FKEmpleado);
+			cmd.Parameters.AddWithValue("@FechaIngreso", datos.FechaIngreso);
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+
 	}
 }

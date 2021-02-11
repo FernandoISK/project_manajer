@@ -1,9 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var Proyecto = (Project_Manager.Services.BO.TblProyectosBO)ViewBag.ProyectoObj;
     var proyectoaEmpleado = (List<Project_Manager.Services.BO.TblProyectoEmpleadoBO>)ViewBag.proyectoaEmpleado;
+    var asignacion = (List<Project_Manager.Services.BO.TblEmpleadoBO>)ViewBag.ProyectoList;
 
 }
 
@@ -14,103 +14,170 @@
             <b>
                 <h2 class="card-text">Proyecto: @Proyecto.NombreProyecto</h2>
                 <button type="button" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btnEdit float-right" data-toggle="tooltip" title="Editar"><i class="fas fa-pen"></i></button>
+                <a href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-warning">Tareas</a>
             </b>
         </div>
 
-            <div class="card-body">
-                <form method="post" >
-                    <div class="group form-group">
-                        <div class="col-sm-6" style="float:left; position:relative">
-                            <fieldset>
-                                <legend>Datos Generales</legend>
-                                <dl class="row">
-                                    @if (Proyecto.Estatus == 0)
+        <div class="card-body">
+            <form method="post">
+                <div class="group form-group">
+                    <div class="col-sm-6" style="float:left; position:relative">
+                        <fieldset>
+                            <legend>Datos Generales</legend>
+                            <dl class="row">
+                                @if (Proyecto.Estatus == 0)
+                                {
+                                    <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                    <dd class="col-sm-8"><samp style="color:green">Activo</samp></dd>
+                                }
+                                else
+                                {
+                                    if (Proyecto.Estatus == 1)
                                     {
                                         <dt class="col-sm-4"><label class="label">Estado: </label></dt>
-                                        <dd class="col-sm-8"><samp style="color:green">Activo</samp></dd>
+                                        <dd class="col-sm-8"><samp style="color:green">En retroalimentacion</samp></dd>
                                     }
                                     else
                                     {
-                                        if (Proyecto.Estatus == 1)
+                                        if (Proyecto.Estatus == 2)
                                         {
                                             <dt class="col-sm-4"><label class="label">Estado: </label></dt>
-                                            <dd class="col-sm-8"><samp style="color:green">En retroalimentacion</samp></dd>
+                                            <dd class="col-sm-8"><samp style="color:red">En reparacion</samp></dd>
                                         }
                                         else
                                         {
-                                            if (Proyecto.Estatus == 2)
+                                            if (Proyecto.Estatus == 3)
                                             {
                                                 <dt class="col-sm-4"><label class="label">Estado: </label></dt>
-                                                <dd class="col-sm-8"><samp style="color:red">En reparacion</samp></dd>
+                                                <dd class="col-sm-8"><samp style="color:green">Finalizado</samp></dd>
                                             }
                                             else
                                             {
-                                                if (Proyecto.Estatus == 3)
-                                                {
-                                                    <dt class="col-sm-4"><label class="label">Estado: </label></dt>
-                                                    <dd class="col-sm-8"><samp style="color:green">Finalizado</samp></dd>
-                                                }
-                                                else
-                                                {
-                                                    <dt class="col-sm-4"><label class="label">Estado: </label></dt>
-                                                    <dd class="col-sm-8"><samp style="color:red">Suspendido</samp></dd>
-                                                }
+                                                <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                                <dd class="col-sm-8"><samp style="color:red">Suspendido</samp></dd>
                                             }
                                         }
                                     }
+                                }
 
-                                    <dt class="col-sm-4"><label class="label">Fecha De Entrega:</label></dt>
-                                    <dd class="col-sm-8"><samp style="color:black">@Proyecto.FechaLimite</samp></dd>
+                                <dt class="col-sm-4"><label class="label">Fecha De Entrega:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.FechaLimite</samp></dd>
 
-                                    <dt class="col-sm-4"><label class="label">Prioridad:</label></dt>
-                                    <dd class="col-sm-8"><samp style="color:black">@Proyecto.Prioridad</samp></dd>
+                                <dt class="col-sm-4"><label class="label">Prioridad:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.Prioridad</samp></dd>
 
-                                    <dt class="col-sm-4"><label class="label">Empresa Dueña:</label></dt>
-                                    <dd class="col-sm-8"><samp style="color:black">@Proyecto.NombreEmpresa</samp></dd>
+                                <dt class="col-sm-4"><label class="label">Empresa Dueña:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.NombreEmpresa</samp></dd>
 
-                                    <dt class="col-sm-4"><label class="label">Detalles:</label></dt>
-                                    <dd class="col-sm-8" id="TextJustify">
-                                        <samp style="color:black">
-                                            @Proyecto.Descripcion
-                                        </samp>
-                                    </dd>
-                                </dl>
-                            </fieldset>
-                        </div>
-                        <div class="col-sm-6" style="float:left; position:relative">
-                            <fieldset>
-                                <legend>Trabajadores del proyecto @Proyecto.Actual/@Proyecto.Limite</legend>
-                                <dl class="row">
-                                    @foreach (Project_Manager.Services.BO.TblProyectoEmpleadoBO item in proyectoaEmpleado)
-                                    {
-                                        <div class="row">
-                                            <dt class="col-sm-4"><label class="label">Empleado:</label></dt>
-                                            <dd class="col-sm-8"><samp style="color:black">@item.NombreEmpleado</samp></dd>
-                                            <dt class="col-sm-4"><label class="label">Incorporacion:</label></dt>
-                                            <dd class="col-sm-8"><samp style="color:black">@item.FechaIngreso</samp></dd>
-                                            @if (item.EstadoEmple == 0)
-                                            {
-                                                <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
-                                                <dd class="col-sm-8"><samp style="color:black">Con autorización</samp></dd>
-                                            }
-                                            else
-                                            {
-                                                <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
-                                                <dd class="col-sm-8"><samp style="color:black">Sin autorización</samp></dd>
-                                            }
-                                            <dt class="col-sm-4"><label class="label">Contacto:</label></dt>
-                                            <dd class="col-sm-8"><a href="https://mail.google.com/mail/u/0/"><i class="fas fa-envelope-open-text"></i></a></dd>
-                                            <i class="fas fa-grip-lines Iopacity"></i>
-                                        </div>
-                                    }
-
-                                </dl>
-                            </fieldset>
-                        </div>
-
+                                <dt class="col-sm-4"><label class="label">Detalles:</label></dt>
+                                <dd class="col-sm-8" id="TextJustify">
+                                    <samp style="color:black">
+                                        @Proyecto.Descripcion
+                                    </samp>
+                                </dd>
+                            </dl>
+                        </fieldset>
                     </div>
-                </form>
+                    <div class="col-sm-6" style="float:left; position:relative">
+                        <fieldset>
+                            <legend>Trabajadores del proyecto @Proyecto.Actual/@Proyecto.Limite</legend>
+                            <dl class="row">
+                                @foreach (Project_Manager.Services.BO.TblProyectoEmpleadoBO item in proyectoaEmpleado)
+                                {
+                                    <div class="row">
+                                        <dt class="col-sm-4"><label class="label">Empleado:</label></dt>
+                                        <dd class="col-sm-8"><samp style="color:black">@item.NombreEmpleado</samp></dd>
+                                        <dt class="col-sm-4"><label class="label">Incorporacion:</label></dt>
+                                        <dd class="col-sm-8"><samp style="color:black">@item.FechaIngreso</samp></dd>
+                                        @if (item.EstadoEmple == 0)
+                                        {
+                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                            <dd class="col-sm-8"><samp style="color:black">Con autorización</samp></dd>
+                                        }
+                                        else
+                                        {
+                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                            <dd class="col-sm-8"><samp style="color:black">Sin autorización</samp></dd>
+                                        }
+                                        <dt class="col-sm-4"><label class="label">Contacto:</label></dt>
+                                        <dd class="col-sm-8"><a href="https://mail.google.com/mail/u/0/"><i class="fas fa-envelope-open-text"></i></a></dd>
+                                        <i class="fas fa-grip-lines Iopacity"></i>
+                                    </div>
+                                }
+
+                            </dl>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                @if (asignacion.Count > 0)
+                {
+                    <div class="card shadow mb-4">
+                       
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+
+                                        <tr>
+                                            <th>Nombre completo</th>
+                                            <th>Telefono</th>
+                                            <th>Seleccionar</th>
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in asignacion)
+                                        {
+
+                                                <tr>
+                                                    <td>@item.NombreEmpleado @item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
+                                                    <td>@item.TelefonoEmpleado</td>
+                                                    <td align="center">
+                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio','@Proyecto.NombreProyecto')"  class="btn btn-warning">Asignar proyecto</button>
+                                                    </td>
+                                                </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h2> Sin resultados</h2>
+
+                }
+
             </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; FernandoISK 2019</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
 </div>
@@ -176,6 +243,7 @@
         </form>
     </div>
 </div>
+
 <script>
     const mensaje = document.getElementById('mensaje');
     const contador = document.getElementById('contador');

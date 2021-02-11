@@ -8,8 +8,9 @@ namespace Project_Manager.Services.BO
 {
     public class TblProyectoEmpleadoBO
     {
+        public int IDAsignacion { get; set; }
         public string FechaIngreso { get; set; }
-        public int FKProyecto { get; set; }
+        public string FKProyecto { get; set; }
         public int FKEmpleado { get; set; }
         public int EstadoEmple { get; set; }
 

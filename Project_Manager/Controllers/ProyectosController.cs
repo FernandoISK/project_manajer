@@ -1,5 +1,6 @@
-﻿using Microsoft.Ajax.Utilities;
+﻿ using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
+using Project_Manager.Correos;
 using Project_Manager.Services;
 using Project_Manager.Services.BO;
 using Project_Manager.Services.Services;
@@ -12,6 +13,8 @@ namespace Project_Manager.Controllers
     {
         TblProyectosCTRL proyecto = new TblProyectosCTRL();
         TblClienteCTRL cliente = new TblClienteCTRL();
+        TblEmpleadoCTRL Empleado = new TblEmpleadoCTRL();
+        TblTareasCTRL tareas = new TblTareasCTRL();
         TblProyectoEmpleadoCTRL EmpleadoProyecto = new TblProyectoEmpleadoCTRL();
         // GET: Proyectos
         #region Vistas
@@ -25,10 +28,10 @@ namespace Project_Manager.Controllers
                     return View();
                 }
                 else
-                    return RedirectToAction("../Login/UserLogin");
+                    return RedirectToAction("../Home/Error");
             }
             else
-                return RedirectToAction("../Login/UserLogin");
+                return RedirectToAction("../Home/Error");
 
             
         }
@@ -42,7 +45,7 @@ namespace Project_Manager.Controllers
                     return View();
                 }
                 else
-                    return RedirectToAction("../Login/UserLogin");
+                    return RedirectToAction("../Home/Error");
             }
             else
                 return RedirectToAction("../Login/UserLogin");
@@ -58,15 +61,36 @@ namespace Project_Manager.Controllers
                     try { folio = Request.QueryString.Get("i"); } catch { }
                     ViewBag.ProyectoObj = proyecto.GetOne(folio);
                     ViewBag.proyectoaEmpleado = EmpleadoProyecto.GetProyectoAEmpleado(folio);
+                    ViewBag.ProyectoList = Empleado.TraerEmpleadosAsignacion();
                     return View();
                 }
                 else
-                    return RedirectToAction("../Login/UserLogin");
+                    return RedirectToAction("../Home/Error");
             }
             else
                 return RedirectToAction("../Login/UserLogin");
 
             
+        }
+        public ActionResult Task()
+        {
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    string folio = "";
+                    try { folio = Request.QueryString.Get("i"); } catch { }
+                    ViewBag.TareasList = tareas.GetAll(folio);
+                    ViewBag.ProyectoObj = proyecto.GetOne(folio);
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
+
+
         }
         #endregion
         #region Metodos
@@ -132,6 +156,73 @@ namespace Project_Manager.Controllers
                 int res = 0;
 
                 res = proyecto.Cambio(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int NewTask()
+        {
+            string nombre = Request.Form.Get("Nombre");
+            string descripcion = Request.Form.Get("DESCRI");
+            string folio = Request.Form.Get("fkproyecto");
+
+            TblTareasBO data = new TblTareasBO();
+
+            data.Titulo = nombre;
+            data.Descripcion = descripcion;
+            data.FKProyecto = folio;
+            try
+            {
+                int res = 0;
+
+                res = tareas.Alta(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
+        public int DeleteTask()
+        {
+            int id = int.Parse(Request.Form.Get("IdEmpleado"));
+            try
+            {
+                int res = 0;
+
+                res = tareas.Baja(id);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int AsignarProyecto()
+        {
+            string Folio = Request.Form.Get("folioproyecto");
+            int Empleado = int.Parse(Request.Form.Get("IdEmpleado"));
+            string NombreProyecto = Request.Form.Get("projecName");
+            int Actualizacion = 0;
+            TblProyectoEmpleadoBO data = new TblProyectoEmpleadoBO();
+            data.FKEmpleado = Empleado;
+            data.FKProyecto = Folio;
+            data.FechaIngreso = DateTime.Now.ToString("yyyy-MM-dd");
+            TblProyectosBO actual = new TblProyectosBO();
+            Actualizacion = actual.Actual + 1;
+
+            try
+            {
+                int res = 0;
+                res = EmpleadoProyecto.Alta(data);
+                res = 0;
+                res = proyecto.AddEmpleado(Actualizacion, Folio);
+                CorreosParaEmpleado correo = new CorreosParaEmpleado();
+                correo.IncorporacionProyecto(Empleado, NombreProyecto);
                 return res;
             }
             catch (Exception ex)

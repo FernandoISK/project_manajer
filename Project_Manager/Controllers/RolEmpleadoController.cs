@@ -9,7 +9,7 @@ namespace Project_Manager.Controllers
 {
     public class RolEmpleadoController : Controller
     {
-        TblProyectosCTRL proyecto = new TblProyectosCTRL();
+        TblProyectoEmpleadoCTRL proyecto = new TblProyectoEmpleadoCTRL();
         // GET: RolEmpleado
         public ActionResult Index()
         {
@@ -25,13 +25,12 @@ namespace Project_Manager.Controllers
             else
                 return RedirectToAction("../Login/UserLogin");
         }
-        public ActionResult Select()
+        public ActionResult Juntas()
         {
             if (Session["Rol"] != null)
             {
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
-                    ViewBag.ProyectoList = proyecto.GetAll();
                     return View();
                 }
                 else

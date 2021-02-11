@@ -45,6 +45,13 @@ namespace Project_Manager.Services.Services
             resultado = metodo.Actualizar(obj);
             return resultado;
         }
+        public int AddEmpleado(int actual, string folio)
+        {
+            int resultado = 0;
+            resultado = metodo.AgregarEmpleado(actual,folio);
+            return resultado;
+        }
+
     }
 }
 

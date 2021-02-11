@@ -154,5 +154,24 @@ namespace Project_Manager.Services.DAO
             }
             return dato;
         }
-    }
+		public int AgregarEmpleado(int actual, string folio)
+		{
+
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "UPDATE TblProyectos set Actual = " + actual + " WHERE Folio = '" + folio + "';";
+			cmd.CommandText = sql;
+
+
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+
+	}
 }

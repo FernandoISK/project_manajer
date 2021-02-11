@@ -129,6 +129,31 @@
                     }
                 });
             });
-        }
+        } ,
+        asignarProyecto: function (id, folio,proyecto) {
+                Dialog.show("¿Deseas asignar este empleado a este proyecto?", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/AsignarProyecto",
+                    type: "POST",
+                    data: { IdEmpleado: id, folioproyecto: folio, projecName: proyecto },
+                    beforeSend: function () {
+                        Dialog.show("Uniendo al nuevo empleado al proyecto", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            Dialog.show("El empleado se añadio con éxito", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                location.reload(true);
+                            });
+                        }
+                        else {
+                            Dialog.show("Este empleado ya se encuetra en el proyecto. No puedes agregarlo dos veces", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        },
+
     }
 }

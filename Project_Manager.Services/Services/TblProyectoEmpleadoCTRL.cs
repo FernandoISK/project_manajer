@@ -17,6 +17,11 @@ namespace Project_Manager.Services.Services
             datos = metodo.GetEmpleadoPro(folio); 
             return datos;
         }
-
+        public int Alta(object obj)
+        {
+            int resultado = 0;
+            resultado = metodo.Crear(obj);
+            return resultado;
+        }
     }
 }

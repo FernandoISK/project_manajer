@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace Project_Manager.Controllers
 {
-    public class HomeController : Controller
+    public class RolClienteController : Controller
     {
+        // GET: RolCliente
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult Error()
+        public ActionResult Agendas()
         {
             return View();
         }

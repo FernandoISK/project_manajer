@@ -16,12 +16,33 @@ namespace Project_Manager.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            ViewBag.EmpleadoList = Client.GetAll();
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    ViewBag.EmpleadoList = Client.GetAll();
+                    return View(); ;
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
+            
         }
         public ActionResult Create()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    return View(); ;
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
         public int New()
         {

@@ -21,11 +21,11 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Administrador")
                 {
-                    ViewBag.EmpleadoList = Employees.GetAll(); //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
+                    ViewBag.EmpleadoList = Employees.GetAll();
                     return View();
                 }
                 else
-                    return RedirectToAction("../Login/UserLogin");
+                    return RedirectToAction("../Home/Error");
             }
             else
                 return RedirectToAction("../Login/UserLogin");
@@ -36,10 +36,9 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Administrador")
                 {
-                    //ViewBag.ProyectoList = Proyecto.GetIDProyecto();
                     return View();
                 }
-                return RedirectToAction("../Login/UserLogin");
+                return RedirectToAction("../Home/Error");
             }
             else
                 return RedirectToAction("../Login/UserLogin");

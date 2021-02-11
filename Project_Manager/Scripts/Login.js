@@ -19,14 +19,10 @@
                 type: "POST",
                 data: { usuario: L_USER, contraseña: L_PASS },
                 beforeSend: function () {
-                    Dialog.show("Validando Datos", Dialog.type.progress);
                 },
                 success: function (response) {
                     if (response > 0) {
-                        Dialog.show("Inicio De Sesion Correcto", Dialog.type.success);
-                        $(".sem-dialog").on("done", function () {
-                            document.location.href = '../Admin/Index';
-                        });
+                        document.location.href = '../Admin/Index';
                     }
                     else {
                         Dialog.show("Usuario y/o Contraseña Invalida", Dialog.type.error);

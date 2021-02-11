@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EASendMail, Version=7.7.0.6, Culture=neutral, PublicKeyToken=88adb80ecd66540b, processorArchitecture=MSIL">
+      <HintPath>..\packages\EASendMail.7.7.0.6\lib\net461\EASendMail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -136,7 +140,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProyectosController.cs" />
+    <Compile Include="Controllers\RolClienteController.cs" />
     <Compile Include="Controllers\RolEmpleadoController.cs" />
+    <Compile Include="Correos\CorreosParaEmpleado.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1853,6 +1859,7 @@
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\ProjectAll.js" />
+    <Content Include="Scripts\Tareas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1864,8 +1871,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1953,7 +1958,11 @@
     <Content Include="Views\Proyectos\Index.cshtml" />
     <Content Include="Views\Proyectos\Details.cshtml" />
     <Content Include="Views\RolEmpleado\Index.cshtml" />
-    <Content Include="Views\RolEmpleado\Select.cshtml" />
+    <Content Include="Views\RolEmpleado\Juntas.cshtml" />
+    <Content Include="Views\RolCliente\Index.cshtml" />
+    <Content Include="Views\RolCliente\Agendas.cshtml" />
+    <Content Include="Views\Proyectos\Task.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
