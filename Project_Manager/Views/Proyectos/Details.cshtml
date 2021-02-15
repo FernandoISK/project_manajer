@@ -12,9 +12,9 @@
     <div class="card border-dark text-black">
         <div class="card-header" id="TextCenter">
             <b>
-                <h2 class="card-text">Proyecto: @Proyecto.NombreProyecto</h2>
-                <button type="button" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btnEdit float-right" data-toggle="tooltip" title="Editar"><i class="fas fa-pen"></i></button>
-                <a href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-warning">Tareas</a>
+                <span style="font-size:30px" class="card-text"><b>Proyecto: @Proyecto.NombreProyecto</b></span>
+                    <a title="Editar" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btnEdit float-right"><i class="far fa-file-plus"></i></a>
+                    <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-warning float-right"><i class="fas fa-folder-plus"></i></a>
             </b>
         </div>
 
@@ -81,31 +81,38 @@
                     <div class="col-sm-6" style="float:left; position:relative">
                         <fieldset>
                             <legend>Trabajadores del proyecto @Proyecto.Actual/@Proyecto.Limite</legend>
-                            <dl class="row">
-                                @foreach (Project_Manager.Services.BO.TblProyectoEmpleadoBO item in proyectoaEmpleado)
-                                {
-                                    <div class="row">
-                                        <dt class="col-sm-4"><label class="label">Empleado:</label></dt>
-                                        <dd class="col-sm-8"><samp style="color:black">@item.NombreEmpleado</samp></dd>
-                                        <dt class="col-sm-4"><label class="label">Incorporacion:</label></dt>
-                                        <dd class="col-sm-8"><samp style="color:black">@item.FechaIngreso</samp></dd>
-                                        @if (item.EstadoEmple == 0)
-                                        {
-                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
-                                            <dd class="col-sm-8"><samp style="color:black">Con autorización</samp></dd>
-                                        }
-                                        else
-                                        {
-                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
-                                            <dd class="col-sm-8"><samp style="color:black">Sin autorización</samp></dd>
-                                        }
-                                        <dt class="col-sm-4"><label class="label">Contacto:</label></dt>
-                                        <dd class="col-sm-8"><a href="https://mail.google.com/mail/u/0/"><i class="fas fa-envelope-open-text"></i></a></dd>
-                                        <i class="fas fa-grip-lines Iopacity"></i>
-                                    </div>
-                                }
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <dl class="row">
+                                                @foreach (Project_Manager.Services.BO.TblProyectoEmpleadoBO item in proyectoaEmpleado)
+                                                {
+                                                    <div class="row" style="padding:5%">
+                                                        <dt class="col-sm-4"><label class="label">Empleado:</label></dt>
+                                                        <dd class="col-sm-8"><samp style="color:black">@item.NombreEmpleado</samp></dd>
+                                                        <dt class="col-sm-4"><label class="label">Incorporacion:</label></dt>
+                                                        <dd class="col-sm-8"><samp style="color:black">@item.FechaIngreso</samp></dd>
+                                                        @if (item.EstadoEmple == 0)
+                                                        {
+                                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                                            <dd class="col-sm-8"><samp style="color:black">Con autorización</samp></dd>
+                                                        }
+                                                        else
+                                                        {
+                                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                                            <dd class="col-sm-8"><samp style="color:black">Sin autorización</samp></dd>
+                                                        }
+                                                        <dt class="col-sm-4"><label class="label">Contacto:</label></dt>
+                                                        <dd class="col-sm-8"><a href="https://mail.google.com/mail/u/0/"><i class="fas fa-envelope-open-text"></i></a></dd>
+                                                    </div>
+                                                }
 
-                            </dl>
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </fieldset>
                     </div>
 
@@ -113,7 +120,7 @@
             </form>
         </div>
     </div>
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column" style="padding:5%">
 
         <!-- Main Content -->
         <div id="content">
@@ -147,7 +154,7 @@
                                                     <td>@item.NombreEmpleado @item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
                                                     <td>@item.TelefonoEmpleado</td>
                                                     <td align="center">
-                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio','@Proyecto.NombreProyecto')"  class="btn btn-warning">Asignar proyecto</button>
+                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio','@Proyecto.NombreProyecto')"  class="btn btn-warning"><i class="fas fa-user-plus"></i></button>
                                                     </td>
                                                 </tr>
 
@@ -205,7 +212,7 @@
                                 <label asp-for="veh.modelo" class="label">Descripción</label>
                             </div>
                             <div class="row col-lg-12">
-                                <textarea maxlength="250" id="mensaje" rows="4" cols="70">@Proyecto.Descripcion</textarea>
+                                <textarea class="form-control" maxlength="250" id="mensaje" rows="4" cols="70">@Proyecto.Descripcion</textarea>
                             </div>
                             <div class="row col-lg-12">
                                 <div id="contador">0/250</div>

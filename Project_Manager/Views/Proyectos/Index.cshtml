@@ -44,15 +44,15 @@
                                             <td>@item.Folio</td>
                                             <td>@item.NombreProyecto</td>
                                             <td align="center">
-                                                <a href="@Url.Content(string.Format("~/Proyectos/Details?i={0}", item.Folio))" class="btn btn-warning">Detalles</a>
+                                                <a href="@Url.Content(string.Format("~/Proyectos/Details?i={0}", item.Folio))" title="Detalles" class="btn btn-warning"><i class="far fa-file-alt"></i></a>
                                                 @if (item.Estatus != 4)
                                                 {
-                                                    <button type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-danger">Deshabilitar</button>
+                                                    <button title="Desactivar" type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-danger"><i class="far fa-times-circle"></i></button>
 
                                                 }
                                                 else
                                                 {
-                                                    <button type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-success">Habilitar </button>
+                                                    <button title="Activar" type="button" onclick="Project.evts.updateStatus('@item.Folio', '@item.Estatus')" class="btn btn-success"><i class="fa fa-check-circle"></i></button>
                                                 }
                                             </td>
                                         </tr>

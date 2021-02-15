@@ -20,6 +20,9 @@ namespace Project_Manager.Controllers
                 else if ((Session["Rol"]).ToString() == "Empleado")
                 {
                     return RedirectToAction("../RolEmpleado/Index");
+                }else if((Session["Rol"]).ToString() == "Cliente")
+                {
+                    return RedirectToAction("../RolCliente/Index");
                 }
                 return null;
             }
