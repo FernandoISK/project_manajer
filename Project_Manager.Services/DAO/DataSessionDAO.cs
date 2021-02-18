@@ -82,6 +82,28 @@ namespace Project_Manager.Services.DAO
                             }
                         }
                         break;
+                    case "Cliente":
+                        sql = "SELECT IDCliente, NombreRepresentante, ApellidoPRepresentante, ApellidoMRepresentante, FKUsuario, Contra, Rol FROM tblClientes, tblCuenta WHERE FKUsuario= '" + datos.Usuario + "' AND Contra='" + datos.Contra + "'AND Rol='Cliente' GROUP BY IDCliente, NombreRepresentante, ApellidoPRepresentante, ApellidoMRepresentante, FKUsuario, Contra, Rol";
+
+                        SqlDataAdapter daSC = new SqlDataAdapter(sql, con2.establecerconexion());
+                        DataTable tablaSC = new DataTable();
+                        daSC.Fill(tablaSC);
+                        if (tablaSC.Rows.Count > 0)
+                        {
+                            foreach (DataRow rowse in tablaSC.Rows)
+                            {
+                                DataSessionBO bo = new DataSessionBO();
+                                bo.ID = int.Parse(rowse["IDCliente"].ToString());
+                                bo.Nombre = rowse["NombreRepresentante"].ToString();
+                                bo.Apellido1 = rowse["ApellidoPRepresentante"].ToString();
+                                bo.Apellido2 = rowse["ApellidoMRepresentante"].ToString();
+                                bo.Usuario = rowse["FKUsuario"].ToString();
+                                bo.Contraseña = rowse["Contra"].ToString();
+                                bo.Rol = rowse["Rol"].ToString();
+                                lista.Add(bo);
+                            }
+                        }
+                        break;
                 }
             }
             return lista;

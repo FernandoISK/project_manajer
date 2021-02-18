@@ -11,7 +11,17 @@ namespace Project_Manager.Controllers
         // GET: RolCliente
         public ActionResult Index()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Cliente")
+                {
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
         public ActionResult Agendas()
         {

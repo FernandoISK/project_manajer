@@ -13,14 +13,14 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Tablas de Empleados</h1>
-            <p class="mb-4">Esta tabla contiene todos los datos basicos de todos los empleados.</p>
+            <h1 class="h3 mb-2 text-gray-800">Tablas de Clientes</h1>
+            <p class="mb-4">Esta tabla contiene todos los datos basicos de todos los clientes.</p>
             <!-- DataTales Example -->
             @if (Clientes.Count > 0)
             {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Datos de los empleados</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Datos de los clientes</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -41,16 +41,16 @@
 
                                     @foreach (Project_Manager.Services.BO.TblClienteBO item in Clientes)
                                     {
-                                    <tr>
-                                        <td>@item.NombreEmpresa</td>
-                                        <td>@item.NombreRepresentante @item.ApellidoPRepresentante</td>
-                                        <td align="center">@item.TelefonoRepresentante</td>
-                                        <td align="center">@item.correo</td>
-                                        <td align="center">
-                                            <button type="button" onclick="Client.evts.getClientInfo('@item.IDCliente', '@item.NombreRepresentante', '@item.ApellidoPRepresentante','@item.ApellidoMRepresentante', '@item.TelefonoRepresentante', '@item.correo', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
-                                            <button type="button" onclick="Client.evts.updateStatus('@item.IDCliente','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>@item.NombreEmpresa</td>
+                                            <td>@item.NombreRepresentante @item.ApellidoPRepresentante</td>
+                                            <td align="center">@item.TelefonoRepresentante</td>
+                                            <td align="center">@item.correo</td>
+                                            <td align="center">
+                                                <button type="button" onclick="Client.evts.getClientInfo('@item.IDCliente', '@item.NombreRepresentante', '@item.ApellidoPRepresentante','@item.ApellidoMRepresentante', '@item.TelefonoRepresentante', '@item.correo', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
+                                                <button type="button" onclick="Client.evts.updateStatus('@item.IDCliente','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
 
                                     }
 
