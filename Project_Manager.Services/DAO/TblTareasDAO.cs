@@ -76,5 +76,25 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
+
+		public List<TblProyectosBO> TraerProyecto()
+		{
+			List<TblProyectosBO> lista = new List<TblProyectosBO>();
+			sql = "Select Folio, NombreProyecto from TblProyectos where Estatus = 0;";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblProyectosBO obj = new TblProyectosBO();
+					obj.Folio = row["Folio"].ToString();
+					obj.NombreProyecto = row["NombreProyecto"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Manager.Services.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,9 @@ namespace Project_Manager.Controllers
 {
     public class AdminController : Controller
     {
+        TblProyectosCTRL proyecto = new TblProyectosCTRL();
+        TblEmpleadoCTRL Employees = new TblEmpleadoCTRL();
+        TblClienteCTRL Client = new TblClienteCTRL();
         // GET: Admin
         public ActionResult Index()
         {
@@ -15,6 +19,10 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Administrador")
                 {
+                    ViewBag.EmpleadoList = Employees.GetAll();
+                    ViewBag.ClienteList = Client.GetAll();
+                    ViewBag.ProyectoList = proyecto.GetAll();
+                    ViewBag.TareasList = proyecto.TraerTareas();
                     return View();
                 }
                 else if ((Session["Rol"]).ToString() == "Empleado")

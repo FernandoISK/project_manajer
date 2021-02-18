@@ -51,6 +51,12 @@ namespace Project_Manager.Services.Services
             resultado = metodo.AgregarEmpleado(actual,folio);
             return resultado;
         }
+        public List<TblProyectosBO> TraerTareas()
+        {
+            List<TblProyectosBO> datos = new List<TblProyectosBO>();
+            datos = metodo.TraerTareas();
+            return datos;
+        }
 
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="BO\TblClienteBO.cs" />
     <Compile Include="BO\TblCuentaBO.cs" />
     <Compile Include="BO\TblEmpleadoBO.cs" />
+    <Compile Include="BO\TblJuntasBO.cs" />
     <Compile Include="BO\TblProyectoEmpleadoBO.cs" />
     <Compile Include="BO\TblProyectosBO.cs" />
     <Compile Include="BO\TblTareasBO.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="DAO\TblClienteDAO.cs" />
     <Compile Include="DAO\TblCuentaDAO.cs" />
     <Compile Include="DAO\TblEmpleadoDAO.cs" />
+    <Compile Include="DAO\TblJuntasDAO.cs" />
     <Compile Include="DAO\TblProyectoEmpleadoDAO.cs" />
     <Compile Include="DAO\TblProyectosDAO.cs" />
     <Compile Include="DAO\TblTareasDAO.cs" />

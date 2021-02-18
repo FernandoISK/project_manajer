@@ -15,9 +15,11 @@ namespace Project_Manager.Services.BO
 		public int FKCliente { get; set; }
         public int Limite { get; set; }
         public int Actual { get; set; }
+        public int Tareas { get; set; }
 
         //======================= COLUMNAS TEMPORALES ==============================
         public string NombreEmpresa { get; set; }
+        public int Pendiente { get; set; }
 
     }
 }
