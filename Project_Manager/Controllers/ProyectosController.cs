@@ -76,16 +76,12 @@ namespace Project_Manager.Controllers
         {
             if (Session["Rol"] != null)
             {
-                if ((Session["Rol"]).ToString() == "Administrador")
-                {
+
                     string folio = "";
                     try { folio = Request.QueryString.Get("i"); } catch { }
                     ViewBag.TareasList = tareas.GetAll(folio);
                     ViewBag.ProyectoObj = proyecto.GetOne(folio);
                     return View();
-                }
-                else
-                    return RedirectToAction("../Home/Error");
             }
             else
                 return RedirectToAction("../Login/UserLogin");
@@ -189,12 +185,32 @@ namespace Project_Manager.Controllers
 
         public int DeleteTask()
         {
-            int id = int.Parse(Request.Form.Get("IdEmpleado"));
+            int id = int.Parse(Request.Form.Get("IdTarea"));
             try
             {
                 int res = 0;
 
                 res = tareas.Baja(id);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int TakeTask()
+        {
+            int tarea = int.Parse(Request.Form.Get("Id"));
+            TblTomarTareaBO data = new TblTomarTareaBO();
+            data.FKEmpleado = (int)Session["ID"];
+            data.FKTarea = tarea;
+            data.FechaToma = DateTime.Now.ToString("yyyy/MM/dd");
+
+            try
+            {
+                int res = 0;
+
+                res = tareas.Tomar(data);
                 return res;
             }
             catch (Exception ex)

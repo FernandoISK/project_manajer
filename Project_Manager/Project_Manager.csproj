@@ -1859,6 +1859,7 @@
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\ProjectAll.js" />
+    <Content Include="Scripts\RolEmpleado.js" />
     <Content Include="Scripts\Tareas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1963,6 +1964,8 @@
     <Content Include="Views\RolCliente\Agendas.cshtml" />
     <Content Include="Views\Proyectos\Task.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\RolEmpleado\Incidencias.cshtml" />
+    <Content Include="Views\RolCliente\ListaJuntas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

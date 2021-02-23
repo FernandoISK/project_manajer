@@ -7,7 +7,6 @@ namespace Project_Manager.Services.DAO
 {
 	public class TblProyectosDAO
 	{
-		SqlConnection con = new SqlConnection();
 		SqlCommand cmd = new SqlCommand();
 		Conexion con2 = new Conexion();
 		string sql;
@@ -175,7 +174,7 @@ namespace Project_Manager.Services.DAO
 		public List<TblProyectosBO> TraerTareas()
 		{
 			List<TblProyectosBO> lista = new List<TblProyectosBO>();
-			sql = "SELECT t.FKProyecto Folio, p.NombreProyecto, COUNT(t.FKProyecto) Pendiente, p.Tareas FROM TblTareas t INNER JOIN TblProyectos p ON p.Folio=t.FKProyecto WHERE t.FKProyecto=t.FKProyecto AND Estado=0 GROUP BY t.FKProyecto, p.NombreProyecto, p.Tareas";
+			sql = "SELECT t.FKProyecto Folio, p.NombreProyecto, COUNT(t.FKProyecto) Pendiente, p.Tareas FROM TblTareas t INNER JOIN TblProyectos p ON p.Folio=t.FKProyecto WHERE t.FKProyecto=t.FKProyecto AND Estado<2 GROUP BY t.FKProyecto, p.NombreProyecto, p.Tareas";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -188,6 +187,48 @@ namespace Project_Manager.Services.DAO
 					obj.NombreProyecto = row["NombreProyecto"].ToString();
 					obj.Pendiente = int.Parse(row["Pendiente"].ToString());
 					obj.Tareas = int.Parse(row["Tareas"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+		public List<TblProyectosBO> TraerTareasCliente(int id)
+		{
+			List<TblProyectosBO> lista = new List<TblProyectosBO>();
+			sql = "EXEC VerProyectoClientes_ID "+ id;
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblProyectosBO obj = new TblProyectosBO();
+					obj.Folio = row["Folio"].ToString();
+					obj.NombreProyecto = row["Proyecto"].ToString();
+					obj.Pendiente = int.Parse(row["Pendiente"].ToString());
+					obj.Tareas = int.Parse(row["Total"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+		public List<TblProyectosBO> TraerTareasEmpleado(int id)
+		{
+			List<TblProyectosBO> lista = new List<TblProyectosBO>();
+			sql = "EXEC VerProyectoEmpleados_ID " + id;
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblProyectosBO obj = new TblProyectosBO();
+					obj.Folio = row["Folio"].ToString();
+					obj.NombreProyecto = row["Proyecto"].ToString();
+					obj.Pendiente = int.Parse(row["Pendiente"].ToString());
+					obj.Tareas = int.Parse(row["Total"].ToString());
 					lista.Add(obj);
 				}
 			}

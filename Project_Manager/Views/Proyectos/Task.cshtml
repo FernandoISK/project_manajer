@@ -20,8 +20,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">@item.Titulo</h6>
-                            <button type="button" onclick="PropTask.evts.SaveTask()" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                            <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-check"></i></a>
+                            <button type="button" onclick="PropTask.evts.DeleteTask('@item.ID', '@item.Estado')" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                            <button type="button" onclick="PropTask.evts.TakeTask('@item.ID')" class="btn btn-success btn-circle btn-sm"><i class="fas fa-dolly"></i></button>
+                            <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
                         </div>
                         <div class="card-body">
                             @item.Descripcion

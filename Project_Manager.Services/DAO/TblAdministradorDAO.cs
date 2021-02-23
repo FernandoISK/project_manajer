@@ -88,7 +88,7 @@ namespace Project_Manager.Services.DAO
 		{
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "UPDATE TblAdministrador SET NombreAdmin='@NombreAdmin' WHERE IDAdmin=@IDAdmin";
+			sql = "UPDATE TblAdministrador SET NombreAdmin=@NombreAdmin WHERE IDAdmin=@IDAdmin";
 			cmd.Parameters.AddWithValue("@IDAdmin", datos.IDAdmin);
 			cmd.Parameters.AddWithValue("@NombreAdmin", datos.NombreAdmin);
 			cmd.CommandText = sql;

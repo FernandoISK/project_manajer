@@ -57,6 +57,18 @@ namespace Project_Manager.Services.Services
             datos = metodo.TraerTareas();
             return datos;
         }
+        public List<TblProyectosBO> clienteProyectos(int id)
+        {
+            List<TblProyectosBO> datos = new List<TblProyectosBO>();
+            datos = metodo.TraerTareasCliente(id);
+            return datos;
+        }
+        public List<TblProyectosBO> EmpleadoProyectos(int id)
+        {
+            List<TblProyectosBO> datos = new List<TblProyectosBO>();
+            datos = metodo.TraerTareasEmpleado(id);
+            return datos;
+        }
 
     }
 }

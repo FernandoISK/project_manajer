@@ -51,6 +51,7 @@
     <Compile Include="BO\TblProyectoEmpleadoBO.cs" />
     <Compile Include="BO\TblProyectosBO.cs" />
     <Compile Include="BO\TblTareasBO.cs" />
+    <Compile Include="BO\TblTomarTareaBO.cs" />
     <Compile Include="DAO\Conexion.cs" />
     <Compile Include="DAO\DataSessionDAO.cs" />
     <Compile Include="DAO\TblAdministradorDAO.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Services\TblClienteCTRL.cs" />
     <Compile Include="Services\TblCuentaCTRL.cs" />
     <Compile Include="Services\TblEmpleadoCTRL.cs" />
+    <Compile Include="Services\TblJunstasCTRL.cs" />
     <Compile Include="Services\TblProyectoEmpleadoCTRL.cs" />
     <Compile Include="Services\TblProyectosCTRL.cs" />
     <Compile Include="Services\TblTareasCTRL.cs" />

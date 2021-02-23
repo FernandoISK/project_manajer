@@ -25,5 +25,11 @@ namespace Project_Manager.Services.Services
 			resultado = metodo.Eliminar(id);
 			return resultado;
 		}
+		public int Tomar(object obj)
+		{
+			int resultado = 0;
+			resultado = metodo.TomarTarea(obj);
+			return resultado;
+		}
 	}
 }

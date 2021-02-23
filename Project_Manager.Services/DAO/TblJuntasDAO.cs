@@ -1,6 +1,7 @@
 ﻿using Project_Manager.Services.BO;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -17,19 +18,17 @@ namespace Project_Manager.Services.DAO
 		public int Crear(object obj)
 		{
 
-			TblEmpleadoBO datos = (TblEmpleadoBO)obj;
+			TblJuntasBO datos = (TblJuntasBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "Insert into TblEmpleado(NombreEmpleado ,ApellidoPEmpleado ,ApellidoMEmpleado, TelefonoEmpleado  ,Nacimiento ,GeneroEmpleado ,FKUsuario)" +
-			"Values(@NombreEmpleado ,@ApellidoPEmpleado, @ApellidoMEmpleado ,@TelefonoEmpleado ,@Nacimiento ,@GeneroEmpleado ,@FKUsuario)";
+			sql = "EXEC PA_Agregar_Junta @NombreJuntas ,@FechaJunta, @HoraJunta ,@Motivo ,@FKEmpleado ,@FKProyecto";
 
-			cmd.Parameters.AddWithValue("@NombreEmpleado", datos.NombreEmpleado);
-			cmd.Parameters.AddWithValue("@ApellidoPEmpleado", datos.ApellidoPEmpleado);
-			cmd.Parameters.AddWithValue("@TelefonoEmpleado", datos.TelefonoEmpleado);
-			cmd.Parameters.AddWithValue("@Nacimiento", datos.Nacimiento);
-			cmd.Parameters.AddWithValue("@GeneroEmpleado", datos.GeneroEmpleado);
-			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKUsuario);
-			cmd.Parameters.AddWithValue("@ApellidoMEmpleado", datos.ApellidoMEmpleado);
+			cmd.Parameters.AddWithValue("@NombreJuntas", datos.NombreJuntas);
+			cmd.Parameters.AddWithValue("@FechaJunta", datos.FechaJunta);
+			cmd.Parameters.AddWithValue("@HoraJunta", datos.HoraJunta);
+			cmd.Parameters.AddWithValue("@Motivo", datos.Motivo);
+			cmd.Parameters.AddWithValue("@FKEmpleado", datos.FKEmpleado);
+			cmd.Parameters.AddWithValue("@FKProyecto", datos.FKProyecto);
 			cmd.CommandText = sql;
 			int i = cmd.ExecuteNonQuery();
 			cmd.Parameters.Clear();
@@ -39,6 +38,117 @@ namespace Project_Manager.Services.DAO
 				return 0;
 			}
 			return 1;
+		}
+		public int actualizarFecha(int id, string fecha, string hora)
+		{
+
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "UPDATE TblJuntas SET FechaJunta='" + fecha + "', HoraJunta= '" + hora + "', Estatus=1 WHERE IDJuntas="+ id + ";";
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public int confirmarJunta(int id)
+		{
+
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "UPDATE TblJuntas SET Estatus=2 WHERE IDJuntas=" + id + ";";
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public List<TblProyectosBO> TraerProyectoCliente()
+		{
+			List<TblProyectosBO> lista = new List<TblProyectosBO>();
+			sql = "SELECT a.NombreProyecto, a.Folio FROM TblProyectos a INNER JOIN TblClientes b ON a.FKCliente = b.IDCliente;";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblProyectosBO obj = new TblProyectosBO();
+					obj.Folio = row["Folio"].ToString();
+					obj.NombreProyecto = row["NombreProyecto"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+		public int LeidoCliente(int id)
+		{
+
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "UPDATE TblJuntas SET Lectura= 2 WHERE IDJuntas=" + id + ";";
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public List<TblJuntasBO> GetMyMeetings(int id)
+		{
+			List<TblJuntasBO> lista = new List<TblJuntasBO>();
+			sql = "SELECT a.NombreJuntas,a.Lectura ,b.NombreEmpleado, a.IDJuntas FROM TblJuntas a INNER JOIN tblEmpleado b on a.FKEmpleado=b.IDEmpleado WHERE FKEmpresa = " + id +";";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblJuntasBO obj = new TblJuntasBO();
+					obj.NombreJuntas = row["NombreJuntas"].ToString();
+					obj.Lectura = int.Parse(row["Lectura"].ToString());
+					obj.NombreEmpleado = row["NombreEmpleado"].ToString();
+					obj.IDJuntas = int.Parse(row["IDJuntas"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+
+		public TblJuntasBO GetAMeet(int id)
+		{
+			TblJuntasBO dato = new TblJuntasBO();
+			sql = "EXEC VerDetallesJuntas " + id + ";";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					dato.NombreJuntas = row["NombreJuntas"].ToString();
+					dato.Motivo = row["Motivo"].ToString();
+					dato.FechaJunta = row["FechaJunta"].ToString();
+					dato.HoraJunta = row["HoraJunta"].ToString();
+					dato.NombreEmpleado = row["Nombre"].ToString();
+					dato.TelefonoEmpleado = row["TelefonoEmpleado"].ToString();
+					dato.Correo = row["Correo"].ToString();
+				}
+			}
+			return dato;
 		}
 	}
 }

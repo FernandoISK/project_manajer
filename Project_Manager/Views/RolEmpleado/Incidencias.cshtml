@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Incidencias";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h2>Agregar incidencia</h2>
+        <p class="mb-4">Todos los campos señalados con un "*" son oblogatorios</p>
+    </div>
+    <div class="card-body">
+        <form method="post" id="frmCreate">
+            <div class="group form-group">
+                <fieldset>
+                    <div class="row col-lg-12">
+                        <div class="col-md-4">
+                            <label class="label">Titulo*</label>
+                            <input type="text" class="form-control" id="txtNombre">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-9">
+                            <div class="row col-lg-12">
+                                <label asp-for="veh.modelo" class="label">Motivo*</label>
+                            </div>
+                            <div class="row col-lg-12">
+                                <textarea maxlength="250" id="mensaje" rows="4" cols="70"></textarea>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div id="contador">0/100</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="file-custom">
+                                <label for="flFacial" class="btn btn-success btn-sm btn-block margin">Buscar Archivo</label>
+                                <input type="file" name="flFacial" id="flFacial" style="display:none" accept=".jpg" data-toggle="biometric-select" data-target="#face-box" />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="im-search-box face" id="face-box"></div>
+                            </div>
+                            <button type="button" class="btn btn-default btn-block btn-sm" data-toggle="biometric-clear" data-target="#face-box"><i class="fa fa-eraser"></i>Limpiar</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-success"><i class="zmdi zmdi-save"></i> Guardar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="group">
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

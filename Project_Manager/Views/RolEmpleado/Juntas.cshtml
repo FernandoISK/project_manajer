@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Select";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var proyectos = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.proyectosList;
 
 }
 
@@ -14,26 +15,19 @@
         <form method="post" id="frmCreate">
             <div class="group form-group">
                 <fieldset>
-                    <legend>Datos personales</legend>
                     <div class="row col-lg-12">
                         <div class="col-md-4">
                             <label class="label">Titulo de la junta*</label>
                             <input type="text" class="form-control" id="txtNombre">
                         </div>
                         <div class="col-md-4">
-                            <label class="label">Empresa ha tratar*</label>
-                            <select asp-for="veh.modelo" class="form-control col-md-12" id="txtGenero">
-                                <option selected disabled>--Seleccione--</option>
-                                <option value="F">Femenino</option>
-                                <option value="M">Masculino</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label ">Proyecto a tratar*</label>
-                            <select asp-for="veh.modelo" class="form-control col-md-12" id="txtGenero">
-                                <option selected disabled>--Seleccione--</option>
-                                <option value="F">Femenino</option>
-                                <option value="M">Masculino</option>
+                            <label for="cmbEstacionesBio">Nombre del proyecto*</label>
+                            <select class="form-control" id="cmbEmpresa" name="cmdproyecto">
+                                <option value="0">-Seleccionar un proyecto</option>
+                                @foreach (var est in proyectos)
+                                {
+                                    <option value="@est.Folio">@string.Format("{0}", est.NombreProyecto) </option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -42,7 +36,11 @@
                             <label class="label">Fecha ha sugerir*</label>
                             <input id="txtfecha" type="date" class="form-control">
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-2">
+                            <label class="label">Hora ha sugerir*</label>
+                            <input id="txthora" type="time" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
                             <div class="row col-lg-12">
                                 <label asp-for="veh.modelo" class="label">Motivo*</label>
                             </div>
@@ -62,3 +60,21 @@
         </form>
     </div>
 </div>
+
+<script>
+    const mensaje = document.getElementById('mensaje');
+    const contador = document.getElementById('contador');
+
+    mensaje.addEventListener('input', function (e) {
+        const target = e.target;
+        const longitudMax = target.getAttribute('maxlength');
+        const longitudAct = target.value.length;
+        contador.innerHTML = `${longitudAct}/${longitudMax}`;
+    });
+</script>
+<script src="~/Scripts/RolEmpleado.js"></script>
+<script>
+    $(function () {
+        RolEmployees.init();
+    });
+</script>

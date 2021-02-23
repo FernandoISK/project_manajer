@@ -76,25 +76,27 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-
-		public List<TblProyectosBO> TraerProyecto()
+		public int TomarTarea(object obj)
 		{
-			List<TblProyectosBO> lista = new List<TblProyectosBO>();
-			sql = "Select Folio, NombreProyecto from TblProyectos where Estatus = 0;";
-			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
-			DataTable tabla = new DataTable();
-			da.Fill(tabla);
-			if (tabla.Rows.Count > 0)
+
+			TblTomarTareaBO datos = (TblTomarTareaBO)obj;
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "INSERT INTO TblTomarTarea(FKEmpleado,FKTarea,FechaToma) VALUES(@FKEmpleado,@FKTarea,@FechaToma);";
+
+			cmd.Parameters.AddWithValue("@FKEmpleado", datos.FKEmpleado);
+			cmd.Parameters.AddWithValue("@FKTarea", datos.FKTarea);
+			cmd.Parameters.AddWithValue("@FechaToma", datos.FechaToma);
+
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
 			{
-				foreach (DataRow row in tabla.Rows)
-				{
-					TblProyectosBO obj = new TblProyectosBO();
-					obj.Folio = row["Folio"].ToString();
-					obj.NombreProyecto = row["NombreProyecto"].ToString();
-					lista.Add(obj);
-				}
+				return 0;
 			}
-			return lista;
+			return 1;
 		}
 	}
 }

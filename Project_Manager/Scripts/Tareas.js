@@ -48,7 +48,7 @@
                     $.ajax({
                         url: Root + "Proyectos/NewTask",
                         type: "POST",
-                        data: { IdEmpleado: id },
+                        data: { IdTarea: id },
                         beforeSend: function () {
                             Dialog.show("Elimando la tarea", Dialog.type.progress);
                         },
@@ -64,10 +64,31 @@
                 });
             }
             else {
-                Dialog.show("No puedes eliminar esta tarea porque esta sinedo trabajada por algun empleado ", Dialog.type.error);
+                Dialog.show("No puedes eliminar esta tarea porqué esta sinedo trabajada por algun empleado ", Dialog.type.error);
                 return;
             }
             
+        },
+        TakeTask: function (tarea) {
+            Dialog.show("¿Deseas agregar esta tarea a tu lista de tareas?", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/TakeTask",
+                    type: "POST",
+                    data: { Id: tarea},
+                    beforeSend: function () {
+                        Dialog.show("Mandando datos a tu perfil", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            location.reload(true);
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al intentar guardar, inténtelo de nuevo", Dialog.type.error);
+                        }
+                    }
+                });
+            });
         }
     }
 }
