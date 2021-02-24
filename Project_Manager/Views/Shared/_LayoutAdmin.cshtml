@@ -88,9 +88,6 @@
                 }
             }
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Heading -->
             @if (Session["Rol"].ToString() == "Empleado")
             {
                 <div class="sidebar-heading">
@@ -111,15 +108,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-tasks"></i>
-                        <span>Requisitos</span>
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Requisitos")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Incidencias</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>Incidencias</span>
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Sugerencia")">
+                        <i class="fas fa-tasks"></i>
+                        <span>Sugerencia</span>
                     </a>
                 </li>
             }
@@ -133,21 +130,21 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Content("~/RolCliente/ListaJuntas")">
-                        <i class="fas fa-dolly-flatbed"></i>
+                        <i class="fas fa-users"></i>
                         <span>Ver mis juntas</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-dolly-flatbed"></i>
-                        <span>Requisitos</span>
+                        <i class="far fa-calendar-alt"></i>
+                        <span>Agenda</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-dolly-flatbed"></i>
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Incidencias")">
+                        <i class="fas fa-exclamation-circle"></i>
                         <span>Incidencias</span>
                     </a>
                 </li>
