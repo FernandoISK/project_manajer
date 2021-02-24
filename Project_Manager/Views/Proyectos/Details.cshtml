@@ -13,8 +13,8 @@
         <div class="card-header" id="TextCenter">
             <b>
                 <span style="font-size:30px" class="card-text"><b>Proyecto: @Proyecto.NombreProyecto</b></span>
-                    <a title="Editar" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btnEdit float-right"><i class="far fa-file-plus"></i></a>
-                    <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-warning float-right"><i class="fas fa-folder-plus"></i></a>
+                <a title="Editar" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btn btn-light float-right"><i class="far fa-edit"></i></a>
+                <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-light float-right"><i class="fas fa-folder-plus"></i></a>
             </b>
         </div>
 

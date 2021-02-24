@@ -27,7 +27,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">AP Manager</div>
             </a>
 
             <!-- Divider -->
@@ -96,71 +96,55 @@
                 <div class="sidebar-heading">
                     Empleado
                 </div>
+            
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="far fa-bookmark"></i>
+                        <span>Mis Tareas</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Juntas")">
+                        <i class="fas fa-users"></i>
+                        <span>Programar Junta</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
+                        <i class="fas fa-tasks"></i>
+                        <span>Requisitos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Incidencias</span>
+                    </a>
+                </li>
             }
-            else if (Session["Rol"].ToString() == "Cliente")
+
+
+            @if (Session["Rol"].ToString() == "Cliente")
             {
                 <div class="sidebar-heading">
                     Cliente
                 </div>
-            }
 
-
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-dolly-flatbed"></i>
-                    <span>Mis Tareas</span>
-                </a>
-            </li>
-
-            @if (Session["Rol"].ToString() == "Empleado")
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Juntas")">
-                        <i class="fas fa-dolly-flatbed"></i>
-                        <span>Programar Junta</span>
-                    </a>
-                </li>
-            }
-            @if (Session["Rol"].ToString() == "Cliente")
-            {
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Content("~/RolCliente/ListaJuntas")">
                         <i class="fas fa-dolly-flatbed"></i>
                         <span>Ver mis juntas</span>
                     </a>
                 </li>
-            }
 
-            @if (Session["Rol"].ToString() == "Empleado")
-            {
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
                         <i class="fas fa-dolly-flatbed"></i>
                         <span>Requisitos</span>
                     </a>
                 </li>
-            }
-            @if (Session["Rol"].ToString() == "Cliente")
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-dolly-flatbed"></i>
-                        <span>Requisitos</span>
-                    </a>
-                </li>
-            }
 
-            @if (Session["Rol"].ToString() == "Empleado")
-            {
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
-                        <i class="fas fa-dolly-flatbed"></i>
-                        <span>Incidencias</span>
-                    </a>
-                </li>
-            }
-            @if (Session["Rol"].ToString() == "Cliente")
-            {
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
                         <i class="fas fa-dolly-flatbed"></i>
@@ -193,8 +177,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <!-- BARRA DE BUSQUEDA -->
+                    @*<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
@@ -203,7 +187,7 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </form>*@
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

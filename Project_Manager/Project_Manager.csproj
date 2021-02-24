@@ -1966,6 +1966,10 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\RolEmpleado\Incidencias.cshtml" />
     <Content Include="Views\RolCliente\ListaJuntas.cshtml" />
+    <Content Include="Views\RolEmpleado\ListaJuntas.cshtml" />
+    <Content Include="Views\RolEmpleado\Requisitos.cshtml" />
+    <Content Include="Views\RolCliente\Incidencias.cshtml" />
+    <Content Include="Views\RolCliente\Requesitos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

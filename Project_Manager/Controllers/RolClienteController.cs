@@ -64,6 +64,29 @@ namespace Project_Manager.Controllers
                 return RedirectToAction("../Login/UserLogin");
         }
 
+        public ActionResult Incidencias()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+        public ActionResult Requesitos()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+
         #region Metodos
         public int Updatedate()
         {

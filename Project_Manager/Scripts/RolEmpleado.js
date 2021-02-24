@@ -98,7 +98,7 @@
             Dialog.hide();
         },
         confirm: function (ID) {
-            Dialog.show("Estás seguro que quiere confirmar Esta decha?", Dialog.type.question);
+            Dialog.show("¿Esta seguro que quiere confirmar Esta decha?", Dialog.type.question);
 
             $(".sem-dialog").on("done", function () {
                 $.ajax({

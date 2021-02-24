@@ -135,10 +135,10 @@
         },
         updateStatus: function (id, status) {
             if (status == "0") {
-                Dialog.show("Estás seguro que quiere Eliminar este cliente?", Dialog.type.question);
+                Dialog.show("¿Esta seguro que quiere Eliminar este cliente?", Dialog.type.question);
             }
             else {
-                Dialog.show("Reactivar este Empleado?", Dialog.type.question);
+                Dialog.show("¿Desea reactivar este Empleado?", Dialog.type.question);
             }
             $(".sem-dialog").on("done", function () {
                 $.ajax({

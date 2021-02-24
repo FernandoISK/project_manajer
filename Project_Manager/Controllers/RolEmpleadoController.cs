@@ -62,6 +62,29 @@ namespace Project_Manager.Controllers
                 return RedirectToAction("../Login/UserLogin");
         }
 
+        public ActionResult ListaJuntas()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+        public ActionResult Requisitos()
+        {
+            if (Session["ID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+
         public int Sugerencia()
         {
             string data = Request.Form.Get("dataJunta");

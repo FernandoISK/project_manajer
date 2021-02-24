@@ -133,7 +133,7 @@
         },
         updateStatus: function (id, status) {
             if (status == "0") {
-                Dialog.show("Estás seguro que quiere Eliminar este empleaado?", Dialog.type.question);
+                Dialog.show("¿Estás seguro que quiere Eliminar este empleado?", Dialog.type.question);
             }
             else {
                 Dialog.show("Reactivar este Empleado?", Dialog.type.question);

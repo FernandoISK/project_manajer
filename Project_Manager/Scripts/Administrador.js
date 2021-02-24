@@ -75,7 +75,7 @@
                     },
                     success: function (response) {
                         if (response > 0) {
-                            Dialog.show("Empleado actualizado correctamente", Dialog.type.success);
+                            Dialog.show("Administrador actualizado correctamente", Dialog.type.success);
                             $(".sem-dialog").on("done", function () {
                                 location.reload(true);
                             });
