@@ -1857,7 +1857,9 @@
     <Content Include="Scripts\Administrador.js" />
     <Content Include="Scripts\Client.js" />
     <Content Include="Scripts\Employees.js" />
+    <Content Include="Scripts\GlobalCliente.js" />
     <Content Include="Scripts\Login.js" />
+    <Content Include="Scripts\Materials.js" />
     <Content Include="Scripts\ProjectAll.js" />
     <Content Include="Scripts\RolEmpleado.js" />
     <Content Include="Scripts\Tareas.js" />

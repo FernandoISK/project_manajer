@@ -3,10 +3,9 @@
     ViewBag.Title = "Requisitos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <div class="card">
     <div class="card-header">
-        <h2>Agregar incidencia</h2>
+        <h2>Agregar requisitos</h2>
         <p class="mb-4">Todos los campos señalados con un "*" son oblogatorios</p>
     </div>
     <div class="card-body">
@@ -17,7 +16,11 @@
                 <!-- Default Card Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary"><span>A4-One Web</span> -Boton inicar no responde</h6>
+                        
+                        <h6 class="m-0 font-weight-bold text-primary">
+                        <span>A4-One Web</span> 
+                        -Boton inicar no responde</h6>
+                        
                         <button type="button" class="btn btn-success btn-circle btn-sm"><i class="fas fa-dolly"></i></button>
                         <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
                     </div>
@@ -46,6 +49,12 @@
 
         </div>
 
-    </div>s
+    </div>
 </div>
 
+<script src="~/Scripts/GlobalCliente.js"></script>
+<script>
+    $(function () {
+        GlobalClientes.init();
+    });
+</script>

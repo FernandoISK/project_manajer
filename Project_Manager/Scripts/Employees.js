@@ -1,4 +1,4 @@
-﻿var Employees = {
+﻿var GlobalClientes = {
     Objects: {
         IDEmpleado: 0
     },
@@ -11,7 +11,7 @@
             var E_USERNAME = $("#txtUsuario").val();
             var E_EMAIL = $("#txtCorreo").val();
 
-            if (Employees.Objects.IDEmpleado == 0) {
+            if (GlobalClientes.Objects.IDEmpleado == 0) {
                 var E_PATERNALSURNAME = $("#txtApellidoP").val();
                 var E_MATERNALSURNAME = $("#txtApellidoM").val();
                 var E_BIRTH = $("#txtfecha").val();
@@ -97,7 +97,7 @@
                 $.ajax({
                     url: Root + "Empleado/Update",
                     type: "POST",
-                    data: { nombre: E_NAME, telefono: E_CELLPHONE, correo: E_EMAIL, usuario: E_USERNAME, id: Employees.Objects.IDEmpleado },
+                    data: { nombre: E_NAME, telefono: E_CELLPHONE, correo: E_EMAIL, usuario: E_USERNAME, id: GlobalClientes.Objects.IDEmpleado },
                     beforeSend: function () {
                         Dialog.show("Actualizando datos", Dialog.type.progress);
                     },
@@ -122,7 +122,7 @@
     },
     evts: {
         getEmployeesInfo: function (id, nombre, celular, gmail,user) {
-            Employees.Objects.IDEmpleado = id;
+            GlobalClientes.Objects.IDEmpleado = id;
             $("#txtNombre").val(nombre);
             $("#txtCelular").val(celular);
             $("#txtCorreo").val(gmail);

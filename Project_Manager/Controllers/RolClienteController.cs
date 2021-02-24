@@ -119,6 +119,20 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+
+        public int New()
+        {
+
+            try
+            {
+                int res = 1;
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         #endregion
     }
 }

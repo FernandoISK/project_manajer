@@ -54,6 +54,7 @@
     </div>
 </div>
 
+<script src="~/Scripts/GlobalCliente.js"></script>
 <script>
     const mensaje = document.getElementById('mensaje');
     const contador = document.getElementById('contador');
@@ -63,5 +64,11 @@
         const longitudMax = target.getAttribute('maxlength');
         const longitudAct = target.value.length;
         contador.innerHTML = `${longitudAct}/${longitudMax}`;
+    });
+</script>
+
+<script>
+    $(function () {
+        GlobalClientes.init();
     });
 </script>

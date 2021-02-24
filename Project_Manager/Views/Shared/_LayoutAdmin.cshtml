@@ -93,9 +93,9 @@
                 <div class="sidebar-heading">
                     Empleado
                 </div>
-            
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Index")">
                         <i class="far fa-bookmark"></i>
                         <span>Mis Tareas</span>
                     </a>
@@ -108,15 +108,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Requisitos")">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>Incidencias</span>
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/ListaJuntas")">
+                        <i class="fas fa-tasks"></i>
+                        <span>Juntas</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Sugerencia")">
-                        <i class="fas fa-tasks"></i>
-                        <span>Sugerencia</span>
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Requisitos")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Solicitud(N)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Incidencias")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Incidencias</span>
                     </a>
                 </li>
             }
@@ -129,16 +136,16 @@
                 </div>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/ListaJuntas")">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Index")">
                         <i class="fas fa-users"></i>
-                        <span>Ver mis juntas</span>
+                        <span>Mi Proyecto</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Content("~/RolCliente/Agendas")">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/ListaJuntas")">
                         <i class="far fa-calendar-alt"></i>
-                        <span>Agenda</span>
+                        <span>Ver mis juntas</span>
                     </a>
                 </li>
 
@@ -146,6 +153,13 @@
                     <a class="nav-link" href="@Url.Content("~/RolCliente/Incidencias")">
                         <i class="fas fa-exclamation-circle"></i>
                         <span>Incidencias</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Requesitos")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Requesitos</span>
                     </a>
                 </li>
             }
