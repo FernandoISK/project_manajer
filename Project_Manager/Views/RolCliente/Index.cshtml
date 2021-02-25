@@ -46,7 +46,8 @@
                                         </form>
                                     </td>
                                     <td align="center">
-                                        <a href="@Url.Content(string.Format("~/RolCliente/Requerimientos"))" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
+                                        <a href="@Url.Content(string.Format("~/RolCliente/CreateIncidencia?i={0}", item.Folio))" title="Detalles" class="btn btn-warning"><i class="fas fa-exclamation"></i></a>
+                                        <a href="@Url.Content(string.Format("~/RolCliente/CreateRequisito?i={0}", item.Folio))" title="Detalles" class="btn btn-warning"><i class="fas fa-file-signature"></i></a>
                                         <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", item.Folio))" class="btn btn-warning float-right"><i class="fas fa-folder-plus"></i></a>
                                     </td>
                                 </tr>

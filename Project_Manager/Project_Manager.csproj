@@ -1972,6 +1972,8 @@
     <Content Include="Views\RolEmpleado\Requisitos.cshtml" />
     <Content Include="Views\RolCliente\Incidencias.cshtml" />
     <Content Include="Views\RolCliente\Requesitos.cshtml" />
+    <Content Include="Views\RolCliente\CreateIncidencia.cshtml" />
+    <Content Include="Views\RolCliente\CreateRequisito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

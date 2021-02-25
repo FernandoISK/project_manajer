@@ -13,6 +13,7 @@ namespace Project_Manager.Controllers
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL Juntas = new TblJunstasCTRL();
         // GET: RolCliente
+        #region Vistas
         public ActionResult Index()
         {
             if (Session["Rol"] != null)
@@ -53,7 +54,7 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Cliente")
                 {
-                    int id = (int)Session["ID"];
+                     int id = (int)Session["ID"];
                     ViewBag.JuntasList = Juntas.GetMyMeetings(id);
                     return View();
                 }
@@ -68,6 +69,8 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
+                string folio = "";
+                try { folio = Request.QueryString.Get("i"); } catch { }
                 return View();
             }
             else
@@ -79,6 +82,8 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
+                string folio = "";
+                try { folio = Request.QueryString.Get("i"); } catch { }
                 return View();
             }
             else
@@ -86,7 +91,33 @@ namespace Project_Manager.Controllers
                 return RedirectToAction("../Login/UserLogin");
             }
         }
-
+        public ActionResult CreateRequisito()
+        {
+            if (Session["ID"] != null)
+            {
+                string folio = "";
+                try { folio = Request.QueryString.Get("i"); } catch { }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+        public ActionResult CreateIncidencia()
+        {
+            if (Session["ID"] != null)
+            {
+                string folio = "";
+                try { folio = Request.QueryString.Get("i"); } catch { }
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("../Login/UserLogin");
+            }
+        }
+        #endregion
         #region Metodos
         public int Updatedate()
         {
