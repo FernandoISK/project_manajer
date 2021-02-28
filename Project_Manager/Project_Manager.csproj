@@ -1856,6 +1856,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\Administrador.js" />
     <Content Include="Scripts\Client.js" />
+    <Content Include="Scripts\Commentary.js" />
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\GlobalCliente.js" />
     <Content Include="Scripts\Login.js" />
@@ -1974,6 +1975,7 @@
     <Content Include="Views\RolCliente\Requesitos.cshtml" />
     <Content Include="Views\RolCliente\CreateIncidencia.cshtml" />
     <Content Include="Views\RolCliente\CreateRequisito.cshtml" />
+    <Content Include="Views\Proyectos\DetallesTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

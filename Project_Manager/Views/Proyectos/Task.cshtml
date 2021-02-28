@@ -19,14 +19,27 @@
                 <div class="col-lg-6">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">@item.Titulo</h6>
-
-                            @if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
-                            {
-                                <button type="button" onclick="PropTask.evts.DeleteTask('@item.ID', '@item.Estado')" class="btn btn-warning btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                                <button type="button" onclick="PropTask.evts.TakeTask('@item.ID')" class="btn btn-success btn-circle btn-sm"><i class="fas fa-dolly"></i></button>
-                                <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
-                            }
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                @item.Titulo<span>|</span>
+                                @switch (item.Estado)
+                                {
+                                    case 0:
+                                        <span class="text-muted justify-content-end">|Disponible</span>
+                                        break;
+                                    case 1:
+                                        <span class="text-muted text-right" ">|Trabajando</span>
+                                        break;
+                                        case 2:
+                                        <span class="text-muted text-right" ">|Finalizado</span>
+                                        break;
+                                }
+                                @if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
+                                {
+                                    <button type="button" onclick="PropTask.evts.DeleteTask('@item.ID', '@item.Estado')" class="btn btn-danger btn-circle btn-sm float-right"><i class="fas fa-trash"></i></button>
+                                    <button type="button" onclick="PropTask.evts.TakeTask('@item.ID')" class="btn btn-success btn-circle btn-sm float-right"><i class="fas fa-dolly"></i></button>
+                                }
+                                <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/DetallesTask?f={0}&i={1}", item.FKProyecto, item.ID))" class="btn btn-warning btn-circle btn-sm float-right"><i class="fas fa-exclamation-circle"></i></a>
+                            </h6>
                         </div>
                         <div class="card-body">
                             @item.Descripcion
@@ -35,8 +48,8 @@
 
                 </div>
             }
-            if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
-            {
+                            if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
+                            {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Agregar nueva tarea</h6>
@@ -49,7 +62,7 @@
 
         }
         else
-        {
+                            {
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Agregar nueva tarea</h6>
@@ -104,13 +117,13 @@
 
 <script>
     const mensaje = document.getElementById('mensaje');
-    const contador = document.getElementById('contador');
+                            const contador = document.getElementById('contador');
 
-    mensaje.addEventListener('input', function (e) {
-        const target = e.target;
-        const longitudMax = target.getAttribute('maxlength');
-        const longitudAct = target.value.length;
-        contador.innerHTML = `${longitudAct}/${longitudMax}`;
-    });
+                            mensaje.addEventListener('input', function (e) {
+                                const target = e.target;
+                                const longitudMax = target.getAttribute('maxlength');
+                                const longitudAct = target.value.length;
+                                contador.innerHTML = `${longitudAct}/${longitudMax}`;
+                            });
 </script>
 <script src="~/Scripts/Tareas.js"></script>

@@ -89,6 +89,24 @@
                     }
                 });
             });
-        }
+        },
+        DetailsTask: function (folio, id) {
+            Dialog.show("¿Desea ver?", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/DetallesTask",
+                    type: "POST",
+                    data: { folio: folio, id: id },
+                    beforeSend: function () { },
+                    success: function (response) {
+                        if (response > 0) {
+                            document.location.href = '../Proyectos/DetallesTask';
+                        } else {
+                            Dialog.show("Algo A Fallado", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        },
     }
 }

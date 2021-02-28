@@ -16,6 +16,9 @@ namespace Project_Manager.Controllers
         TblEmpleadoCTRL Empleado = new TblEmpleadoCTRL();
         TblTareasCTRL tareas = new TblTareasCTRL();
         TblProyectoEmpleadoCTRL EmpleadoProyecto = new TblProyectoEmpleadoCTRL();
+        TblTomarTareaCTRL TomaTarea = new TblTomarTareaCTRL();
+        TblComentarioCTRL Comentarios = new TblComentarioCTRL();
+
         // GET: Proyectos
         #region Vistas
         public ActionResult Index()
@@ -84,12 +87,52 @@ namespace Project_Manager.Controllers
                     return View();
             }
             else
-                return RedirectToAction("../Login/UserLogin");
-
-
+                return RedirectToAction("../");
         }
+
+        public ActionResult DetallesTask()
+        {
+            if (Session["Rol"] != null)
+            {
+                string fkfolio = String.Empty;
+                string id = String.Empty;
+                try
+                {
+                    fkfolio = Request.QueryString.Get("f");
+                    id = Request.QueryString.Get("i");
+                }
+                catch { }
+                ViewBag.ListDetalles = TomaTarea.GetDetallesTareas(fkfolio, id);
+                ViewBag.ListaComentario = Comentarios.ListaComentario(fkfolio, id);
+                return View();
+            }
+            else
+                return RedirectToAction("../");
+        }
+
         #endregion
         #region Metodos
+        public int NewCom()
+        {
+            TblComentarioBO datos = new TblComentarioBO();
+            TblComentarioCTRL metodo = new TblComentarioCTRL();
+
+            datos.Comentario = Request.Form.Get("comentario");
+            datos.FKTarea = Request.Form.Get("tarea");
+            datos.FKProyecto = Request.Form.Get("proyecto");
+            datos.FKUsuario = Session["Usuario"].ToString();
+
+            try
+            {
+                return metodo.AgregarComentario(datos);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+
         public int New()
         {
             string data = Request.Form.Get("dataproyecto");

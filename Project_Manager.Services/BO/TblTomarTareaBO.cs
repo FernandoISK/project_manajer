@@ -14,5 +14,14 @@ namespace Project_Manager.Services.BO
         public int Estado { get; set; }
         public string FechaToma { get; set; }
         public string FechaFinalizacion { get; set; }
+
+        //temp table
+
+        public string _folio { get; set; }
+        public string _titulo { get; set; }
+        public string _descripcion { get; set; }
+        public string _empleado { get; set; }
+        public string _telefono { get; set; }
+
     }
 }
