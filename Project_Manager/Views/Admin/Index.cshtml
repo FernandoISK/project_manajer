@@ -7,7 +7,6 @@
     var Proyecto = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.ProyectoList;
     var Tareas = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.TareasList;
 }
-
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -75,12 +74,27 @@
             <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">No definido</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        <div class="contenedor">
+                            <div class="widget">
+                                @*<div class="fecha">
+                                    <p id="diaSemana" class="diaSemana"></p>
+                                    <p id="dia" class="dia"></p>
+                                    <p>de</p>
+                                    <p id="mes" class="mes"></p>
+                                    <p>del</p>
+                                    <p id="anio" class="anio"></p>
+                                </div>*@
+                                <div class="reloj">
+                                    <p id="horas" class="horas"></p>
+                                    <p>:</p>
+                                    <p id="minutos" class="minutos"></p>
+                                    <p>:</p>
+                                    <div class="cajaSegundos">
+                                        <p id="ampm" class="ampm"></p>
+                                        <p id="segundos" class="segundos"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

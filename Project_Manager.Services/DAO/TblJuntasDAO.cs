@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Project_Manager.Services.DAO
 {
-    public class TblJuntasDAO
-    {
+	public class TblJuntasDAO
+	{
 		SqlConnection con = new SqlConnection();
 		SqlCommand cmd = new SqlCommand();
 		Conexion con2 = new Conexion();
@@ -44,7 +44,7 @@ namespace Project_Manager.Services.DAO
 
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "UPDATE TblJuntas SET FechaJunta='" + fecha + "', HoraJunta= '" + hora + "', Estatus=1 WHERE IDJuntas="+ id + ";";
+			sql = "UPDATE TblJuntas SET FechaJunta='" + fecha + "', HoraJunta= '" + hora + "', Estatus=1 WHERE IDJuntas=" + id + ";";
 			cmd.CommandText = sql;
 			int i = cmd.ExecuteNonQuery();
 			cmd.Parameters.Clear();
@@ -71,10 +71,10 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-		public List<TblProyectosBO> TraerProyectoCliente()
+		public List<TblProyectosBO> TraerProyectoCliente(int id)
 		{
 			List<TblProyectosBO> lista = new List<TblProyectosBO>();
-			sql = "SELECT a.NombreProyecto, a.Folio FROM TblProyectos a INNER JOIN TblClientes b ON a.FKCliente = b.IDCliente;";
+			sql = "SELECT c.Folio, c.NombreProyecto FROM TblProyectoEmpleado a INNER JOIN  tblEmpleado b ON a.FKEmpleado = b.IDEmpleado INNER JOIN TblProyectos c ON a.FKProyecto = c.Folio WHERE b.IDEmpleado = " + id + "; ";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -109,7 +109,7 @@ namespace Project_Manager.Services.DAO
 		public List<TblJuntasBO> GetMyMeetings(int id)
 		{
 			List<TblJuntasBO> lista = new List<TblJuntasBO>();
-			sql = "SELECT a.NombreJuntas,a.Lectura ,b.NombreEmpleado, a.IDJuntas FROM TblJuntas a INNER JOIN tblEmpleado b on a.FKEmpleado=b.IDEmpleado WHERE FKEmpresa = " + id +";";
+			sql = "SELECT a.NombreJuntas,a.Lectura ,b.NombreEmpleado, a.IDJuntas FROM TblJuntas a INNER JOIN tblEmpleado b on a.FKEmpleado=b.IDEmpleado WHERE FKEmpresa = " + id + ";";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -143,12 +143,42 @@ namespace Project_Manager.Services.DAO
 					dato.Motivo = row["Motivo"].ToString();
 					dato.FechaJunta = row["FechaJunta"].ToString();
 					dato.HoraJunta = row["HoraJunta"].ToString();
+					dato.IDJuntas = int.Parse(row["IDJuntas"].ToString());
+					dato.Estatus = int.Parse(row["Estatus"].ToString());
+					dato.Lectura = int.Parse(row["Lectura"].ToString());
 					dato.NombreEmpleado = row["Nombre"].ToString();
 					dato.TelefonoEmpleado = row["TelefonoEmpleado"].ToString();
 					dato.Correo = row["Correo"].ToString();
 				}
 			}
 			return dato;
+		}
+		public List<TblJuntasBO> MisJuntas(int id)
+		{
+			List<TblJuntasBO> lista = new List<TblJuntasBO>();
+			sql = "SELECT * FROM TblJuntas WHERE FKEmpleado = " + id + ";";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblJuntasBO obj = new TblJuntasBO();
+					obj.IDJuntas = int.Parse(row["IDJuntas"].ToString());
+					obj.NombreJuntas = row["NombreJuntas"].ToString();
+					obj.FechaJunta = row["FechaJunta"].ToString();
+					obj.HoraJunta = row["HoraJunta"].ToString();
+					obj.Motivo = row["Motivo"].ToString();
+					obj.FKEmpleado = int.Parse(row["FKEmpleado"].ToString());
+					obj.FKEmpleado = int.Parse(row["FKEmpleado"].ToString());
+					obj.FKProyecto = row["FKProyecto"].ToString();
+					obj.Estatus = int.Parse(row["Estatus"].ToString());
+					obj.Lectura = int.Parse(row["Lectura"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
 		}
 	}
 }

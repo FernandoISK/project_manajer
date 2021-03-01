@@ -220,6 +220,7 @@
     <Content Include="Content\js\jquery.pogo-slider.min.js" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\js\popper.min.js" />
+    <Content Include="Content\js\Reloj.js" />
     <Content Include="Content\js\responsiveslides.min.js" />
     <Content Include="Content\js\sb-admin-2.js" />
     <Content Include="Content\js\slider-index.js" />

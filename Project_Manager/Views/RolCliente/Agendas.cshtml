@@ -16,7 +16,7 @@
         <div class="card-body">
             <form method="post">
                 <div class="group form-group">
-                    <div class="col-sm-6" style="float:left; position:relative">
+                    <div class="col-sm-12" style="float:left; position:relative">
                         <fieldset>
                             <legend>Informacion</legend>
                             <dl class="row">
@@ -38,9 +38,12 @@
 
                     </div>
                     <div class="row">
+                        @if (Juntas.Estatus == 0)
+                        {
+                            <button type="button" onclick="Rol.evts.confirm('@Juntas.IDJuntas')" class="btn btn-primary">Agendar</button>
+                            <button type="button" onclick="Rol.evts.OpenModalTime('@Juntas.IDJuntas')" class="btn btn-success" data-toggle="tooltip" title="Editar">Sugerir Fecha</button>
+                        }
 
-                        <button type="button" onclick="Rol.evts.confirm('@Juntas.IDJuntas')" class="btn btn-primary">Agendar</button>
-                        <button type="button" onclick="Rol.evts.OpenModalTime('@Juntas.IDJuntas')" class="btn btn-success" data-toggle="tooltip" title="Editar">Sugerir Fecha</button>
                     </div>
                 </div>
             </form>

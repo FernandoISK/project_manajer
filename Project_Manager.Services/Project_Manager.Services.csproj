@@ -45,6 +45,7 @@
     <Compile Include="BO\DataSessionBO.cs" />
     <Compile Include="BO\TblAdministradorBO.cs" />
     <Compile Include="BO\TblClienteBO.cs" />
+    <Compile Include="BO\TblComentarioBO.cs" />
     <Compile Include="BO\TblCuentaBO.cs" />
     <Compile Include="BO\TblEmpleadoBO.cs" />
     <Compile Include="BO\TblJuntasBO.cs" />
@@ -56,22 +57,26 @@
     <Compile Include="DAO\DataSessionDAO.cs" />
     <Compile Include="DAO\TblAdministradorDAO.cs" />
     <Compile Include="DAO\TblClienteDAO.cs" />
+    <Compile Include="DAO\TblComentarioDAO.cs" />
     <Compile Include="DAO\TblCuentaDAO.cs" />
     <Compile Include="DAO\TblEmpleadoDAO.cs" />
     <Compile Include="DAO\TblJuntasDAO.cs" />
     <Compile Include="DAO\TblProyectoEmpleadoDAO.cs" />
     <Compile Include="DAO\TblProyectosDAO.cs" />
     <Compile Include="DAO\TblTareasDAO.cs" />
+    <Compile Include="DAO\TblTomarTareaDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataSessionCTRL.cs" />
     <Compile Include="Services\TblAdministradorCTRL.cs" />
     <Compile Include="Services\TblClienteCTRL.cs" />
+    <Compile Include="Services\TblComentarioCTRL.cs" />
     <Compile Include="Services\TblCuentaCTRL.cs" />
     <Compile Include="Services\TblEmpleadoCTRL.cs" />
     <Compile Include="Services\TblJunstasCTRL.cs" />
     <Compile Include="Services\TblProyectoEmpleadoCTRL.cs" />
     <Compile Include="Services\TblProyectosCTRL.cs" />
     <Compile Include="Services\TblTareasCTRL.cs" />
+    <Compile Include="Services\TblTomarTareaCTRL.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

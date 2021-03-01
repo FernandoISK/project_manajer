@@ -15,6 +15,7 @@ namespace Project_Manager.Controllers
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL juntas = new TblJunstasCTRL();
         // GET: RolEmpleado
+        #region Vistas
         public ActionResult Index()
         {
             if (Session["Rol"] != null)
@@ -37,7 +38,7 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
-                    ViewBag.proyectosList = juntas.GetAllProjects();
+                    ViewBag.proyectosList = juntas.GetAllProjects((int)Session["ID"]);
                     return View();
                 }
                 else
@@ -52,7 +53,7 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
-                    
+
                     return View();
                 }
                 else
@@ -66,6 +67,8 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
+                int id = (int)Session["ID"];
+                ViewBag.JuntasList = juntas.MisJuntas(id);
                 return View();
             }
             else
@@ -84,7 +87,9 @@ namespace Project_Manager.Controllers
                 return RedirectToAction("../Login/UserLogin");
             }
         }
+        #endregion
 
+        #region Metodos 
         public int Sugerencia()
         {
             string data = Request.Form.Get("dataJunta");
@@ -101,5 +106,6 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        #endregion
     }
 }

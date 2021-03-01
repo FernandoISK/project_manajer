@@ -98,7 +98,7 @@
             Dialog.hide();
         },
         confirm: function (ID) {
-            Dialog.show("¿Esta seguro que quiere confirmar Esta decha?", Dialog.type.question);
+            Dialog.show("¿Esta seguro que quiere confirmar Esta fecha?", Dialog.type.question);
 
             $(".sem-dialog").on("done", function () {
                 $.ajax({
@@ -106,7 +106,7 @@
                     type: "POST",
                     data: { id: ID },
                     beforeSend: function () {
-                        Dialog.show("Mandando confirmacion datos", Dialog.type.progress);
+                        Dialog.show("Mandando confirmacion de datos", Dialog.type.progress);
                     },
                     success: function (response) {
                         if (response > 0) {

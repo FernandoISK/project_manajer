@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Project_Manager.Services.Services
 {
-    public class TblJunstasCTRL
-    {
+	public class TblJunstasCTRL
+	{
 		TblJuntasDAO metodo = new TblJuntasDAO();
 
 		public int Alta(object obj)
@@ -38,16 +38,22 @@ namespace Project_Manager.Services.Services
 			return resultado;
 		}
 
-		public List<TblProyectosBO> GetAllProjects()
+		public List<TblProyectosBO> GetAllProjects(int id)
 		{
 			List<TblProyectosBO> datos = new List<TblProyectosBO>();
-			datos = metodo.TraerProyectoCliente();
+			datos = metodo.TraerProyectoCliente(id);
 			return datos;
 		}
 		public List<TblJuntasBO> GetMyMeetings(int id)
 		{
 			List<TblJuntasBO> datos = new List<TblJuntasBO>();
 			datos = metodo.GetMyMeetings(id);
+			return datos;
+		}
+		public List<TblJuntasBO> MisJuntas(int id)
+		{
+			List<TblJuntasBO> datos = new List<TblJuntasBO>();
+			datos = metodo.MisJuntas(id);
 			return datos;
 		}
 		public TblJuntasBO GetAMeet(int id)
