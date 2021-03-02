@@ -159,15 +159,15 @@
     box-sizing: border-box;
 }
 
-html, body {
+/*html, body {
     height: 100%;
-}
+}*/
 
-    body {
+    /*body {
         background: lightblue;
         font-size: 16px;
         color: #fff;
-    }
+    }*/
 
 .contenedor {
     width: 90%;

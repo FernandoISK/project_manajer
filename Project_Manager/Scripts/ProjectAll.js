@@ -130,13 +130,13 @@
                 });
             });
         } ,
-        asignarProyecto: function (id, folio,proyecto) {
+        asignarProyecto: function (id, folio,proyecto, actual) {
                 Dialog.show("¿Deseas asignar este empleado a este proyecto?", Dialog.type.question);
             $(".sem-dialog").on("done", function () {
                 $.ajax({
                     url: Root + "Proyectos/AsignarProyecto",
                     type: "POST",
-                    data: { IdEmpleado: id, folioproyecto: folio, projecName: proyecto },
+                    data: { IdEmpleado: id, folioproyecto: folio, projecName: proyecto, numeroActual: actual},
                     beforeSend: function () {
                         Dialog.show("Uniendo al nuevo empleado al proyecto", Dialog.type.progress);
                     },

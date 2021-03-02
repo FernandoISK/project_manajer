@@ -27,7 +27,7 @@
                                 location.reload(true);
                             }
                             else {
-                                Dialog.show("Ocurrió un error al intentar guardar, inténtelo de nuevo", Dialog.type.error);
+                                Dialog.show("Titulo demasiado largo, Intente de nuevo", Dialog.type.error);
                             }
                         }
                     });

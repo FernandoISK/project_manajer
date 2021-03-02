@@ -265,14 +265,14 @@ namespace Project_Manager.Controllers
         {
             string Folio = Request.Form.Get("folioproyecto");
             int Empleado = int.Parse(Request.Form.Get("IdEmpleado"));
+            int Actual   = int.Parse(Request.Form.Get("numeroActual"));
             string NombreProyecto = Request.Form.Get("projecName");
-            int Actualizacion = 0;
             TblProyectoEmpleadoBO data = new TblProyectoEmpleadoBO();
             data.FKEmpleado = Empleado;
             data.FKProyecto = Folio;
             data.FechaIngreso = DateTime.Now.ToString("yyyy-MM-dd");
             TblProyectosBO actual = new TblProyectosBO();
-            Actualizacion = actual.Actual + 1;
+            int Actualizacion = Actual + 1;
 
             try
             {

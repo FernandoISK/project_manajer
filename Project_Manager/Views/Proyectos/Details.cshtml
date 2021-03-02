@@ -127,50 +127,58 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
-                @if (asignacion.Count > 0)
+                @if (Proyecto.Actual != Proyecto.Limite)
                 {
-                    <div class="card shadow mb-4">
-                       
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
+                    if (asignacion.Count > 0)
+                    {
+                        <div class="card shadow mb-4">
 
-                                        <tr>
-                                            <th>Nombre completo</th>
-                                            <th>Telefono</th>
-                                            <th>Seleccionar</th>
-                                        </tr>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
 
-                                    </thead>
+                                            <tr>
+                                                <th>Nombre completo</th>
+                                                <th>Telefono</th>
+                                                <th>Seleccionar</th>
+                                            </tr>
 
-                                    <tbody>
+                                        </thead>
 
-                                        @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in asignacion)
-                                        {
+                                        <tbody>
+
+                                            @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in asignacion)
+                                            {
 
                                                 <tr>
                                                     <td>@item.NombreEmpleado @item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
                                                     <td>@item.TelefonoEmpleado</td>
                                                     <td align="center">
-                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio','@Proyecto.NombreProyecto')"  class="btn btn-warning"><i class="fas fa-user-plus"></i></button>
+                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio', '@Proyecto.NombreProyecto', '@Proyecto.Actual')" class="btn btn-warning"><i class="fas fa-user-plus"></i></button>
                                                     </td>
                                                 </tr>
 
-                                        }
+                                            }
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                        <h2> Sin resultados</h2>
+
+                    }
                 }
                 else
                 {
-                    <h2> Sin resultados</h2>
-
+                    <h1>No puedes agregar más empleados ya que has alcanzado el liminte</h1>
                 }
+
+
 
             </div>
             <!-- /.container-fluid -->
