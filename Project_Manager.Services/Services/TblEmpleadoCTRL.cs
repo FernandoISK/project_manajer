@@ -31,23 +31,18 @@ namespace Project_Manager.Services.Services
 			return resultado;
 		}
 
-
-		public DataSet devuelveEmp(object obj)
+		public List<TblEmpleadoBO> GetAll()
 		{
-			DataSet ds = new DataSet(); 
-			ds = metodo.devuelveEmpleado(obj);
-			return ds;
-		}
-
-
-		public List<TblEmpleadoBO> GetAll()	 //Trae todos los empleados con estatus 0 
-		{
-			List<TblEmpleadoBO> datos = new List<TblEmpleadoBO>(); //Invoca una lista del objeto TblEmpleadoBO
-			datos = metodo.ListarTabla(); //Llena la lista con la consulta, hubicada en Project_Manager.Services.DAO.TblEmpleadoDAO
+			List<TblEmpleadoBO> datos = new List<TblEmpleadoBO>(); 
+			datos = metodo.ListarTabla(); 
 			return datos;
 		}
-
-
+		public List<TblEmpleadoBO> TraerEmpleadosAsignacion()
+		{
+			List<TblEmpleadoBO> datos = new List<TblEmpleadoBO>();
+			datos = metodo.GetAsignacionEmpleado();
+			return datos;
+		}
 	}
 }
 

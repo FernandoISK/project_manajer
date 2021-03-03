@@ -15,15 +15,35 @@ namespace Project_Manager.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.AdministradorList = Administrador.GetAll_Administrador();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    ViewBag.AdministradorList = Administrador.GetAll_Administrador();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
 
         // GET: Administrador
 
         public ActionResult Create()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
 
         #region Metodos
@@ -52,7 +72,6 @@ namespace Project_Manager.Controllers
             login.Contra = contraseña;
             login.Usuario = usuario;
             login.Rol = "Administrador";
-            login.Estatus = 0;
 
 
             try
@@ -68,6 +87,7 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        // Eliminar o mas bien desactivar... algo asi xD
         public int UpdateStatus()
         {
             int estatus = 1;
@@ -81,6 +101,37 @@ namespace Project_Manager.Controllers
             {
                 return 0;
             }
+        }
+        public int Update()
+        {
+            int id = int.Parse(Request.Form.Get("id"));
+            string nombre = Request.Form.Get("nombre");
+            string correo = Request.Form.Get("correo");
+            string usuario = Request.Form.Get("usuario");
+
+            TblAdministradorBO data = new TblAdministradorBO();
+            TblCuentaBO login = new TblCuentaBO();
+
+            data.IDAdmin = id;
+            data.NombreAdmin = nombre;
+            data.CorreoAdmin = correo;
+            data.FKUsuario = usuario;
+
+            login.Usuario = usuario;
+            login.Correo = correo;
+            try
+            {
+                int res = 0;
+                res = Login.Cambio(login);
+                res = 0;
+                res = Administrador.Cambio(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+
         }
         #endregion
     }

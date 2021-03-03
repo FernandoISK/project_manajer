@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "UserLogin";
-    Layout = "";
-    //var Cuenta = (Project_Manager.Services.BO.TblCuentaBO)ViewBag.CuentaList;
-    var Cuenta = (List<Project_Manager.Services.BO.TblCuentaBO>)ViewBag.CuentaList;
+    Layout = null;
+
 
 }
 <head>
@@ -53,10 +52,6 @@
 
                     <div class="container-login100-form-btn">
                         <button type="submit" class="btn btn-success btn-lg">Ingresar</button>
-
-                        @*<button type="submit" class="login100-form-btn">
-                                Login
-                            </button>*@
                     </div>
 
 
@@ -94,4 +89,6 @@
     <script src="~/Content/vendor/daterangepicker/moment.js"></script>
     <script src="~/Content/vendor/countdowntime/countdowntime.js"></script>
     <script src="~/Content/js/main.js"></script>
+
+
 </body>

@@ -14,25 +14,21 @@
                 Dialog.show("El campo 'Contraseña' es obligatorio", Dialog.type.error);
                 return;
             }
-                $.ajax({
-                    url: Root + "Login/Validar",
-                    type: "GET",
-                    data: { usuario: L_USER, contraseña: L_PASS },
-                    beforeSend: function () {
-                        Dialog.show("Validando Datos", Dialog.type.progress);
-                    },
-                    success: function (response) {
-                        if (response > 0) {
-                            Dialog.show("Inicio De Sesion Correcto", Dialog.type.success);
-                            $(".sem-dialog").on("done", function () {
-                                document.location.href = "Admin/Index";
-                            });
-                        }
-                        else {
-                            Dialog.show("Usuario y/o Contraseña Invalida", Dialog.type.error);
-                        }
+            $.ajax({
+                url: Root + "Login/Validar",
+                type: "POST",
+                data: { usuario: L_USER, contraseña: L_PASS },
+                beforeSend: function () {
+                },
+                success: function (response) {
+                    if (response > 0) {
+                        document.location.href = '../Admin/Index';
                     }
-                });
+                    else {
+                        Dialog.show("Usuario y/o Contraseña Invalida", Dialog.type.error);
+                    }
+                }
+            });
 
         });
     },

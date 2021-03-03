@@ -5,7 +5,7 @@ using System.Data;
 
 namespace Project_Manager.Services.Services
 {
-    public class TblAdministradorCTRL
+	public class TblAdministradorCTRL
 	{
 		TblAdministradorDAO metodo = new TblAdministradorDAO();
 
@@ -16,9 +16,9 @@ namespace Project_Manager.Services.Services
 			return resultado;
 		}
 		public List<TblAdministradorBO> GetAll_Administrador()
-        {
-			List<TblAdministradorBO> datos = new List<TblAdministradorBO>(); 
-			datos = metodo.ListarTabla(); 
+		{
+			List<TblAdministradorBO> datos = new List<TblAdministradorBO>();
+			datos = metodo.ListarTabla();
 			return datos;
 		}
 
@@ -30,7 +30,7 @@ namespace Project_Manager.Services.Services
 		}
 
 
-		public int Cambio(object obj)
+		public int Cambio(TblAdministradorBO obj)
 		{
 			int resultado = 0;
 			resultado = metodo.Modificar(obj);

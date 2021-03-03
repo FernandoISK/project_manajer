@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project_Manager.Services.BO;
 using Project_Manager.Services.Services;
+using Newtonsoft.Json;
 
 namespace Project_Manager.Controllers
 {
@@ -12,43 +13,49 @@ namespace Project_Manager.Controllers
     {
         TblEmpleadoCTRL Employees = new TblEmpleadoCTRL();
         TblCuentaCTRL Login = new TblCuentaCTRL();
+        //TblProyectosCTRL Proyecto = new TblProyectosCTRL();
         // GET: Empleado
         public ActionResult Index()
         {
-            ViewBag.EmpleadoList = Employees.GetAll();  //llena el ViewBag con el metodo GetAll hubicado en la carpeta Services
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    ViewBag.EmpleadoList = Employees.GetAll();
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
         public ActionResult Create()
         {
-            return View();
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Administrador")
+                {
+                    return View();
+                }
+                return RedirectToAction("../Home/Error");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
         }
+
+        
+        #region Metodos
         public int New()
         {
-            string nombre = Request.Form.Get("nombre");
-            string apellidop = Request.Form.Get("apellidop");
-            string apellidom = Request.Form.Get("apellidom");
-            string telefono = Request.Form.Get("telefono");
-            string nacimineto = Convert.ToString(Request.Form.Get("nacimineto"));
-            string genero = Request.Form.Get("genero");
-            string correo = Request.Form.Get("correo");
-            string contraseña = Request.Form.Get("contraseña");
-            string usuario = Request.Form.Get("usuario");
-
-            TblEmpleadoBO data = new TblEmpleadoBO();
+            string correo = Request.Form.Get("CorreoEmpleado");
+            string contraseña = Request.Form.Get("ContraEmpleado");
+            string data = Request.Form.Get("dataEmpleado");
+            TblEmpleadoBO empleado = JsonConvert.DeserializeObject<TblEmpleadoBO>(data);
             TblCuentaBO login = new TblCuentaBO();
-            data.NombreEmpleado = nombre;
-            data.ApellidoPEmpleado = apellidop;
-            data.ApellidoMEmpleado = apellidom;
-            data.TelefonoEmpleado = telefono;
-            data.Nacimiento = nacimineto;
-            data.GeneroEmpleado = genero;
-            data.CorreoEmpleado = correo;
-            data.ContraEmpleado = contraseña;
-            data.FKUsuario = usuario;
-            data.FKRol = "Empleado";
             login.Correo = correo;
             login.Contra = contraseña;
-            login.Usuario = usuario;
+            login.Usuario = empleado.FKUsuario;
             login.Rol = "Empleado";
             login.Estatus = 0;
 
@@ -58,7 +65,7 @@ namespace Project_Manager.Controllers
                 int res = 0;
                 res = Login.Alta(login);
                 res = 0;
-                res = Employees.Alta(data);
+                res = Employees.Alta(empleado);
                 return res;
             }
             catch (Exception ex)
@@ -66,8 +73,36 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        public int Update()
+        {
+            string nombre = Request.Form.Get("nombre");
+            string telefono = Request.Form.Get("telefono");
+            string correo = Request.Form.Get("correo");
+            int id = int.Parse(Request.Form.Get("id"));
+            string usuario = Request.Form.Get("usuario");
 
-        //get = 
+            TblEmpleadoBO data = new TblEmpleadoBO();
+            TblCuentaBO login = new TblCuentaBO();
+
+            data.NombreEmpleado = nombre;
+            data.TelefonoEmpleado = telefono;
+            data.FKUsuario = usuario;
+            data.IDEmpleado = id;
+            login.Usuario = usuario;
+            login.Correo = correo;
+            try
+            {
+                int res = 0;
+                res = Login.Cambio(login);
+                res = 0;
+                res = Employees.Cambio(data);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         public int UpdateStatus()
         {
             int estatus = 1;
@@ -82,5 +117,6 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+        #endregion
     }
 }

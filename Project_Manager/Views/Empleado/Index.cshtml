@@ -13,14 +13,14 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Tablas de Choferes</h1>
+            <h1 class="h3 mb-2 text-gray-800">Tablas de Empleados</h1>
             <p class="mb-4">Esta tabla contiene todos los datos basicos de todos los empleados.</p>
             <!-- DataTales Example -->
             @if (Empleados.Count > 0)
             {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Datos de los choferes</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Datos de los empleados</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -31,7 +31,7 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Apellidos</th>
                                         <th scope="col">Telefono</th>
-                                        <th scope="col">Sexo</th>
+                                        <th scope="col">Genero</th>
                                         <th>Accesorios</th>
                                     </tr>
 
@@ -41,22 +41,23 @@
 
                                     @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in Empleados)
                                     {
-                                    <tr>
-                                        <td>@item.NombreEmpleado</td>
-                                        <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
-                                        <td align="center">@item.TelefonoEmpleado</td>
-                                        @if (item.GeneroEmpleado == "M")
-                                        {
-                                            <td align="center">Masculino</td>
-                                        }
-                                        else
-                                        {
-                                            <td>Femenino</td>
-                                        }
-                                        <td align="center">
-                                            <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>@item.NombreEmpleado</td>
+                                            <td>@item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
+                                            <td align="center">@item.TelefonoEmpleado</td>
+                                            @if (item.GeneroEmpleado == "M")
+                                            {
+                                                <td align="center">Masculino</td>
+                                            }
+                                            else
+                                            {
+                                                <td align="center">Femenino</td>
+                                            }
+                                            <td align="center">
+                                                <button type="button" onclick="Employees.evts.getEmployeesInfo('@item.IDEmpleado', '@item.NombreEmpleado','@item.TelefonoEmpleado', '@item.correo', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
+                                                <button type="button" onclick="Employees.evts.updateStatus('@item.IDEmpleado','0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
 
                                     }
 
@@ -68,8 +69,8 @@
             }
             else
             {
-        <h2> Sin resultados</h2>
-               
+                <h2> Sin resultados</h2>
+
             }
 
         </div>
@@ -91,5 +92,52 @@
 
 </div>
 
+
+<div class="modal fade" tabindex="-1" role="dialog" id="mdlDetail">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <form id="frmCreate" class="modal-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="col-12 modal-title text-center" id="employeeStr">Nuevo Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nombre del Empleado</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtNombre" id="txtNombre" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Correo Electronico</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtCorreo" id="txtCorreo" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Telefono</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtCelular" id="txtCelular" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="hidden" autocomplete="off" class="form-control" name="txtUsuario" id="txtUsuario" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="~/Scripts/Employees.js"></script>
+<script>
+    $(function () {
+        Employees.init();
+    });
+</script>
 

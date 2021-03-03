@@ -12,6 +12,7 @@
     <link href="~/Content/Dialog/Dialog-ie.css" rel="stylesheet" />
     <link href="~/Content/Dialog/Dialog.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="~/Content/css/MyStyle.css" rel="stylesheet" />
 </head>
 <body id="page-top">
 
@@ -26,7 +27,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">AP Manager</div>
             </a>
 
             <!-- Divider -->
@@ -36,121 +37,132 @@
             <li class="nav-item active">
                 <a class="nav-link" href="@Url.Content("~/Admin/Index")">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Administración</span>
+                    @Session["Rol"]
                 </a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Administración
-            </div>
 
             <!-- CATALOGO CATALOGO CATALOGO CATALOGO CATALOGO -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Catalogos</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Buscar por :</h6>
-                        <a class="collapse-item" href="utilities-color.html">Clientes</a>
-                        <a class="collapse-item" href="@Url.Content("~/Empleado/Index")">Empleados</a>
-                        <a class="collapse-item" href="@Url.Content("~/Administrador/Index")">Administradores</a>
-                        <a class="collapse-item" href="@Url.Content("~/tblEmpleadoes/Index")">Proyectos</a>
+            @{
+                if (Session["Rol"].ToString() == "Administrador")
+                {
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Administración
                     </div>
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-table"></i>
+                            <span>Catalogos</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Buscar por :</h6>
+                                <a class="collapse-item" href="@Url.Content("~/Clientes/Index")">Clientes</a>
+                                <a class="collapse-item" href="@Url.Content("~/Empleado/Index")">Empleados</a>
+                                <a class="collapse-item" href="@Url.Content("~/Administrador/Index")">Administradores</a>
+                                <a class="collapse-item" href="@Url.Content("~/Proyectos/Index")">Proyectos</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- AGREGAR AGREGAR AGREGAR AGREGAR AGREGAR  -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-user-plus"></i>
+                            <span>Registrar</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Agregar nuevo: </h6>
+                                <a class="collapse-item" href="@Url.Content("~/Clientes/Create")">Clientes</a>
+                                <a class="collapse-item" href="@Url.Content("~/Empleado/Create")">Empleados</a>
+                                <a class="collapse-item" href="@Url.Content("~/Administrador/Create")">Administradores</a>
+                                <a class="collapse-item" href="@Url.Content("~/Proyectos/Create")">Proyectos</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+
+            @if (Session["Rol"].ToString() == "Empleado")
+            {
+                <div class="sidebar-heading">
+                    Empleado
                 </div>
-            </li>
 
-            <!-- AGREGAR AGREGAR AGREGAR AGREGAR AGREGAR  -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Registrar</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Agregar nuevo: </h6>
-                        <a class="collapse-item" href="utilities-color.html">Clientes</a>
-                        <a class="collapse-item" href="@Url.Content("~/Empleado/Create")">Empleados</a>
-                        <a class="collapse-item" href="@Url.Content("~/Administrador/Create")">Administradores</a>
-                        <a class="collapse-item" href="@Url.Content("~/tblProyectos/Create")">Proyectos</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Index")">
+                        <i class="far fa-bookmark"></i>
+                        <span>Mis Tareas</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Juntas")">
+                        <i class="fas fa-users"></i>
+                        <span>Programar Junta</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/ListaJuntas")">
+                        <i class="fas fa-tasks"></i>
+                        <span>Juntas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Requisitos")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Solicitud(N)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolEmpleado/Incidencias")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Incidencias</span>
+                    </a>
+                </li>
+            }
+
+
+            @if (Session["Rol"].ToString() == "Cliente")
+            {
+                <div class="sidebar-heading">
+                    Cliente
                 </div>
-            </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Index")">
+                        <i class="fas fa-users"></i>
+                        <span>Mi Proyecto</span>
+                    </a>
+                </li>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Administración
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/ListaJuntas")">
+                        <i class="far fa-calendar-alt"></i>
+                        <span>Ver mis juntas</span>
+                    </a>
+                </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            @*<li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
-                </div>
-            </div>
-        </li>*@
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-wrench"></i>
-                    <span>Soporte</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Incidencias")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Incidencias</span>
+                    </a>
+                </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-server"></i>
-                    <span>Proyectos</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Clientes</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-plane"></i>
-                    <span>Vacaciones</span>
-                </a>
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-book"></i>
-                    <span>Repostes</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-users"></i>
-                    <span>Equipos</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Content("~/RolCliente/Requesitos")">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Requesitos</span>
+                    </a>
+                </li>
+            }
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -176,17 +188,18 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                    <div class="contenedor">
+                        <div class="contenedorFecha">
+                            <div class="fecha">
+                                <span id="diaSemana" class="diaSemana"></span>
+                                <span id="dia" class="dia"></span>
+                                <span>de</span>
+                                <span id="mes" class="mes"></span>
+                                <span>del</span>
+                                <span id="anio" class="anio"></span>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -321,7 +334,10 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-4 d-none d-lg-inline text-gray-600 small">
+
+                                    @Session["Nombre"] @Session["Apellido1"] @Session["Apellido2"]
+                                </span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -341,7 +357,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                    Cerrar Sesion
                                 </a>
                             </div>
                         </li>
@@ -353,23 +369,23 @@
                 @*-----------------------------------------------------------------------------------------------------------------------*@
 
 
-                @RenderBody();
+                @RenderBody()
 
 
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2019</span>
                     </div>
-
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Your Website 2019</span>
-                            </div>
-                        </div>
-                    </footer>            <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
+            </footer>            <!-- End of Footer -->
 
-</div>
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
 
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -380,15 +396,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">¿Cerrar Sesion?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Confirme Si Desea Terminar La Sesion</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                    <a class="btn btn-primary" href="@Url.Content("~/Login/Cerrar")">Si</a>
                 </div>
             </div>
         </div>
@@ -404,6 +420,7 @@
     <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="~/Content/js/demo/chart-pie-demo.js"></script>
     <script src="~/Content/js/demo/datatables-demo.js"></script>
+    <script src="~/Content/js/Reloj.js"></script>
     <script>
         var Root = "@Url.Content("~/")";
     </script>

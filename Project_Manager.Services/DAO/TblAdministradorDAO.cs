@@ -18,17 +18,12 @@ namespace Project_Manager.Services.DAO
 			TblAdministradorBO datos = (TblAdministradorBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			string sql = "Insert into TblAdministrador(NombreAdmin,ApellidoPAdmin,ApellidoMAdmin,CorreoAdmin,ContraAdmin,FKUsuario,FKRol)" +
-			"Values(@NombreAdmin,@ApellidoPAdmin,@ApellidoMAdmin,@CorreoAdmin,@ContraAdmin,@FKUsuario,@FKRol)";
+			string sql = "Insert into TblAdministrador(NombreAdmin,ApellidoPAdmin,ApellidoMAdmin,FKUsuario) Values(@NombreAdmin,@ApellidoPAdmin,@ApellidoMAdmin,@FKUsuario)";
 
 			cmd.Parameters.AddWithValue("@NombreAdmin", datos.NombreAdmin);
 			cmd.Parameters.AddWithValue("@ApellidoPAdmin", datos.ApellidoPAdmin);
 			cmd.Parameters.AddWithValue("@ApellidoMAdmin", datos.ApellidoMAdmin);
-
-			cmd.Parameters.AddWithValue("@CorreoAdmin", datos.CorreoAdmin);
-			cmd.Parameters.AddWithValue("@ContraAdmin", datos.ContraAdmin);
 			cmd.Parameters.AddWithValue("@FKUsuario", datos.FKUsuario);
-			cmd.Parameters.AddWithValue("@FKRol", datos.FKRol);
 
 			cmd.CommandText = sql;
 			int i = cmd.ExecuteNonQuery();
@@ -44,7 +39,7 @@ namespace Project_Manager.Services.DAO
 		public List<TblAdministradorBO> ListarTabla()
 		{
 			List<TblAdministradorBO> lista = new List<TblAdministradorBO>();
-			sql = "select * from TblAdministrador where Estatus = 0;";
+			sql = "SELECT b.*, a.Correo, a.Rol, a.Contra FROM tblCuenta a INNER JOIN TblAdministrador b ON a.Usuario = b.FKUsuario WHERE b.Estatus = 0;";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -58,10 +53,10 @@ namespace Project_Manager.Services.DAO
 					obj.ApellidoPAdmin = row["ApellidoPAdmin"].ToString();
 					obj.ApellidoMAdmin = row["ApellidoMAdmin"].ToString();
 					obj.Estatus = int.Parse(row["Estatus"].ToString());
-					obj.CorreoAdmin = row["CorreoAdmin"].ToString();
-					obj.ContraAdmin = row["ContraAdmin"].ToString();
 					obj.FKUsuario = row["FKUsuario"].ToString();
-					obj.FKRol = row["FKRol"].ToString();
+					obj.CorreoAdmin = row["Correo"].ToString();
+					obj.ContraAdmin = row["Contra"].ToString();
+					obj.FKRol = row["Rol"].ToString();
 					lista.Add(obj);
 				}
 			}
@@ -89,34 +84,17 @@ namespace Project_Manager.Services.DAO
 
 
 
-		public int Modificar(object obj)
+		public int Modificar(TblAdministradorBO datos)
 		{
-
-			TblAdministradorBO datos = (TblAdministradorBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "update TblAdministrador" +
-			" set " +
-			"NombreAdmin = @NombreAdmin," +
-			"ApellidoAdmin = @ApellidoAdmin," +
-			"FKRol = @FKRol," +
-			"FKCuenta = @FKCuenta" +
-			" where IDAdmin = @IDAdmin";
-
-			cmd.Parameters.Add("@IDAdmin", SqlDbType.Int);
-			cmd.Parameters.Add("@NombreAdmin", SqlDbType.VarChar);
-			cmd.Parameters.Add("@ApellidoAdmin", SqlDbType.VarChar);
-			cmd.Parameters.Add("@FKRol", SqlDbType.Int);
-			cmd.Parameters.Add("@FKCuenta", SqlDbType.Int);
-
-			cmd.Parameters["@IDAdmin"].Value = datos.IDAdmin;
-			cmd.Parameters["@NombreAdmin"].Value = datos.NombreAdmin;
-			cmd.Parameters["@ApellidoAdmin"].Value = datos.ApellidoMAdmin;
-			//cmd.Parameters["@FKCuenta"].Value = datos.OTblCuentaBO.IDCuenta;
-
+			sql = "UPDATE TblAdministrador SET NombreAdmin=@NombreAdmin WHERE IDAdmin=@IDAdmin";
+			cmd.Parameters.AddWithValue("@IDAdmin", datos.IDAdmin);
+			cmd.Parameters.AddWithValue("@NombreAdmin", datos.NombreAdmin);
 			cmd.CommandText = sql;
 
 			int i = cmd.ExecuteNonQuery();
+			con2.CerrarConexion();
 			cmd.Parameters.Clear();
 
 			if (i <= 0)
@@ -125,6 +103,7 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
+
 		public DataSet devuelveAlumno(object obj)
 		{
 			string cadenaWhere = "";
@@ -148,13 +127,5 @@ namespace Project_Manager.Services.DAO
 			con2.CerrarConexion();
 			return ds;
 		}
-		//public DataTable ListarTabla()
-		//{
-		//	sql = "Select * from TblAdministrador";
-		//	SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
-		//	DataTable tabla = new DataTable();
-		//	da.Fill(tabla);
-		//	return tabla;
-		//}
 	}
 }
