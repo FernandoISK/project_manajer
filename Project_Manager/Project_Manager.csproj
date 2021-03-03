@@ -1879,6 +1879,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".bak\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
