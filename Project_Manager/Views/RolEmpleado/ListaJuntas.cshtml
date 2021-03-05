@@ -41,7 +41,7 @@
                                             <td>@item.NombreJuntas</td>
                                             @if (item.Estatus == 1)
                                             {
-                                                <td><i class="fas fa-fire"></i>@item.FechaJunta @item.HoraJunta</td>
+                                                <td><i class="fas fa-fire"></i> @item.FechaJunta @item.HoraJunta</td>
                                             }
                                             else
                                             {
@@ -58,7 +58,7 @@
                                             {
 
                                                 <td>
-                                                    <button type="button" onclick="Rol.evts.confirm('@item.IDJuntas')" class="btn btn-primary">Reporte</button>
+                                                    <a title="Tareas" href="@Url.Content(string.Format("~/RolEmpleado/Reporte?i={0}", item.IDJuntas))" class="btn btn-warning float-right"><i class="fas fa-file-contract"></i></a>
                                                 </td>
                                             }
                                             else

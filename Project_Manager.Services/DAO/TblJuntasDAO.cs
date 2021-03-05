@@ -71,10 +71,29 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-		public List<TblProyectosBO> TraerProyectoCliente(int id)
+		public List<TblProyectosBO> TraerProyectoEmpleado(int id)
 		{
 			List<TblProyectosBO> lista = new List<TblProyectosBO>();
 			sql = "SELECT c.Folio, c.NombreProyecto FROM TblProyectoEmpleado a INNER JOIN  tblEmpleado b ON a.FKEmpleado = b.IDEmpleado INNER JOIN TblProyectos c ON a.FKProyecto = c.Folio WHERE b.IDEmpleado = " + id + "; ";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblProyectosBO obj = new TblProyectosBO();
+					obj.Folio = row["Folio"].ToString();
+					obj.NombreProyecto = row["NombreProyecto"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
+		public List<TblProyectosBO> TraerProyectoCliente(int id)
+		{
+			List<TblProyectosBO> lista = new List<TblProyectosBO>();
+			sql = "SELECT a.Folio, a.NombreProyecto FROM TblProyectos a INNER JOIN  TblClientes b ON a.FKCliente = b.IDCliente WHERE b.IDCliente = " + id + "; ";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);

@@ -252,7 +252,7 @@ namespace Project_Manager.Controllers
             try
             {
                 int res = 0;
-
+                res = tareas.ActualizarEstado(tarea);
                 res = tareas.Tomar(data);
                 return res;
             }

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Task";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Tareas = (List<Project_Manager.Services.BO.TblTareasBO>)ViewBag.TareasList;
+}
+
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Mis tareas pendientes</h1>
+    </div>
+
+    <div class="row">
+        @if (Tareas.Count != 0)
+        {
+            foreach (Project_Manager.Services.BO.TblTareasBO item in Tareas)
+            {
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                @item.Titulo<span>|</span>
+                                <span class="text-muted justify-content-end">|@item.NombreProyecto</span>
+                                <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/DetallesTask?f={0}&i={1}", item.FKProyecto, item.ID))" class="btn btn-warning btn-circle btn-sm float-right"><i class="fas fa-exclamation-circle"></i></a>
+                                <button type="button" onclick="PropTask.evts.completeTask('@item.ID', '@item.IDToma')" class="btn btn-success btn-circle btn-sm float-right"><i class="fas fa-calendar-check"></i></button>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            @item.Descripcion
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <h1>No tiene ninguna tarea Pendiente</h1>
+        }
+    </div>
+</div>
+<script src="~/Scripts/Tareas.js"></script>

@@ -11,6 +11,7 @@ namespace Project_Manager.Services.Services
 	public class TblJunstasCTRL
 	{
 		TblJuntasDAO metodo = new TblJuntasDAO();
+		TblReporteJuntaDAO reportes = new TblReporteJuntaDAO();
 
 		public int Alta(object obj)
 		{
@@ -41,6 +42,12 @@ namespace Project_Manager.Services.Services
 		public List<TblProyectosBO> GetAllProjects(int id)
 		{
 			List<TblProyectosBO> datos = new List<TblProyectosBO>();
+			datos = metodo.TraerProyectoEmpleado(id);
+			return datos;
+		}
+		public List<TblProyectosBO> GetProjectsClient(int id)
+		{
+			List<TblProyectosBO> datos = new List<TblProyectosBO>();
 			datos = metodo.TraerProyectoCliente(id);
 			return datos;
 		}
@@ -61,6 +68,12 @@ namespace Project_Manager.Services.Services
 			TblJuntasBO data = new TblJuntasBO();
 			data = metodo.GetAMeet(id);
 			return data;
+		}
+		public int NuevoReporte(object obj)
+		{
+			int resultado = 0;
+			resultado = reportes.Crear(obj);
+			return resultado;
 		}
 	}
 }

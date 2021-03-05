@@ -1,10 +1,14 @@
-﻿using Project_Manager.Services.BO;
+﻿using Newtonsoft.Json;
+using Project_Manager.Services.BO;
 using Project_Manager.Services.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace Project_Manager.Controllers
 {
@@ -12,6 +16,8 @@ namespace Project_Manager.Controllers
     {
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL Juntas = new TblJunstasCTRL();
+        TblIncidenciasCTRL IncidenciasMT = new TblIncidenciasCTRL();
+        TblJunstasCTRL juntas = new TblJunstasCTRL();
         // GET: RolCliente
         #region Vistas
         public ActionResult Index()
@@ -54,7 +60,7 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Cliente")
                 {
-                     int id = (int)Session["ID"];
+                    int id = (int)Session["ID"];
                     ViewBag.JuntasList = Juntas.GetMyMeetings(id);
                     return View();
                 }
@@ -108,8 +114,8 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
-                string folio = "";
-                try { folio = Request.QueryString.Get("i"); } catch { }
+
+                ViewBag.proyectosList = juntas.GetProjectsClient((int)Session["ID"]);
                 return View();
             }
             else
@@ -153,10 +159,12 @@ namespace Project_Manager.Controllers
 
         public int New()
         {
-
+            string data = Request.Form.Get("DatosIncidencia");
+            TblIncidenciasBO obj = JsonConvert.DeserializeObject<TblIncidenciasBO>(data);
             try
             {
-                int res = 1;
+                int res = 0;
+                res = IncidenciasMT.Alta(obj);
                 return res;
             }
             catch (Exception ex)

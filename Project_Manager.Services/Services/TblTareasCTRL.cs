@@ -19,6 +19,12 @@ namespace Project_Manager.Services.Services
 			datos = metodo.GetAll(folio);
 			return datos;
 		}
+		public List<TblTareasBO> GetMyTask(int id)
+		{
+			List<TblTareasBO> datos = new List<TblTareasBO>();
+			datos = metodo.GetMyTask(id);
+			return datos;
+		}
 		public int Baja(int id)
 		{
 			int resultado = 0;
@@ -29,6 +35,18 @@ namespace Project_Manager.Services.Services
 		{
 			int resultado = 0;
 			resultado = metodo.TomarTarea(obj);
+			return resultado;
+		}
+		public int ActualizarEstado(int id)
+		{
+			int resultado = 0;
+			resultado = metodo.ActualizasEstatus(id);
+			return resultado;
+		}
+		public int FinalizarTarea(int idTarea, int idToma)
+		{
+			int resultado = 0;
+			resultado = metodo.FinalizarTarea(idTarea, idToma);
 			return resultado;
 		}
 	}

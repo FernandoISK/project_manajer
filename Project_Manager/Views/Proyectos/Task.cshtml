@@ -27,15 +27,18 @@
                                         <span class="text-muted justify-content-end">|Disponible</span>
                                         break;
                                     case 1:
-                                        <span class="text-muted text-right" ">|Trabajando</span>
+                                        <span class="text-muted text-right ">|Trabajando</span>
                                         break;
                                         case 2:
-                                        <span class="text-muted text-right" ">|Finalizado</span>
+                                        <span class="text-muted text-right ">|Finalizado</span>
                                         break;
                                 }
-                                @if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
+                                @if (Session["Rol"].ToString() == "Administrador")
                                 {
                                     <button type="button" onclick="PropTask.evts.DeleteTask('@item.ID', '@item.Estado')" class="btn btn-danger btn-circle btn-sm float-right"><i class="fas fa-trash"></i></button>
+                                }
+                                @if (Session["Rol"].ToString() == "Empleado" || item.Estado == 0)
+                                {
                                     <button type="button" onclick="PropTask.evts.TakeTask('@item.ID')" class="btn btn-success btn-circle btn-sm float-right"><i class="fas fa-dolly"></i></button>
                                 }
                                 <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/DetallesTask?f={0}&i={1}", item.FKProyecto, item.ID))" class="btn btn-warning btn-circle btn-sm float-right"><i class="fas fa-exclamation-circle"></i></a>
@@ -48,7 +51,7 @@
 
                 </div>
             }
-                            if (Session["Rol"].ToString() == "Empleado" || Session["Rol"].ToString() == "Administrador")
+                            if (Session["Rol"].ToString() == "Administrador")
                             {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">

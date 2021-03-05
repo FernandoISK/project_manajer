@@ -24,7 +24,11 @@
                         },
                         success: function (response) {
                             if (response > 0) {
-                                location.reload(true);
+                                Dialog.show("Se agrego la tarea a tu lista de tareas", Dialog.type.success);
+                                $(".sem-dialog").on("done", function () {
+                                    location.reload(true);
+
+                                });
                             }
                             else {
                                 Dialog.show("Titulo demasiado largo, Intente de nuevo", Dialog.type.error);
@@ -103,6 +107,31 @@
                             document.location.href = '../Proyectos/DetallesTask';
                         } else {
                             Dialog.show("Algo A Fallado", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        },
+        completeTask: function (idtarea, idtoma) {
+            Dialog.show("¿Seguro que quiere finalizar esta tarea?", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "RolEmpleado/FinalizarTarea",
+                    type: "POST",
+                    data: { Tarea: idtarea, TomaTarea: idtoma },
+                    beforeSend: function () {
+                        Dialog.show("Actualizando datos del proyeco", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            Dialog.show("Se actualizo el estado de la tarea", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                location.reload(true);
+
+                            });
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al intentar guardar los datos, inténtelo de nuevo", Dialog.type.error);
                         }
                     }
                 });

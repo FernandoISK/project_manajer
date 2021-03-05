@@ -13,5 +13,11 @@ namespace Project_Manager.Services.BO
         public string Titulo { get; set; }
         public int Estado { get; set; }
         public int ID { get; set; }
+
+        //============================ TABLAS TEMPORALES ================================
+
+        public string NombreProyecto { get; set; }
+        public int IDToma { get; set; }
+
     }
 }

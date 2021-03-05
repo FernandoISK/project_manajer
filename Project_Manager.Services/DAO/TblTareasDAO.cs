@@ -21,7 +21,7 @@ namespace Project_Manager.Services.DAO
 			TblTareasBO datos = (TblTareasBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "Insert into TblTareas(Titulo ,Descripcion, FKProyecto) Values(@Titulo ,@Descripcion ,@FKProyecto)";
+			sql = "EXEC NuevaTarea @Titulo ,@Descripcion ,@FKProyecto";
 
 			cmd.Parameters.AddWithValue("@Titulo", datos.Titulo);
 			cmd.Parameters.AddWithValue("@Descripcion", datos.Descripcion);
@@ -76,6 +76,30 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
+		public List<TblTareasBO> GetMyTask(int id)
+		{
+			List<TblTareasBO> lista = new List<TblTareasBO>();
+			sql = "SELECT b.*, c.NombreProyecto, a.IDToma  FROM TblTomarTarea a INNER JOIN TblTareas b ON a.FKTarea = b.ID INNER JOIN TblProyectos C ON b.FKProyecto = c.Folio WHERE a.Estado = 0 AND b.Estado = 1 AND a.FKEmpleado = " + id + "; ";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblTareasBO obj = new TblTareasBO();
+					obj.ID = int.Parse(row["ID"].ToString());
+					obj.Titulo = row["Titulo"].ToString();
+					obj.Descripcion = row["Descripcion"].ToString();
+					obj.FKProyecto = row["FKProyecto"].ToString();
+					obj.Estado = int.Parse(row["Estado"].ToString());
+					obj.NombreProyecto = row["NombreProyecto"].ToString();
+					obj.IDToma = int.Parse(row["IDToma"].ToString());
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
 		public int TomarTarea(object obj)
 		{
 
@@ -88,6 +112,40 @@ namespace Project_Manager.Services.DAO
 			cmd.Parameters.AddWithValue("@FKTarea", datos.FKTarea);
 			cmd.Parameters.AddWithValue("@FechaToma", datos.FechaToma);
 
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public int ActualizasEstatus(int id)
+		{
+
+			TblTomarTareaBO datos = new TblTomarTareaBO();
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "update TblTareas set Estado = 1 where ID = " + id +";";
+			cmd.CommandText = sql;
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public int FinalizarTarea(int idTarea, int idToma)
+		{
+
+			TblTomarTareaBO datos = new TblTomarTareaBO();
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "EXEC PA_Finalizar_Tarea " + idTarea + ","+ idToma + ";";
 			cmd.CommandText = sql;
 			int i = cmd.ExecuteNonQuery();
 			cmd.Parameters.Clear();
