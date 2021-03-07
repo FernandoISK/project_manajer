@@ -56,39 +56,36 @@
                     thumb = null;
                 }
             }
-                var AgregarInci = {
-                    FKProyecto: I_Proyecto,
-                    Titulo: I_Titulo,
-                    Descripcion: I_Descripcion,
-                    Imagen: thumb
-                };
-
-                $.ajax({
-                    url: Root + "RolCliente/New",
-                    type: "POST",
-                    data: { DatosIncidencia: JSON.stringify(AgregarInci) },
-                        beforeSend: function () {
-                            Dialog.show("Registrando", Dialog.type.progress);
-                        },
-                        success: function (response) {
-                            console.log(response);
-                            if (response == 1) {
-                                Dialog.show("Guardado correctamente", Dialog.type.success);
-                                $(".sem-dialog").on("done", function () {
-                                    location.reload(true);
-                                });
-                            }
-                            else {
-                                Dialog.show("Ocurrió un error al guardar los datos, inténtelo de nuevo", Dialog.type.error);
-                            }
-                        }
-                    });
+            var AgregarInci = {
+                FKProyecto: I_Proyecto,
+                Titulo: I_Titulo,
+                Descripcion: I_Descripcion,
+                Imagen: thumb
+            };
+            $.ajax({
+                url: Root + "RolCliente/New",
+                type: "POST",
+                data: { DatosIncidencia: JSON.stringify(AgregarInci) },
+                beforeSend: function () {
+                    Dialog.show("Registrando", Dialog.type.progress);
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response == 1) {
+                        Dialog.show("Guardado correctamente", Dialog.type.success);
+                        $(".sem-dialog").on("done", function () {
+                            location.reload(true);
+                        });
+                    }
+                    else {
+                        Dialog.show("Ocurrió un error al guardar los datos, inténtelo de nuevo", Dialog.type.error);
+                    }
                 }
-            
+            });
         });
-        $(".input-number").on("input", function () {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
+        //$(".input-number").on("input", function () {
+        //    this.value = this.value.replace(/[^0-9]/g, '');
+        //});
     },
     evts: {
         parseFileFromElement: function (Element, Callback) {
@@ -107,5 +104,4 @@
             Dialog.hide();
         }
     }
-    
 }

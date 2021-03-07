@@ -15,7 +15,7 @@ namespace Project_Manager.Controllers
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL juntas = new TblJunstasCTRL();
         TblTareasCTRL task = new TblTareasCTRL();
-        int IDJuntaGlobal = 0;
+        
         // GET: RolEmpleado
         #region Vistas
         public ActionResult Index()
@@ -56,7 +56,9 @@ namespace Project_Manager.Controllers
             {
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
-                    try { IDJuntaGlobal = int.Parse(Request.QueryString.Get("i")); } catch { }
+                    int IDJunta = 0;
+                    try { IDJunta= int.Parse(Request.QueryString.Get("i")); } catch { }
+                    ViewBag.IDJunta = IDJunta;
                     return View();
                 }
                 else
@@ -157,9 +159,12 @@ namespace Project_Manager.Controllers
             TblReporteJuntaBO reporte = new TblReporteJuntaBO();
             string Motivo = Request.Form.Get("Motivo");
             string Descripcion = Request.Form.Get("Descripcion");
-            int Aprobacion = int.Parse(Request.Form.Get("Aprobacion"));
+            int IDJunta = int.Parse(Request.Form.Get("Junta"));
             reporte.FKEmpleado = (int)Session["ID"];
-            reporte.FKJunta = IDJuntaGlobal;
+            reporte.FKJunta = IDJunta;
+            reporte.Motivo = Motivo;
+            reporte.Descripcion = Descripcion;
+
             try
             {
                 int res = 0;

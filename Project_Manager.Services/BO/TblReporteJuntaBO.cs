@@ -11,7 +11,6 @@ namespace Project_Manager.Services.BO
         public string Motivo { get; set; }
         public string Descripcion { get; set; }
         public int IdReporte { get; set; }
-        public int Aprobacion { get; set; }
         public int FKEmpleado { get; set; }
         public int FKJunta { get; set; }
     }

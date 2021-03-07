@@ -89,12 +89,10 @@
         });
         $("#frmCreateReport").on("submit", function (e) {
             e.preventDefault()
-
-            var R_Motivo = $("#txtMotivo").val();
+            var R_IDJunta = $("#hdnIdJunta").val(); 
+            var R_Motivo = $("#cmdMotivo").val();
             var R_Mensaje = $("#mensaje").val();
-            var R_AprobacionSI = $("#cboxSi").val();
-            var R_AprobacionNO = $("#cboxNo").val();
-            var R_Aprobacion = null;
+
 
             if (R_Motivo.trim() == "") {
                 Dialog.show("El campo 'Motivo' es obligatorio", Dialog.type.error);
@@ -103,24 +101,13 @@
             if (R_Mensaje.trim() == "") {
                 Dialog.show("El campo 'Mensaje' es obligatorio", Dialog.type.error);
                 return;
-            }
-
-            if (R_AprobacionSI.trim() == "" && R_AprobacionNO.trim()) {
-                Dialog.show("Seleccione un opcion en objetivo", Dialog.type.error);
-                return;
-            }
-            if (R_AprobacionSI.trim() != "") {
-                R_Aprobacion = R_AprobacionSI;
-            }
-            if (R_AprobacionNO.trim() != "") {
-                R_Aprobacion = R_AprobacionNO;
-            }           
+            }         
             
             $.ajax({
                 url: Root + "RolEmpleado/ReporteJunta",
                 type: "POST",
                 data: {
-                    Motivo: R_Motivo, Descripcion: R_Mensaje, Aprobacion: R_Aprobacion 
+                    Motivo: R_Motivo, Descripcion: R_Mensaje, Junta: R_IDJunta 
                 },
                 beforeSend: function () {
                     Dialog.show("Guardando Reporte", Dialog.type.progress);
