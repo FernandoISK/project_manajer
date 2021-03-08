@@ -8,7 +8,7 @@
             var Element = this;
             if (Element.value.toString().toLowerCase().includes("jpg") || Element.value.toString().toLowerCase().includes("jpeg")) {
                 GlobalClientes.evts.parseFileFromElement(Element, function (e) {
-                    $(TargetResult).html("<img src=\"" + e.target.result + "\" class=\"img-fluid\">");
+                    $(TargetResult).html("<img src=\"" + e.target.result + "\" width=\"600\" height=\"350\">");
                 });
             }
             //this.value = null;
