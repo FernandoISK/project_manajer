@@ -14,5 +14,9 @@ namespace Project_Manager.Services.BO
         public string FKUsuario { get; set; }
         public string Comentario { get; set; }
         public string Tiempo { get; set; }
+
+        public string _fkincidencia { get; set; }
+        public string _fkrequisito { get; set; }
+
     }
 }

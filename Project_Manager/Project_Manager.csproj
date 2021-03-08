@@ -1857,7 +1857,9 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\Administrador.js" />
     <Content Include="Scripts\Client.js" />
+    <Content Include="Scripts\CommentarioRequirement.js" />
     <Content Include="Scripts\Commentary.js" />
+    <Content Include="Scripts\CommentaryIncidents.js" />
     <Content Include="Scripts\Employees.js" />
     <Content Include="Scripts\GlobalCliente.js" />
     <Content Include="Scripts\Login.js" />

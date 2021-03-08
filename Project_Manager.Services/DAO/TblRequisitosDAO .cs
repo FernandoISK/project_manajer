@@ -67,7 +67,7 @@ namespace Project_Manager.Services.DAO
 		public TblRequisitosBO UnRequisito(int id)
 		{
 			TblRequisitosBO obj = new TblRequisitosBO();
-			sql = "Select * FROM TblRequisitos Where IdIncidencia = " + id + ";";
+			sql = "Select * FROM TblRequisitos Where IdRequisito = " + id + ";";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -95,7 +95,7 @@ namespace Project_Manager.Services.DAO
 		public byte[] GetImagen(int id)
 		{
 			byte[] imagen = null;
-			sql = " Select Imagen FROM TblRequisitos Where IdIncidencia = " + id + ";";
+			sql = " Select Imagen FROM TblRequisitos Where IdRequisito = " + id + ";";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -103,7 +103,7 @@ namespace Project_Manager.Services.DAO
 			{
 				foreach (DataRow row in tabla.Rows)
 				{
-					
+
 					try
 					{
 						imagen = (byte[])row["Imagen"];

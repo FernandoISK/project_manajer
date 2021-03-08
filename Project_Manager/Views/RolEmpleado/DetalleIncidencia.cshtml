@@ -3,48 +3,98 @@
     ViewBag.Title = "DetalleIncidencia";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var Incidencias = (Project_Manager.Services.BO.TblIncidenciasBO)ViewBag.incidenciasObj;
+    var ComenInci = (List<Project_Manager.Services.BO.TblComentarioBO>)ViewBag.ComentarioIn;
 
 }
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-6">
-           <h3>IDincidencia</h3>
+
+
+<div class="row" style="padding:2%">
+    <div class="col">
+        <div class="row g-0">
+            <div class="col-6 col-md-2"><b>Incidencia</b></div>
+            <div class="col-sm-6 col-md-8">@Incidencias.IdIncidencia</div>
         </div>
-        <div class="col-lg-6">
-            <h3>@Incidencias.IdIncidencia</h3>
+        <div class="row g-0">
+            <div class="col-6 col-md-2"><b>Titulo</b></div>
+            <div class="col-sm-6 col-md-8">@Incidencias.Titulo</div>
+        </div>
+        <div class="row g-0">
+            <div class="col-6 col-md-2"><b>Descripcion</b></div>
+            <div class="col-sm-6 col-md-8">@Incidencias.Descripcion</div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-6">
+                    <h3>Imagen</h3>
+                </div>
+                <div class="col-lg-6">
+                    <div class="im-search-box face" id="face-box"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col">
+        <h2>Comentario</h2>
+        <div>
+            <div class="container row contenedo_msj">
+                @if (ComenInci.Count > 0)
+                {
+                    foreach (Project_Manager.Services.BO.TblComentarioBO itemC in ComenInci)
+                    {
+                        if (itemC.FKUsuario == Session["Usuario"].ToString())
+                        {
+                            <div class="mensaje-der col-12" style="padding:1%;">
+                                <div class="cuerpo_msj">
+                                    <div class="msj-texto">
+                                        <span class="tiempo"><i class="icon-clock"></i> @itemC.Tiempo | Yo</span>
+                                        <h4>@itemC.Comentario</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="mensaje-izq col-12" style="padding:1%;">
+                                <div class="cuerpo_msj">
+                                    <div class="msj-texto">
+                                        <span class="tiempo"><i class="icon-clock"></i> @itemC.Tiempo | @itemC.FKUsuario</span>
+                                        <h4>@itemC.Comentario</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="float-left col-12" style="padding:1%;">
+                        <h6>Sin Comentarios, Por favor no realice ninguno :P</h6>
+                    </div>
+                }
+            </div>
+        </div>
+        <div>
+            <form method="post" id="formcommentaryIncidents">
+                <input id="idincidencia" type="text" value="@Incidencias.IdIncidencia" style="display:none" />
+                <input id="folio" type="text" value="@Incidencias.FKProyecto" style="display:none" />
+                <div class="input-group input-group-newsletter">
+                    <input type="text" id="mensaje" class="form-control" placeholder="Mensaje...">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit" id="submit-button"><i class="fas fa-angle-double-right"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-6">
-            <h3>Titulo</h3>
-        </div>
-        <div class="col-lg-6">
-            <h3>@Incidencias.Titulo</h3>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-6">
-            <h3>Descripcion</h3>
-        </div>
-        <div class="col-lg-6">
-            <h3>@Incidencias.Descripcion</h3>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="col-lg-6">
-            <h3>Imagen</h3>
-        </div>
-        <div class="col-lg-6">
-            <div class="im-search-box face" id="face-box"></div>
-        </div>
-    </div>
-</div>
+<script src="~/Scripts/CommentaryIncidents.js"></script>
+<script>
+    $(function () {
+        Commentary.init();
+    });
+</script>
 
 <script src="~/Scripts/RolEmpleado.js"></script>
 <script>

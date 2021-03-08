@@ -141,6 +141,46 @@ namespace Project_Manager.Controllers
                 return RedirectToAction("../Login/UserLogin");
             }
         }
+
+        public int NewComRequisito()
+        {
+            TblComentarioBO datos = new TblComentarioBO();
+            TblComentarioCTRL metodo = new TblComentarioCTRL();
+
+            datos.Comentario = Request.Form.Get("comentario");
+            datos.FKTarea = Request.Form.Get("idrequi");
+            datos.FKProyecto = Request.Form.Get("proyecto");
+            datos.FKUsuario = Session["Usuario"].ToString();
+
+            try
+            {
+                return metodo.AgregarComentarioRequisitos(datos);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public int NewComIncidencia()
+        {
+            TblComentarioBO datos = new TblComentarioBO();
+            TblComentarioCTRL metodo = new TblComentarioCTRL();
+
+            datos.Comentario = Request.Form.Get("comentario");
+            datos._fkincidencia = Request.Form.Get("idinci");
+            datos.FKProyecto = Request.Form.Get("proyecto");
+            datos.FKUsuario = Session["Usuario"].ToString();
+
+            try
+            {
+                return metodo.AgregarComentarioIncidencias(datos);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         #endregion
 
         #region Metodos 

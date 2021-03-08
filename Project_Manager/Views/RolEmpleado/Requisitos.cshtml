@@ -6,7 +6,7 @@
 }
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Lista de incidencias</h1>
+        <h1 class="h3 mb-0 text-gray-800">Lista de requisitos</h1>
     </div>
 
     <div class="row">
@@ -20,7 +20,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">
                                 @item.Titulo<span>|</span>
                                 <span class="text-muted justify-content-end">|@item.NombreProyecto</span>
-                                <a title="Tareas" href="@Url.Content(string.Format("~/RolEmpleado/DetalleIncidencia?i={0}",item.IdRequisito))" class="btn btn-warning btn-circle btn-sm float-right"><i class="fas fa-exclamation-circle"></i></a>
+                                <a title="Tareas" href="@Url.Content(string.Format("~/RolEmpleado/DetallesRequisitos?i={0}&f={1}",item.IdRequisito, item.FKProyecto))" class="btn btn-warning btn-circle btn-sm float-right"><i class="fas fa-exclamation-circle"></i></a>
                             </h6>
                         </div>
                         <div class="card-body">
