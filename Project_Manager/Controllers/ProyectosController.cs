@@ -289,6 +289,33 @@ namespace Project_Manager.Controllers
                 return 0;
             }
         }
+
+        public int Reparar()
+        {
+            string Folio = Request.Form.Get("Folio");
+            try
+            {
+                int res = proyecto.Reparar(Folio);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int Finalizar()
+        {
+            string Folio = Request.Form.Get("Folio");
+            try
+            {
+                int res = proyecto.Finalizar(Folio);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         #endregion
     }
 }

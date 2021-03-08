@@ -89,7 +89,7 @@
         });
         $("#frmCreateReport").on("submit", function (e) {
             e.preventDefault()
-            var R_IDJunta = $("#hdnIdJunta").val();
+            var R_IDJunta = $("#cmbProyecto").val();
             var R_Motivo = $("#cmdMotivo").val();
             var R_Mensaje = $("#mensaje").val();
 

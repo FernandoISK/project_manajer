@@ -6,12 +6,6 @@
 
 }
 <div class="container-fluid" style="padding:5%">
-    @*<div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Mis proyectos</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-    </div>*@
-
-
     @if (Tareas.Count > 0)
     {
         <div class="card shadow mb-4">
@@ -39,16 +33,37 @@
                                 int actual = item.Tareas - item.Pendiente;
                                 <tr>
                                     <td>@item.NombreProyecto</td>
+                                    @switch (item.Estatus)
+                                    {
+                                        case 0:
+                                            <td align="center">
+                                                <form name="formulario" method="post" action="/send.php">
+                                                    <!-- Medidor -->
+                                                    <meter min="0" max="@item.Tareas" low="1" high="3" optimum="100" value="@actual"></meter>
+                                                </form>
+                                            </td>
+                                            break;
+
+                                        case 1:
+                                            <td align="center">
+                                                <button type="button" onclick="Project.evts.repararProyecto('@item.Folio')" class="btn btn-danger">Regresar con incidencia</button>
+                                                <button type="button" onclick="Project.evts.finalizarProyecto('@item.Folio')" class="btn btn-success">Confirmar Entrega</button>
+                                            </td>
+                                            break;
+                                        case 2:
+                                            <td align="center">
+                                                Completado
+                                            </td>
+                                            break;
+                                    }
                                     <td align="center">
-                                        <form name="formulario" method="post" action="/send.php">
-                                            <!-- Medidor -->
-                                            <meter min="0" max="@item.Tareas" low="1" high="3" optimum="100" value="@actual">
-                                        </form>
-                                    </td>
-                                    <td align="center">
-                                        <a href="@Url.Content(string.Format("~/RolCliente/CreateIncidencia?i={0}", item.Folio))" title="Incidencias" class="btn btn-warning"><i class="fas fa-exclamation"></i></a>
+                                        @if (item.Estatus == 1)
+                                        {
+                                            <a href="@Url.Content(string.Format("~/RolCliente/CreateIncidencia?i={0}", item.Folio))" title="Incidencias" class="btn btn-warning"><i class="fas fa-exclamation"></i></a>
+
+                                        }
                                         <a href="@Url.Content(string.Format("~/RolCliente/CreateRequisito?i={0}", item.Folio))" title="Requisitos" class="btn btn-warning"><i class="fas fa-file-signature"></i></a>
-                                        <a href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", item.Folio))" title="Tareas"  class="btn btn-warning"><i class="fas fa-folder-plus"></i></a>
+                                        <a href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", item.Folio))" title="Tareas" class="btn btn-warning"><i class="fas fa-folder-plus"></i></a>
                                     </td>
                                 </tr>
 
@@ -65,6 +80,12 @@
         <h2> Sin resultados</h2>
 
     }
-
-
 </div>
+
+
+<script src="~/Scripts/ProjectAll.js"></script>
+<script>
+    $(function () {
+        Project.init();
+    });
+</script>

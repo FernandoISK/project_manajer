@@ -133,7 +133,7 @@ namespace Project_Manager.Controllers
             if (Session["ID"] != null)
             {
                 int id = (int)Session["ID"];
-                ViewBag.TareasList = juntas.GetAllProjects(id);
+                ViewBag.TareasList = task.GetMyTask(id);
                 return View();
             }
             else
@@ -178,7 +178,7 @@ namespace Project_Manager.Controllers
         public int ReporteJunta()
         {
             TblReporteJuntaBO reporte = new TblReporteJuntaBO();
-            string Motivo = Request.Form.Get("Motivo");
+            int Motivo = int.Parse(Request.Form.Get("Motivo"));
             string Descripcion = Request.Form.Get("Descripcion");
             int IDJunta = int.Parse(Request.Form.Get("Junta"));
             reporte.FKEmpleado = (int)Session["ID"];

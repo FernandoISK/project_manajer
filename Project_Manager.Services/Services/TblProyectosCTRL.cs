@@ -32,6 +32,18 @@ namespace Project_Manager.Services.Services
             resultado = metodo.Eliminar(folio, status);
             return resultado;
         }
+        public int Reparar(string folio)
+        {
+            int resultado = 0;
+            resultado = metodo.Fix(folio);
+            return resultado;
+        }
+        public int Finalizar(string folio)
+        {
+            int resultado = 0;
+            resultado = metodo.Finish(folio);
+            return resultado;
+        }
         public TblProyectosBO GetOne(string folio)
         {
             TblProyectosBO data = new TblProyectosBO();

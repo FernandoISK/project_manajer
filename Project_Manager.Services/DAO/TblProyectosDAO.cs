@@ -126,7 +126,41 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-        public TblProyectosBO TraeUnProyecto(string folio)
+		public int Fix(string Folio)
+		{
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "update TblProyectos set Estatus = 2 where Folio = @Folio";
+			cmd.Parameters.AddWithValue("@Folio", Folio);
+			cmd.CommandText = sql;
+
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public int Finish(string Folio)
+		{
+			cmd.Connection = con2.establecerconexion();
+			con2.AbrirConexion();
+			sql = "update TblProyectos set Estatus = 3 where Folio = @Folio";
+			cmd.Parameters.AddWithValue("@Folio", Folio);
+			cmd.CommandText = sql;
+
+			int i = cmd.ExecuteNonQuery();
+			cmd.Parameters.Clear();
+
+			if (i <= 0)
+			{
+				return 0;
+			}
+			return 1;
+		}
+		public TblProyectosBO TraeUnProyecto(string folio)
         {
             TblProyectosBO dato = new TblProyectosBO();
 			sql = "SELECT a.*, b.NombreEmpresa FROM TblProyectos a INNER JOIN TblClientes b ON a.FKCliente = IDCliente WHERE a.Folio = '" + folio + "';";
@@ -208,6 +242,7 @@ namespace Project_Manager.Services.DAO
 					obj.NombreProyecto = row["Proyecto"].ToString();
 					obj.Pendiente = int.Parse(row["Pendiente"].ToString());
 					obj.Tareas = int.Parse(row["Total"].ToString());
+					obj.Estatus = int.Parse(row["Estatus"].ToString());
 					lista.Add(obj);
 				}
 			}
@@ -229,6 +264,7 @@ namespace Project_Manager.Services.DAO
 					obj.NombreProyecto = row["Proyecto"].ToString();
 					obj.Pendiente = int.Parse(row["Pendiente"].ToString());
 					obj.Tareas = int.Parse(row["Total"].ToString());
+					obj.Estatus = int.Parse(row["Estatus"].ToString());
 					lista.Add(obj);
 				}
 			}

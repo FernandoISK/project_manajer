@@ -154,6 +154,53 @@
                 });
             });
         },
-
+        repararProyecto: function (id) {
+                Dialog.show("Si ejecuta esta operacion, porfavor brindenos alguna incidencia encontrada", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/Reparar",
+                    type: "POST",
+                    data: { Folio: id},
+                    beforeSend: function () {
+                        Dialog.show("Enviando datos", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            Dialog.show("Porfavor ingrese el problema que ocurrio en el proyecto", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                document.location.href = '../RolCliente/CreateIncidencia?i=' + id;
+                            });
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al eliminar, inténtelo de nuevo", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        },
+        finalizarProyecto: function (id) {
+            Dialog.show("¿Confirma que el proyecto se ha finalizado y ha quedado de su agrada?", Dialog.type.question);
+            $(".sem-dialog").on("done", function () {
+                $.ajax({
+                    url: Root + "Proyectos/Finalizar",
+                    type: "POST",
+                    data: { Folio: id },
+                    beforeSend: function () {
+                        Dialog.show("Enviando datos", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        if (response > 0) {
+                            Dialog.show("Se han enviado los datos correctamente", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                location.reload(true);
+                            });
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al eliminar, inténtelo de nuevo", Dialog.type.error);
+                        }
+                    }
+                });
+            });
+        },
     }
 }

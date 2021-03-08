@@ -20,7 +20,7 @@ namespace Project_Manager.Services.DAO
 			TblReporteJuntaBO datos = (TblReporteJuntaBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = "INSERT INTO TblReporteJunta(Motivo,Descripcion,FKEmpleado,FKJunta) VALUES(@Motivo,@Descripcion,@FKEmpleado,@FKJunta);";
+			sql = "EXEC PA_CrearReporte @Motivo,@Descripcion,@FKEmpleado,@FKJunta";
 
 			cmd.Parameters.AddWithValue("@Motivo", datos.Motivo);
 			cmd.Parameters.AddWithValue("@Descripcion", datos.Descripcion);

@@ -8,7 +8,7 @@ namespace Project_Manager.Services.BO
 {
     public class TblReporteJuntaBO
     {
-        public string Motivo { get; set; }
+        public int Motivo { get; set; }
         public string Descripcion { get; set; }
         public int IdReporte { get; set; }
         public int FKEmpleado { get; set; }
