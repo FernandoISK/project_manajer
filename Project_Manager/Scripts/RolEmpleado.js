@@ -89,7 +89,7 @@
         });
         $("#frmCreateReport").on("submit", function (e) {
             e.preventDefault()
-            var R_IDJunta = $("#hdnIdJunta").val(); 
+            var R_IDJunta = $("#hdnIdJunta").val();
             var R_Motivo = $("#cmdMotivo").val();
             var R_Mensaje = $("#mensaje").val();
 
@@ -101,13 +101,13 @@
             if (R_Mensaje.trim() == "") {
                 Dialog.show("El campo 'Mensaje' es obligatorio", Dialog.type.error);
                 return;
-            }         
-            
+            }
+
             $.ajax({
                 url: Root + "RolEmpleado/ReporteJunta",
                 type: "POST",
                 data: {
-                    Motivo: R_Motivo, Descripcion: R_Mensaje, Junta: R_IDJunta 
+                    Motivo: R_Motivo, Descripcion: R_Mensaje, Junta: R_IDJunta
                 },
                 beforeSend: function () {
                     Dialog.show("Guardando Reporte", Dialog.type.progress);
@@ -128,6 +128,25 @@
         $(".input-number").on("input", function () {
             this.value = this.value.replace(/[^0-9]/g, '');
         });
+    },
+    initmg: function (id, tipo) {
+        if (tipo == 'Incidencias') {
+            if (id > 0) {
+                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumb?idMat=" + id + "\" class=\"img-fluid\">");
+            }
+            else {
+                $("#face-box").html("<h3>Sin imagen</h3>");
+            }
+        }
+        else if (tipo == 'Requisitos') {
+            if (id > 0) {
+                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumbRe?idMat=" + id + "\" class=\"img-fluid\">");
+            }
+            else {
+                $("#face-box").html("<h3>Sin imagen</h3>");
+            }
+        }
+        
     },
     evts: {
         OpenModalTime: function (id) {

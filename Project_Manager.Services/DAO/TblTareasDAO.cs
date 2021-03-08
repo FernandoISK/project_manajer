@@ -100,6 +100,29 @@ namespace Project_Manager.Services.DAO
 			}
 			return lista;
 		}
+		public List<TblIncidenciasBO> GetMyIncidencias(int id)
+		{
+			List<TblIncidenciasBO> lista = new List<TblIncidenciasBO>();
+			sql = " SELECT a.*, b.NombreProyecto FROM TblIncidencias a INNER JOIN TblProyectos b on a.FKProyecto = b.Folio INNER JOIN TblProyectoEmpleado c ON b.Folio = c.FKProyecto Where c.FKEmpleado = " + id + "; ";
+			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
+			DataTable tabla = new DataTable();
+			da.Fill(tabla);
+			if (tabla.Rows.Count > 0)
+			{
+				foreach (DataRow row in tabla.Rows)
+				{
+					TblIncidenciasBO obj = new TblIncidenciasBO();
+					obj.IdIncidencia = int.Parse(row["IdIncidencia"].ToString());
+					obj.Titulo = row["Titulo"].ToString();
+					obj.Descripcion = row["Descripcion"].ToString();
+					obj.FKProyecto = row["FKProyecto"].ToString();
+					obj.Estatus = int.Parse(row["Estatus"].ToString());
+					obj.NombreProyecto = row["NombreProyecto"].ToString();
+					lista.Add(obj);
+				}
+			}
+			return lista;
+		}
 		public int TomarTarea(object obj)
 		{
 

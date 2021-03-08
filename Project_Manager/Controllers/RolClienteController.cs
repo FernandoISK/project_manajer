@@ -17,6 +17,7 @@ namespace Project_Manager.Controllers
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL Juntas = new TblJunstasCTRL();
         TblIncidenciasCTRL IncidenciasMT = new TblIncidenciasCTRL();
+        TblRequisitosCTRL RequisitosMT = new TblRequisitosCTRL();
         TblJunstasCTRL juntas = new TblJunstasCTRL();
         // GET: RolCliente
         #region Vistas
@@ -70,13 +71,11 @@ namespace Project_Manager.Controllers
             else
                 return RedirectToAction("../Login/UserLogin");
         }
-
         public ActionResult Incidencias()
         {
             if (Session["ID"] != null)
             {
-                string folio = "";
-                try { folio = Request.QueryString.Get("i"); } catch { }
+                ViewBag.incidenciasList = IncidenciasMT.GetMyIncidencias((int)Session["ID"]);
                 return View();
             }
             else
@@ -88,8 +87,7 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
-                string folio = "";
-                try { folio = Request.QueryString.Get("i"); } catch { }
+                ViewBag.incidenciasList = RequisitosMT.GetMyRequisitos((int)Session["ID"]);
                 return View();
             }
             else
@@ -101,8 +99,9 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
-                string folio = "";
-                try { folio = Request.QueryString.Get("i"); } catch { }
+                string IDProyecto = "";
+                try { IDProyecto = Request.QueryString.Get("i"); } catch { }
+                ViewBag.IdProyecto = IDProyecto;
                 return View();
             }
             else
@@ -114,8 +113,9 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
-
-                ViewBag.proyectosList = juntas.GetProjectsClient((int)Session["ID"]);
+                string IDProyecto = "";
+                try { IDProyecto = Request.QueryString.Get("i"); } catch { }
+                ViewBag.IdProyecto = IDProyecto;
                 return View();
             }
             else
@@ -157,7 +157,23 @@ namespace Project_Manager.Controllers
             }
         }
 
-        public int New()
+        public int NewRequisito()
+        {
+            string data = Request.Form.Get("DatosRequisitos");
+            TblRequisitosBO obj = JsonConvert.DeserializeObject<TblRequisitosBO>(data);
+            
+            try
+            {
+                int res = 0;
+                res = RequisitosMT.Alta(obj);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+        public int NewInsidencia()
         {
             string data = Request.Form.Get("DatosIncidencia");
             TblIncidenciasBO obj = JsonConvert.DeserializeObject<TblIncidenciasBO>(data);

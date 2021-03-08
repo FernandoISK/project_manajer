@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "CreateIncidencia";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var proyectos = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.proyectosList;
+    string IdProyecto = ViewBag.IdProyecto;
 }
 
 <div class="card">
@@ -14,20 +14,13 @@
             <div class="group form-group">
                 <fieldset>
                     <div class="row col-lg-12">
+                        <input type="hidden" value="@IdProyecto" id="cmbProyecto">
+                        <input type="hidden" value="Incidencia" id="txtTipoProceso">
                         <div class="col-md-6">
                             <label class="label">Título*</label>
                             <input type="text" class="form-control" id="txtTitulo">
                         </div>
-                        <div class="col-md-6">
-                            <label for="cmbEstacionesBio">Nombre del proyecto*</label>
-                            <select class="form-control" id="cmbProyecto" name="cmdproyecto">
-                                <option value="0">-Seleccionar un proyecto</option>
-                                @foreach (var est in proyectos)
-                                {
-                                    <option value="@est.Folio">@string.Format("{0}", est.NombreProyecto) </option>
-                                }
-                            </select>
-                        </div>
+
                     </div>
 
                     <div class="row col-lg-12">

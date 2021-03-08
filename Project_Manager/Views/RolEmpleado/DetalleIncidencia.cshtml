@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "DetalleIncidencia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Incidencias = (Project_Manager.Services.BO.TblIncidenciasBO)ViewBag.incidenciasObj;
+
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+           <h3>IDincidencia</h3>
+        </div>
+        <div class="col-lg-6">
+            <h3>@Incidencias.IdIncidencia</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <h3>Titulo</h3>
+        </div>
+        <div class="col-lg-6">
+            <h3>@Incidencias.Titulo</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <h3>Descripcion</h3>
+        </div>
+        <div class="col-lg-6">
+            <h3>@Incidencias.Descripcion</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <h3>Imagen</h3>
+        </div>
+        <div class="col-lg-6">
+            <div class="im-search-box face" id="face-box"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/RolEmpleado.js"></script>
+<script>
+    $(function () {
+        Rol.initmg(@Incidencias.IdIncidencia, 'Incidencias');
+    });
+</script>

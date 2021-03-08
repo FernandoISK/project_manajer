@@ -2,20 +2,24 @@
 @{
     ViewBag.Title = "CreateRequisito";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    string IdProyecto = ViewBag.IdProyecto;
 }
 <div class="card">
     <div class="card-header text-center">
-        <h2>Crear Requisito</h2>
+        <h2>Crear incidencia</h2>
     </div>
     <div class="card-body">
         <form method="post" id="frmCreate">
             <div class="group form-group">
                 <fieldset>
                     <div class="row col-lg-12">
-                        <div class="col-md-12">
+                        <input type="hidden" value="@IdProyecto" id="cmbProyecto">
+                        <input type="hidden" value="Requisito" id="txtTipoProceso">
+                        <div class="col-md-6">
                             <label class="label">Título*</label>
-                            <input type="text" class="form-control" id="txtNombrePro">
+                            <input type="text" class="form-control" id="txtTitulo">
                         </div>
+
                     </div>
 
                     <div class="row col-lg-12">
@@ -38,9 +42,10 @@
                                 <label for="flFacial" class="btn btn-success btn-sm btn-block margin">Buscar Archivo</label>
                                 <input type="file" name="flFacial" id="flFacial" style="display:none" accept=".jpg" data-toggle="biometric-select" data-target="#face-box" />
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <button type="button" class="btn btn-default btn-block btn-sm bg-light" data-toggle="biometric-clear" data-target="#face-box"><i class="fa fa-eraser"></i>Limpiar</button>
+                            <div class="col-md-12">
+                                <div class="im-search-box face" id="face-box"></div>
+                            </div>
+                            <button type="button" class="btn btn-default btn-block btn-sm" data-toggle="biometric-clear" data-target="#face-box"><i class="fa fa-eraser"></i>Limpiar</button>
                         </div>
                     </div>
 
@@ -52,7 +57,6 @@
         </form>
     </div>
 </div>
-
 <script src="~/Scripts/GlobalCliente.js"></script>
 <script>
     const mensaje = document.getElementById('mensaje');
@@ -63,5 +67,10 @@
         const longitudMax = target.getAttribute('maxlength');
         const longitudAct = target.value.length;
         contador.innerHTML = `${longitudAct}/${longitudMax}`;
+    });
+</script>
+<script>
+    $(function () {
+        GlobalClientes.init();
     });
 </script>

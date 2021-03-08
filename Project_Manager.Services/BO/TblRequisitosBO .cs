@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Project_Manager.Services.BO
 {
-    public class TblIncidenciasBO
+    public class TblRequisitosBO
     {
-        public int IdIncidencia { get; set; }
+        public int IdRequisito { get; set; }
         public int Estatus { get; set; }
         public string FKProyecto { get; set; }
         public string Titulo { get; set; }

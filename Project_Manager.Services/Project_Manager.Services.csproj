@@ -48,6 +48,7 @@
     <Compile Include="BO\TblComentarioBO.cs" />
     <Compile Include="BO\TblCuentaBO.cs" />
     <Compile Include="BO\TblEmpleadoBO.cs" />
+    <Compile Include="BO\TblRequisitosBO .cs" />
     <Compile Include="BO\TblIncidenciasBO.cs" />
     <Compile Include="BO\TblJuntasBO.cs" />
     <Compile Include="BO\TblProyectoEmpleadoBO.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="DAO\TblComentarioDAO.cs" />
     <Compile Include="DAO\TblCuentaDAO.cs" />
     <Compile Include="DAO\TblEmpleadoDAO.cs" />
+    <Compile Include="DAO\TblRequisitosDAO .cs" />
     <Compile Include="DAO\TblIncidenciasDAO.cs" />
     <Compile Include="DAO\TblJuntasDAO.cs" />
     <Compile Include="DAO\TblProyectoEmpleadoDAO.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Services\TblComentarioCTRL.cs" />
     <Compile Include="Services\TblCuentaCTRL.cs" />
     <Compile Include="Services\TblEmpleadoCTRL.cs" />
+    <Compile Include="Services\TblRequisitosCTRL .cs" />
     <Compile Include="Services\TblIncidenciasCTRL.cs" />
     <Compile Include="Services\TblJunstasCTRL.cs" />
     <Compile Include="Services\TblProyectoEmpleadoCTRL.cs" />

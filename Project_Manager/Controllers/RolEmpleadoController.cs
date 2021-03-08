@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Project_Manager.Services.BO;
+using Project_Manager.Services.DAO;
 using Project_Manager.Services.Services;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace Project_Manager.Controllers
         TblProyectosCTRL Tarea = new TblProyectosCTRL();
         TblJunstasCTRL juntas = new TblJunstasCTRL();
         TblTareasCTRL task = new TblTareasCTRL();
+        TblIncidenciasCTRL Inci = new TblIncidenciasCTRL();
+        TblRequisitosCTRL Requi = new TblRequisitosCTRL();
         
         // GET: RolEmpleado
         #region Vistas
@@ -74,6 +77,7 @@ namespace Project_Manager.Controllers
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
 
+                    ViewBag.incidenciasList = Inci.GetMyIncidencias((int)Session["ID"]);
                     return View();
                 }
                 else
@@ -82,7 +86,23 @@ namespace Project_Manager.Controllers
             else
                 return RedirectToAction("../Login/UserLogin");
         }
-
+        public ActionResult DetalleIncidencia()
+        {
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Empleado")
+                {
+                    int IDIncidencia = 0;
+                    try { IDIncidencia = int.Parse(Request.QueryString.Get("i")); } catch { }
+                    ViewBag.incidenciasObj = Inci.GetIncidencia(IDIncidencia);
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
+        }
         public ActionResult ListaJuntas()
         {
             if (Session["ID"] != null)
@@ -100,6 +120,7 @@ namespace Project_Manager.Controllers
         {
             if (Session["ID"] != null)
             {
+                ViewBag.incidenciasList = Requi.GetMyRequisitos((int)Session["ID"]);
                 return View();
             }
             else
@@ -112,7 +133,7 @@ namespace Project_Manager.Controllers
             if (Session["ID"] != null)
             {
                 int id = (int)Session["ID"];
-                ViewBag.TareasList = task.GetMyTask(id);
+                ViewBag.TareasList = juntas.GetAllProjects(id);
                 return View();
             }
             else
@@ -174,6 +195,48 @@ namespace Project_Manager.Controllers
             catch (Exception ex)
             {
                 return 0;
+            }
+        }
+        public void ImagenThumb()
+        {
+            int id =int.Parse(Request.QueryString["idMat"]);
+            TblIncidenciasDAO img = new TblIncidenciasDAO();
+             byte[] _img = img.GetImagen(id);
+            try
+            {
+                if (_img != null)
+                {
+                    Response.ContentType = "image/jpeg";
+                    Response.Cache.SetCacheability(HttpCacheability.Private);
+                    Response.BinaryWrite(_img);
+
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            catch
+            {
+            }
+        }
+        public void ImagenThumbRe()
+        {
+            int id = int.Parse(Request.QueryString["idMat"]);
+            TblRequisitosDAO img = new TblRequisitosDAO();
+            byte[] _img = img.GetImagen(id);
+            try
+            {
+                if (_img != null)
+                {
+                    Response.ContentType = "image/jpeg";
+                    Response.Cache.SetCacheability(HttpCacheability.Private);
+                    Response.BinaryWrite(_img);
+
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            catch
+            {
             }
         }
         #endregion

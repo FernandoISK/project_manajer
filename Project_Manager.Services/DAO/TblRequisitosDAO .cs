@@ -1,17 +1,12 @@
 ﻿using Project_Manager.Services.BO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Manager.Services.DAO
 {
-    public class TblIncidenciasDAO
-    {
-		SqlConnection con = new SqlConnection();
+    public class TblRequisitosDAO
+	{
 		SqlCommand cmd = new SqlCommand();
 		Conexion con2 = new Conexion();
 		string sql;
@@ -19,10 +14,10 @@ namespace Project_Manager.Services.DAO
 		public int Crear(object obj)
 		{
 
-			TblIncidenciasBO datos = (TblIncidenciasBO)obj;
+			TblRequisitosBO datos = (TblRequisitosBO)obj;
 			cmd.Connection = con2.establecerconexion();
 			con2.AbrirConexion();
-			sql = " INSERT INTO TblIncidencias(Titulo,Descripcion,Imagen,FKProyecto) VALUES(@Titulo,@Descripcion,@Imagen,@FKProyecto)";
+			sql = " INSERT INTO TblRequisitos(Titulo,Descripcion,Imagen,FKProyecto) VALUES(@Titulo,@Descripcion,@Imagen,@FKProyecto)";
 
 			cmd.Parameters.AddWithValue("@Titulo", datos.Titulo);
 			cmd.Parameters.AddWithValue("@Descripcion", datos.Descripcion);
@@ -38,10 +33,10 @@ namespace Project_Manager.Services.DAO
 			}
 			return 1;
 		}
-		public List<TblIncidenciasBO> GetMyIncidencias(int id)
+		public List<TblRequisitosBO> GetMyRequisitos(int id)
 		{
-			List<TblIncidenciasBO> lista = new List<TblIncidenciasBO>();
-			sql = " SELECT a.*, b.NombreProyecto FROM TblIncidencias a INNER JOIN TblProyectos b on a.FKProyecto = b.Folio INNER JOIN TblProyectoEmpleado c ON b.Folio = c.FKProyecto Where c.FKEmpleado = " + id + "; ";
+			List<TblRequisitosBO> lista = new List<TblRequisitosBO>();
+			sql = " SELECT a.*, b.NombreProyecto FROM TblRequisitos a INNER JOIN TblProyectos b on a.FKProyecto = b.Folio INNER JOIN TblProyectoEmpleado c ON b.Folio = c.FKProyecto Where c.FKEmpleado = " + id + "; ";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -49,7 +44,7 @@ namespace Project_Manager.Services.DAO
 			{
 				foreach (DataRow row in tabla.Rows)
 				{
-					TblIncidenciasBO obj = new TblIncidenciasBO();
+					TblRequisitosBO obj = new TblRequisitosBO();
 					byte[] imagen = null;
 					try
 					{
@@ -57,7 +52,7 @@ namespace Project_Manager.Services.DAO
 					}
 					catch
 					{ }
-					obj.IdIncidencia = int.Parse(row["IdIncidencia"].ToString());
+					obj.IdRequisito = int.Parse(row["IdRequisito"].ToString());
 					obj.Titulo = row["Titulo"].ToString();
 					obj.Descripcion = row["Descripcion"].ToString();
 					obj.FKProyecto = row["FKProyecto"].ToString();
@@ -69,10 +64,10 @@ namespace Project_Manager.Services.DAO
 			}
 			return lista;
 		}
-		public TblIncidenciasBO UnaIncidencia(int id)
+		public TblRequisitosBO UnRequisito(int id)
 		{
-			TblIncidenciasBO obj = new TblIncidenciasBO();
-			sql = "Select * FROM TblIncidencias Where IdIncidencia = " + id + ";";
+			TblRequisitosBO obj = new TblRequisitosBO();
+			sql = "Select * FROM TblRequisitos Where IdIncidencia = " + id + ";";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);
@@ -87,7 +82,7 @@ namespace Project_Manager.Services.DAO
 					}
 					catch
 					{ }
-					obj.IdIncidencia = int.Parse(row["IdIncidencia"].ToString());
+					obj.IdRequisito = int.Parse(row["IdRequisito"].ToString());
 					obj.Titulo = row["Titulo"].ToString();
 					obj.Descripcion = row["Descripcion"].ToString();
 					obj.FKProyecto = row["FKProyecto"].ToString();
@@ -100,7 +95,7 @@ namespace Project_Manager.Services.DAO
 		public byte[] GetImagen(int id)
 		{
 			byte[] imagen = null;
-			sql = " Select Imagen FROM TblIncidencias Where IdIncidencia = " + id + ";";
+			sql = " Select Imagen FROM TblRequisitos Where IdIncidencia = " + id + ";";
 			SqlDataAdapter da = new SqlDataAdapter(sql, con2.establecerconexion());
 			DataTable tabla = new DataTable();
 			da.Fill(tabla);

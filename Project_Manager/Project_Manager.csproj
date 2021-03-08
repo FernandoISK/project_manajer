@@ -1979,6 +1979,8 @@
     <Content Include="Views\Proyectos\DetallesTask.cshtml" />
     <Content Include="Views\RolEmpleado\ListaTareas.cshtml" />
     <Content Include="Views\RolEmpleado\Reporte.cshtml" />
+    <Content Include="Views\RolEmpleado\DetalleIncidencia.cshtml" />
+    <Content Include="Views\RolEmpleado\DetallesRequisitos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -23,7 +23,7 @@
         });
         $("#frmCreate").on("submit", function (e) {
             e.preventDefault()
-            debugger
+            //debugger
             var ImgAct = false;
             var thumb = $("#face-box").find("img").length > 0 ? $("#face-box").find("img").attr("src") : null;
             if (thumb != null) {
@@ -37,6 +37,7 @@
             var I_Titulo = $("#txtTitulo").val();
             var I_Descripcion = $("#mensaje").val();
             var I_Proyecto = $("#cmbProyecto").val();
+            var T_TipoProceso = $("#txtTipoProceso").val();
 
             if (I_Titulo.trim() == "") {
                 Dialog.show("El Campo 'Titulo' es obligatorio", Dialog.type.error);
@@ -46,42 +47,64 @@
                 Dialog.show("El Campo 'Descripcion' es obligatorio", Dialog.type.error);
                 return;
             }
-            if (I_Proyecto.trim() == 0) {
-                Dialog.show("El Campo 'Nombre del proyecto' es obligatorio", Dialog.type.error);
-                return;
-            }
 
             if (thumb != null) {
                 if (ImgAct == false) {
                     thumb = null;
                 }
             }
-            var AgregarInci = {
+            var Agregar = {
                 FKProyecto: I_Proyecto,
                 Titulo: I_Titulo,
                 Descripcion: I_Descripcion,
                 Imagen: thumb
             };
-            $.ajax({
-                url: Root + "RolCliente/New",
-                type: "POST",
-                data: { DatosIncidencia: JSON.stringify(AgregarInci) },
-                beforeSend: function () {
-                    Dialog.show("Registrando", Dialog.type.progress);
-                },
-                success: function (response) {
-                    console.log(response);
-                    if (response == 1) {
-                        Dialog.show("Guardado correctamente", Dialog.type.success);
-                        $(".sem-dialog").on("done", function () {
-                            location.reload(true);
-                        });
+            if (T_TipoProceso.trim() == "Requisito") {
+                $.ajax({
+                    url: Root + "RolCliente/NewRequisito",
+                    type: "POST",
+                    data: { DatosRequisitos: JSON.stringify(Agregar) },
+                    beforeSend: function () {
+                        Dialog.show("Registrando", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response == 1) {
+                            Dialog.show("Guardado correctamente", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                location.reload(true);
+                            });
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al guardar los datos, inténtelo de nuevo", Dialog.type.error);
+                        }
                     }
-                    else {
-                        Dialog.show("Ocurrió un error al guardar los datos, inténtelo de nuevo", Dialog.type.error);
+                });
+
+            }
+            else if (T_TipoProceso.trim() == "Incidencia") {
+                $.ajax({
+                    url: Root + "RolCliente/NewInsidencia",
+                    type: "POST",
+                    data: { DatosIncidencia: JSON.stringify(Agregar) },
+                    beforeSend: function () {
+                        Dialog.show("Registrando", Dialog.type.progress);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response == 1) {
+                            Dialog.show("Guardado correctamente", Dialog.type.success);
+                            $(".sem-dialog").on("done", function () {
+                                location.reload(true);
+                            });
+                        }
+                        else {
+                            Dialog.show("Ocurrió un error al guardar los datos, inténtelo de nuevo", Dialog.type.error);
+                        }
                     }
-                }
-            });
+                });
+            }
+            
         });
         //$(".input-number").on("input", function () {
         //    this.value = this.value.replace(/[^0-9]/g, '');
