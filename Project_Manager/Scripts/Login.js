@@ -22,7 +22,7 @@
                 },
                 success: function (response) {
                     if (response > 0) {
-                        document.location.href = '.../RolCliente/CreateIncidencia ? i =';
+                        document.location.href = '../Admin/Index';
                     }
                     else {
                         Dialog.show("Usuario y/o Contraseña Invalida", Dialog.type.error);

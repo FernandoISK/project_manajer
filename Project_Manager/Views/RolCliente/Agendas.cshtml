@@ -35,16 +35,16 @@
                                 </div>
                             </dl>
                         </fieldset>
+                        <div class="row">
+                            @if (Juntas.Estatus == 0)
+                            {
+                                <button type="button" onclick="Rol.evts.confirm('@Juntas.IDJuntas')" class="btn btn-primary">Agendar</button>
+                                <button type="button" onclick="Rol.evts.OpenModalTime('@Juntas.IDJuntas')" class="btn btn-success" data-toggle="tooltip" title="Editar">Sugerir Fecha</button>
+                            }
 
+                        </div>
                     </div>
-                    <div class="row">
-                        @if (Juntas.Estatus == 0)
-                        {
-                            <button type="button" onclick="Rol.evts.confirm('@Juntas.IDJuntas')" class="btn btn-primary">Agendar</button>
-                            <button type="button" onclick="Rol.evts.OpenModalTime('@Juntas.IDJuntas')" class="btn btn-success" data-toggle="tooltip" title="Editar">Sugerir Fecha</button>
-                        }
-
-                    </div>
+                    
                 </div>
             </form>
         </div>
