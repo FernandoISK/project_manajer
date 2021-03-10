@@ -182,7 +182,7 @@ namespace Project_Manager.Controllers
             TblComentarioCTRL metodo = new TblComentarioCTRL();
 
             datos.Comentario = Request.Form.Get("comentario");
-            datos.FKTarea = Request.Form.Get("idrequi");
+            datos._fkrequisito = Request.Form.Get("idrequi");
             datos.FKProyecto = Request.Form.Get("proyecto");
             datos.FKUsuario = Session["Usuario"].ToString();
 
