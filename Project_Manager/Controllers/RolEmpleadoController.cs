@@ -18,6 +18,7 @@ namespace Project_Manager.Controllers
         TblTareasCTRL task = new TblTareasCTRL();
         TblIncidenciasCTRL Inci = new TblIncidenciasCTRL();
         TblRequisitosCTRL Requi = new TblRequisitosCTRL();
+        TblComentarioCTRL Comen = new TblComentarioCTRL();
         
         // GET: RolEmpleado
         #region Vistas
@@ -86,6 +87,32 @@ namespace Project_Manager.Controllers
             else
                 return RedirectToAction("../Login/UserLogin");
         }
+        public ActionResult DetallesRequisitos()
+        {
+            if (Session["Rol"] != null)
+            {
+                if ((Session["Rol"]).ToString() == "Empleado")
+                {
+                    int IDRequisito = 0;
+                    string folio = String.Empty;
+                    try
+                    {
+                        IDRequisito = int.Parse(Request.QueryString.Get("i"));
+                        folio = Request.QueryString.Get("f");
+                    }
+                    catch { }
+                    ViewBag.ComentarioRe = Comen.ListaComentarioRequisitos(folio, Convert.ToString(IDRequisito));
+                    ViewBag.requisitoObj = Requi.GetRequisitos(IDRequisito);
+                    return View();
+                }
+                else
+                    return RedirectToAction("../Login/UserLogin");
+            }
+            else
+                return RedirectToAction("../Login/UserLogin");
+
+        }
+
         public ActionResult DetalleIncidencia()
         {
             if (Session["Rol"] != null)
@@ -93,7 +120,14 @@ namespace Project_Manager.Controllers
                 if ((Session["Rol"]).ToString() == "Empleado")
                 {
                     int IDIncidencia = 0;
-                    try { IDIncidencia = int.Parse(Request.QueryString.Get("i")); } catch { }
+                    string folio = String.Empty;
+                    try
+                    {
+                        IDIncidencia = int.Parse(Request.QueryString.Get("i"));
+                        folio = Request.QueryString.Get("f");
+                        ViewBag.ComentarioIn = Comen.ListaComentarioIncidencias(folio, Convert.ToString(IDIncidencia));
+                    }
+                    catch { }
                     ViewBag.incidenciasObj = Inci.GetIncidencia(IDIncidencia);
                     return View();
                 }
