@@ -1,14 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Ap-Manger | Agregar Administrador";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var Administrador = (Project_Manager.Services.BO.TblAdministradorBO)ViewBag.AdministradorList;
 }
 
 <!-- ADMINISTRADOR  -->
+<head>
+    <title> Crear</title>
+</head>
 <div class="card">
     <div class="card-header">
-        Agregar Administrador
+        <h2>Agregar Administrador</h2>
+        <p class="mb-4">Todos los campos son requeridos</p>
     </div>
     <div class="card-body">
         <form method="post" id="formCreate">

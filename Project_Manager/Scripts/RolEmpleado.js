@@ -132,7 +132,7 @@
     initmg: function (id, tipo) {
         if (tipo == 'Incidencias') {
             if (id > 0) {
-                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumb?idMat=" + id + "\" class=\"img-fluid\">");
+                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumb?idMat=" + id + "\" width=\"400\" height=\"250\">");
             }
             else {
                 $("#face-box").html("<h3>Sin imagen</h3>");
@@ -140,7 +140,7 @@
         }
         else if (tipo == 'Requisitos') {
             if (id > 0) {
-                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumbRe?idMat=" + id + "\" class=\"img-fluid\">");
+                $("#face-box").html("<img src=\"" + Root + "RolEmpleado/ImagenThumbRe?idMat=" + id + "\" width=\"400\" height=\"250\">");
             }
             else {
                 $("#face-box").html("<h3>Sin imagen</h3>");

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "DetallesRequisitos";
+    ViewBag.Title = "Ap-Manger | Detalles requisitos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var Requisitos = (Project_Manager.Services.BO.TblRequisitosBO)ViewBag.requisitoObj;
     var ComenRequi = (List<Project_Manager.Services.BO.TblComentarioBO>)ViewBag.ComentarioRe;
@@ -8,28 +8,37 @@
 
 <div class="row" style="padding:2%">
     <div class="col">
-        <div class="text-center">
-            <h3>Detalles De Requisitos</h3>
-        </div>
-        <div class="row g-0">
-            <div class="col-6 col-md-2"><b>Requisito</b></div>
-            <div class="col-sm-6 col-md-8">@Requisitos.IdRequisito</div>
-        </div>
-        <div class="row g-0">
-            <div class="col-6 col-md-2"><b>Titulo</b></div>
-            <div class="col-sm-6 col-md-8">@Requisitos.Titulo</div>
-        </div>
-        <div class="row g-0">
-            <div class="col-6 col-md-2"><b>Descripcion</b></div>
-            <div class="col-sm-6 col-md-8">@Requisitos.Descripcion</div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Imagen</h3>
+        <div class="card">
+            <div class="card-header text-sm-center py-3">
+                <h3 class="m-0 font-weight-bold text-primary">
+                    @Requisitos.Titulo |
+                    @switch (Requisitos.Estatus)
+                    {
+                        case 0:
+                            <span class="text-right">Pendiente</span>
+                            break;
+                        case 1:
+                            <span class="text-right">Trabajando</span>
+                            break;
+                        case 2:
+                            <span class="text-right">Finalizado</span>
+                            break;
+                        default:
+                            <span class="text-right">S/N</span>
+                            break;
+                    }
+                </h3>
             </div>
-            <div class="col-lg-6">
-                <div class="im-search-box face" id="face-box" style="width:200%"></div>
+            <div class="card-body">@Requisitos.Descripcion</div>
+            <div class="card-footer text-sm-center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <div class="im-search-box face" id="face-box" style="width:200%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
